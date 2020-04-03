@@ -1,18 +1,10 @@
 import React, { Component } from "react";
-import {
-  Carousel,
-  Button,
-  Row,
-  Col,
-  Container,
-  Card,
-  Jumbotron
-} from "react-bootstrap";
+import { Button, Card, Jumbotron } from "react-bootstrap";
 import "./../../Css/homepage1.css";
-import image1 from '../../Image/blog1.jpg';
-import image2 from '../../Image/blog2.jpg';
-import image3 from '../../Image/blog3.jpg';
-import image4 from '../../Image/blog4.png';
+import image1 from "../../Image/blog1.jpg";
+import image2 from "../../Image/blog2.jpg";
+import image3 from "../../Image/blog3.jpg";
+import image4 from "../../Image/blog4.png";
 class Blog extends Component {
   state = {
     topic: [
@@ -53,7 +45,11 @@ class Blog extends Component {
             {this.state.topic &&
               this.state.topic.map((item, index) => {
                 return (
-                  <Card key={index} style={{ width: "18rem" }} className="blogcard mx-auto m-3">
+                  <Card
+                    key={index}
+                    style={{ width: "18rem" }}
+                    className="blogcard mx-auto m-3"
+                  >
                     <Card.Img
                       variant="top"
                       style={{ height: "10rem" }}
@@ -65,8 +61,7 @@ class Blog extends Component {
                       <Card.Text>{item.subject}</Card.Text>
                       <Button className="btn-second btn-success">
                         Read
-                          </Button>{" "}
-
+                      </Button>{" "}
                     </Card.Body>
                   </Card>
                 );
