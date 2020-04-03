@@ -1,0 +1,85 @@
+import React, { Component } from "react";
+import {
+  Carousel,
+  Button,
+  Row,
+  Col,
+  Container,
+  Card,
+  Jumbotron
+} from "react-bootstrap";
+import "./../../Css/homepage1.css";
+import image1 from '../../Image/blog1.jpg';
+import image2 from '../../Image/blog2.jpg';
+import image3 from '../../Image/blog3.jpg';
+import image4 from '../../Image/blog4.png';
+class Blog extends Component {
+  state = {
+    topic: [
+      {
+        name: "Bascis Step of Organic Farming",
+        url:image1,
+        subject:
+          "Organic farming refers agricultural system  reliant on green manure, compost ,biological pest contol and crop rotation and livestock production...."
+      },
+      {
+        name: "Mustard Cultivation Income",
+        url:image2,
+        subject:
+          " Musturd is very popular oil seed crop, higly cultivated seeds crop among all the crops in india. Due to easy management practice and  contestant price ......."
+      },
+      {
+        name: "Farm Mechnization",
+        url:image3,
+        subject:
+          "Mechanised agriculture is the process of using agricultural machinery to mechanise the work of agriculture, greatly increasing farm worker productivity. In modern times...."
+      },
+      {
+        name: "Food Subsidiary",
+        url:image4,
+        subject:
+          "NABARD Loan for food Processing Industry in India. The NABARD loan was announced by the Indian Government, which offers 2000 crore funds for entrepreneurs to set up food.... "
+      }
+    ]
+  };
+  render() {
+    return (
+      <div>
+        <Row>
+          <Jumbotron className="Blog text-center">
+            <h1>
+              Our <span style={{ color: "#28ca2f" }}>Blog</span>
+            </h1>
+            <Row>
+              {this.state.topic &&
+                this.state.topic.map((item, index) => {
+                  return (
+                    <Col key={index}>
+                      <Card style={{ width: "18rem" }} className="blogcard">
+                        <Card.Img
+                          variant="top"
+                          style={{ height: "10rem" }}
+                          src={item.url}
+                          className="blogimage"
+                        />
+                        <Card.Body>
+                          <Card.Title>{item.name}</Card.Title>
+                          <Card.Text>{item.subject}</Card.Text>
+                          <Button className="btn-second btn-success">
+                            Read
+                          </Button>{" "}
+                            
+                        </Card.Body>
+                      </Card>
+                    </Col>
+                  );
+                })}
+            </Row>
+          </Jumbotron>
+        </Row>
+      </div>
+    );
+  }
+}
+
+export default Blog;
