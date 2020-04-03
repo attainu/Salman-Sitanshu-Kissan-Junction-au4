@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 import React from "react";
 import icon1 from "../../Image/agronomy.png";
 import icon2 from "../../Image/agriculture.png";
@@ -21,6 +22,22 @@ export default function PageDescription() {
           <h1 className="display-4" style={{ "font-weight": "800" }}>
             AgriCom Farm Ecology Products
           </h1>
+=======
+import React from 'react';
+import icon1 from '../../Image/agronomy.png'
+import icon2 from '../../Image/agriculture.png'
+import icon3 from '../../Image/farm.png'
+import icon4 from '../../Image/food.png'
+import icon5 from '../../Image/tractor.png'
+export default function PageDescription() {
+  return (
+    <>
+      <div class="d-flex flex-row justify-content-around flex-wrap bd-highlight m-5">
+        <div class="p-3 flex-fill bd-highlight box1">
+          <h1 className='display-4' style={{ 'font-weight': '800' }}>
+          <span style={{ color: "#28ca2f" }}>AgriCom</span> Farm Ecology Products
+            </h1>
+>>>>>>> fdfc5e56f2b129826c2b8d7734f688af2e1ec82f
         </div>
         <div class="d-flex justify-content-sm-center flex-column bd-highlight">
           <div class="text-center box bd-highlight pb-3">

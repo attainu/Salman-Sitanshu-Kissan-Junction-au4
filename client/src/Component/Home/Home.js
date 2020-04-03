@@ -3,18 +3,22 @@ import CarouselHome from "./Carousel.js";
 import Blog from "./Blog.js";
 import Service from "./Services.js";
 import PageDescription from './PageDescription';
-import Counter from './Count';
+import Progress from './Progress';
+import Footer from './Footer';
 
 class Home extends Component {
   render() {
     return (
-      <div>
+      <>
         <CarouselHome />
-        <Blog />
-        <Service />
+        <br /><br /><br />
         <PageDescription />
-        <Counter />
-      </div>
+        <br /><br /><br />
+        <Service />
+        <Progress />
+        <Blog />
+        <Footer />
+      </>
     );
   }
 }
