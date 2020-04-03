@@ -4,15 +4,13 @@ import icon2 from '../../Image/agriculture.png'
 import icon3 from '../../Image/farm.png'
 import icon4 from '../../Image/food.png'
 import icon5 from '../../Image/tractor.png'
-import { Navbar, Dropdown, Nav, NavDropdown, Form, Button, FormControl } from 'react-bootstrap';
 export default function PageDescription() {
   return (
     <>
-
-      <div class="d-flex flex-row justify-content-sm-around flex-wrap bd-highlight m-5">
+      <div class="d-flex flex-row justify-content-around flex-wrap bd-highlight m-5">
         <div class="p-3 flex-fill bd-highlight box1">
           <h1 className='display-4' style={{ 'font-weight': '800' }}>
-            AgriCom Farm Ecology Products
+          <span style={{ color: "#28ca2f" }}>AgriCom</span> Farm Ecology Products
             </h1>
         </div>
         <div class="d-flex justify-content-sm-center flex-column bd-highlight">

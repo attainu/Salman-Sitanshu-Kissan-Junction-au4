@@ -34,7 +34,7 @@ class CarouselHome extends React.Component {
 
   render() {
     return (
-      <div>
+      <>
 
         <Carousel>
           <Carousel.Item>
@@ -83,7 +83,7 @@ class CarouselHome extends React.Component {
               })}
           </Row>
         </Container>
-      </div>
+      </>
     );
   }
 }

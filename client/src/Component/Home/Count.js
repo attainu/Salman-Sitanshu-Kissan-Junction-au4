@@ -2,18 +2,37 @@ import React from "react";
 import CountUp from "react-countup";
 import VisibilitySensor from 'react-visibility-sensor';
 
-const Counter = () => (
-  <>
-  <div className='m-5 p-5 text-center'>
-    <CountUp end={100} redraw={false} duration={6}>
-      {({ countUpRef, start }) => (
-        <VisibilitySensor onChange={start} delayedCall>
-          <span ref={countUpRef} />
-        </VisibilitySensor>
-      )}
-    </CountUp>
-    </div>
-  </>
-);
+class Counter extends React.Component {
 
+  state = {
+    didViewCountUp: false
+  };
+
+
+  onVisibilityChange = isVisible => {
+    if (isVisible) {
+      this.setState({ didViewCountUp: true });
+    }
+    return 'start'
+  }
+
+  render() {
+    const { end = 20 } = this.props
+    return (<>
+      <div className='text-center'>
+        <CountUp end={this.state.didViewCountUp ? end : 0} redraw={true} duration={6} onEnd={false} suffix=" K">
+          {({ countUpRef, start }) => (
+            <VisibilitySensor onChange={this.onVisibilityChange} offset={{
+              top:
+                10
+            }} delayedCall>
+              <span ref={countUpRef} />
+            </VisibilitySensor>
+          )}
+        </CountUp>
+      </div>
+    </>
+    );
+  }
+}
 export default Counter;

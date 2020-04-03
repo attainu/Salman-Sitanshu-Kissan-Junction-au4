@@ -39,5 +39,6 @@ code {
 }
 .icon{
   min-width: 90px;
-  max-width: 130px;
+  max-width: 100px;
 }
+.carousel-indicators li { visibility: hidden; }
