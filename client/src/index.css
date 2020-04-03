@@ -20,19 +20,22 @@ code {
   display: none;
 }
 
-.btn:focus {
+/* .btn:focus {
   outline: none !important;
-}
+} */
 .dropdown:hover .dropdown-menu {
   display: block;
   margin-top: 0;
 }
 
-.box, .box1{
+.box, .box1, .box2{
   min-width: 200px;
 }
 .box1{
   max-width: 320px;
+}
+.box2{
+  max-width: 350px;
 }
 .box{
   max-width: 880px;
