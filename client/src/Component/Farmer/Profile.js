@@ -1,6 +1,6 @@
 import React from 'react';
 import '../../Css/profile.css';
-import { Image, Nav } from 'react-bootstrap';
+import { Image, Nav, Button } from 'react-bootstrap';
 import YourProduct from './YourProduct';
 import Purchased from './Purchased';
 import Sold from './Sold';
@@ -11,8 +11,13 @@ export default function Profile() {
     <>
       <div class="d-flex flex-column ">
         <div class="d-flex flex-fill justify-content-around flex-wrap m-5  flex-row">
-          <div class="flex-grow-1 my-auto profile-img">
+          <div class="my-auto profile-img">
             <Image className='shadow' src="https://lakewangaryschool.sa.edu.au/wp-content/uploads/2017/11/placeholder-profile-sq.jpg" rounded fluid />
+            <div className='text-center'>
+              <Button className='btn-1 mt-3' variant="secondary" size="sm">
+                Edit Profile
+          </Button>
+            </div>
           </div>
           <div class="d-flex flex-column justify-content-start">
             <h1 className='mb-0' style={{ 'font-weight': '500' }}>Salman Ahmed</h1>
@@ -45,7 +50,7 @@ export default function Profile() {
               </tbody>
             </table>
           </div>
-          <div class="d-flex flex-column align-self-end justify-content-center">
+          <div class="d-flex flex-column box4 justify-content-end">
             <table class="table table-borderless">
               <tbody>
                 <tr>
@@ -62,12 +67,13 @@ export default function Profile() {
                 </tr> */}
               </tbody>
             </table>
+
           </div>
         </div>
-        <Nav variant="tabs" className="justify-content-center" defaultActiveKey="product">
-          <Link to='/profile/products'>
+        <Nav variant="tabs" className="justify-content-center" defaultActiveKey="/product">
+          <Link to='/profile/'>
             <Nav.Item>
-              <Nav.Link href="product">Your Products</Nav.Link>
+              <Nav.Link href="/product">Your Products</Nav.Link>
             </Nav.Item>
           </Link>
           <Link to='/profile/purchased'>
@@ -81,7 +87,7 @@ export default function Profile() {
             </Nav.Item>
           </Link>
         </Nav>
-        <Route path='/profile/products'>
+        <Route exact path='/profile/'>
           <YourProduct />
         </Route>
         <Route path='/profile/purchased'>
