@@ -1,16 +1,19 @@
 import React from 'react';
 import { Navbar, Dropdown, Nav, NavDropdown, Form, Button, FormControl } from 'react-bootstrap';
+import logo from '../../Image/logo.png'
+import { Link } from "react-router-dom";
+
 export default function NavBar() {
   return (
     <>
       <Navbar bg="light" expand="lg">
-        <Navbar.Brand href="#home"><img className='mr-1'
-          src='https://www.freepnglogos.com/uploads/nature-png/natural-health-logos-32.png'
-          width='35px' />Agricom</Navbar.Brand>
+        <Link to='/'><Navbar.Brand href="#home"><img className='mr-1'
+          src={logo}
+          width='35px' />Agricom</Navbar.Brand></Link>
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">
           <Nav className="mr-auto">
-            <Nav.Link href="#home">Home</Nav.Link>
+          <Link to='/'><Nav.Link href="#home">Home</Nav.Link></Link>
             <Nav.Link href="#link">Services</Nav.Link>
             <Nav.Link href="#link">Blog</Nav.Link>
           </Nav>
@@ -31,7 +34,7 @@ export default function NavBar() {
               <Button variant="outline-success">Signup</Button>
             </NavDropdown.Item>
             <NavDropdown.Divider />
-            <NavDropdown.Item href="#action/3.1">Profile</NavDropdown.Item>
+            <Link to='/profile'><NavDropdown.Item href="#action/3.1">Profile</NavDropdown.Item></Link>
             <NavDropdown.Item href="#action/3.2">Another action</NavDropdown.Item>
             <NavDropdown.Item href="#action/3.3">Something</NavDropdown.Item>
             <NavDropdown.Divider />

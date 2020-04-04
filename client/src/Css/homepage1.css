@@ -49,14 +49,6 @@
         height: 160px;
     }
 }
-@media only screen and (max-width: px) {
-    .boxhome {
-        margin-top: 20px;
-    }
-    .carousel{
-        height: 160px;
-    }
-  }
 /* 
 .Blog {
     width: 85rem;

@@ -1,5 +1,6 @@
 import React from 'react';
 import { Form, Button } from 'react-bootstrap';
+import logo from '../../Image/logo.png'
 
 export default function Footer() {
   return (
@@ -8,7 +9,7 @@ export default function Footer() {
         <div class="d-flex flex-column box2 justify-content-around m-2">
           <div class="d-flex flex-row  justify-content-start pb-4">
             <img className='mr-1 '
-              src='https://www.freepnglogos.com/uploads/nature-png/natural-health-logos-32.png'
+              src={logo}
               width='80px' height='80px' />
             <h2 className='my-auto flex-fill pl-3' style={{ 'font-weight': '900', color: "#28ca2f" }}>Agricon</h2>
           </div>
