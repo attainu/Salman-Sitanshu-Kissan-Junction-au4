@@ -26,7 +26,6 @@
 }
 
 .base-container .content .form {
-    margin-top: 2em;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -62,7 +61,8 @@
 }
 
 .base-container .footer {
-    margin-top: 3em;
+    margin-top: 1em;
+    margin-bottom: 2rem;
 }
 
 .App {
@@ -71,9 +71,11 @@
     justify-content: center;
     align-items: center;
     font-family: "Open Sans", sans-serif;
-    background-image: url("https://ak9.picdn.net/shutterstock/videos/7553389/thumb/1.jpg");
-    background-repeat: no-repeat;
-    background-attachment: fixed;
+    background: rgba(0, 0, 0, 0.65) url("https://ak2.picdn.net/shutterstock/videos/17312992/thumb/1.jpg") no-repeat center center fixed;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
 }
 
 .App-logo {
@@ -123,10 +125,25 @@
     align-items: center;
     background-color: #fff;
     box-shadow: 0px 0px 12px 2px rgba(15, 15, 15, 0.2);
-    border-radius: 4px;
+    border-radius: 24px;
     position: relative;
     z-index: 99;
-    width: 100%;
+    width: 30rem;
+    height: 100%;
+    z-index: 99;
+    padding: 17px 10px;
+}
+
+.logincontainer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #fff;
+    box-shadow: 0px 0px 12px 2px rgba(15, 15, 15, 0.2);
+    border-radius: 24px;
+    position: relative;
+    z-index: 99;
+    width: 30rem;
     height: 100%;
     z-index: 99;
     padding: 17px 10px;
@@ -136,9 +153,9 @@
     display: flex;
     flex-direction: column;
     justify-content: center;
-    height: 90%;
+    height: 70%;
     background-color: #28ca2f;
-    width: 100%;
+    width: 80%;
     position: absolute;
     right: -34%;
     border-radius: 6px;
@@ -158,12 +175,12 @@
 }
 
 .login .right-side.left {
-    right: 40%;
+    right: 65%;
     align-items: flex-start;
 }
 
 .login .right-side.left:hover {
-    right: 45%;
+    right: 65%;
 }
 
 .login .right-side .text {
