@@ -7,7 +7,7 @@ import icon3 from '../../Image/work2.jpg'
 export default function YourProduct() {
   return (
     <>
-      <CardDeck className='m-4 d-flex flex-wrap flex-row'>
+      <CardDeck className='m-4 d-flex flex-wrap justify-content-center flex-row'>
         <Card className='box4 m-3 shadow'>
           <Card.Img variant="top" src={icon1} />
           <Card.Body>
