@@ -5,11 +5,14 @@ import Home from "./Component/Home/Home.js";
 import NavBar from './Component/Home/NavBar';
 import Profile from './Component/Farmer/Profile';
 import Footer from './Component/Home/Footer';
+import Content from './Component/Product/Content';
+import Notification from './Component/Notification/Notification';
 import {
   BrowserRouter as Router,
   Switch,
   Route
 } from "react-router-dom";
+
 
 class App extends Component {
 
@@ -18,12 +21,16 @@ class App extends Component {
       <>
         <Router>
           <NavBar />
+          <Notification />
           <Switch>
             <Route exact path='/'>
               <Home />
             </Route>
             <Route path='/profile'>
               <Profile />
+            </Route>
+            <Route path='/test'>
+              <Content />
             </Route>
           </Switch>
           <Footer />

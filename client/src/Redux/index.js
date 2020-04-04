@@ -1,7 +1,7 @@
 import { combineReducers } from "redux";
-import data from './reducer';
+import data from './notification';
 const rootReducer = combineReducers({
-  restaurant: data,
+  notify: data,
 });
 
 export default rootReducer;

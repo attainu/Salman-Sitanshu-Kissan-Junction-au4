@@ -19,7 +19,7 @@ export default function NavBar() {
           </Nav>
           <Nav className="ml-auto">
             <Nav.Link href="#home">About</Nav.Link>
-            <Nav.Link href="#link">Contacts</Nav.Link>
+            <Link to='/test'><Nav.Link href="#link">Contacts</Nav.Link></Link>
           </Nav>
           <NavDropdown alignRight id="dropdown-no-caret" className="p-0"
             title={
