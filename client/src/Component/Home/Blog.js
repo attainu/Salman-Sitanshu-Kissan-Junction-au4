@@ -1,10 +1,6 @@
 import React, { Component } from "react";
 import {
-  Carousel,
   Button,
-  Row,
-  Col,
-  Container,
   Card,
   Jumbotron
 } from "react-bootstrap";
@@ -49,7 +45,7 @@ class Blog extends Component {
           <h1 className='pt-5'>
             Our <span style={{ color: "#28ca2f" }}>Blog</span>
           </h1>
-          <div class="d-flex flex-row justify-content-sm-around align-item-strech flex-wrap bd-highlight">
+          <div className="d-flex flex-row justify-content-sm-around align-item-strech flex-wrap bd-highlight">
             {this.state.topic &&
               this.state.topic.map((item, index) => {
                 return (

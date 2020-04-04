@@ -65,12 +65,12 @@ class CarouselHome extends React.Component {
             {this.state.topic &&
               this.state.topic.map((item, index) => {
                 return (
-                  <Col>
+                  <Col key={index}>
                     <div
-                      class="styl_box"
+                      className="styl_box"
                       style={{ backgroundImage: `url(${item.url})` }}
                     >
-                      <div class="single_analize__block text-center ">
+                      <div className="single_analize__block text-center ">
                         <h2>{item.name}</h2>
                         <p>{item.subject}</p>
                         <Button className="btn-text btn_new btn-success">
