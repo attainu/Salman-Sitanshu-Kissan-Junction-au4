@@ -5,8 +5,15 @@ import YourProduct from './YourProduct';
 import Purchased from './Purchased';
 import Sold from './Sold';
 import { Route, Link } from "react-router-dom";
+import { connect } from "react-redux";
+import { bindActionCreators } from 'redux'
+import Action from '../../ActionCreater/action'
 
-export default function Profile() {
+const { notify } = Action;
+
+function Profile(props) {
+  const { notify } = props;
+
   return (
     <>
       <div class="d-flex flex-column ">
@@ -14,7 +21,9 @@ export default function Profile() {
           <div class="my-auto profile-img">
             <Image className='shadow' src="https://lakewangaryschool.sa.edu.au/wp-content/uploads/2017/11/placeholder-profile-sq.jpg" rounded fluid />
             <div className='text-center'>
-              <Button className='btn-1 mt-3' variant="secondary" size="sm">
+              <Button className='btn-1 mt-3'
+                onClick={() => notify({ type: 'success', msg: 'Edit Profile' })}
+                variant="secondary" size="sm">
                 Edit Profile
           </Button>
             </div>
@@ -130,3 +139,13 @@ export default function Profile() {
   );
 
 }
+
+const take = (state) => {
+  return state;
+}
+
+const change = (dispatch) => {
+  return bindActionCreators({ notify }, dispatch)
+}
+
+export default connect(take, change)(Profile);

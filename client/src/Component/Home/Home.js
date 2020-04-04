@@ -4,7 +4,6 @@ import Blog from "./Blog.js";
 import Service from "./Services.js";
 import PageDescription from './PageDescription';
 import Progress from './Progress';
-import Footer from './Footer';
 
 class Home extends Component {
   render() {

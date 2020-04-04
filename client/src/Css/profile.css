@@ -24,3 +24,11 @@
 .btn-1{
   min-width: 70px;
 }
+.btn-2{
+  min-width: 110px;
+}
+
+.content{
+  max-width: 550px;
+  width: 100%;
+}
