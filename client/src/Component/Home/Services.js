@@ -41,115 +41,111 @@ class Service extends Component {
       };
     }
     return (
-      <div>
-        <Row>
-          <Jumbotron className="Blog text-center">
-            <h1>
-              <span style={{ color: "#28ca2f" }}>Our</span> Services
+      <>
+        <Jumbotron className="Blog text-center ">
+          <h1>
+            <span style={{ color: "#28ca2f" }}>Our</span> Services
             </h1>
-            <Row
-              style={{
-                marginLeft: "6rem",
-                marginTop: "2rem"
-              }}
-            >
-              <Col className="servicemerge">
-                <Row>
-                  <img
-                    src={image1}
-                    alt="dd"
-                    style={{
-                      width: "18rem",
-                      height: "12rem"
-                    }}
-                  />
-                </Row>
+          <div class="d-flex flex-row justify-content-center align-item-strech flex-wrap bd-highlight">
+            <div>
+              <div>
+                <img
+                  src={image1}
+                  alt="dd"
+                  style={{
+                    width: "18rem",
+                    height: "12rem"
+                  }}
+                />
+              </div>
 
-                <Row
-                  style={linkStyle}
-                  onMouseEnter={this.toggleHover}
-                  onMouseLeave={this.toggleHover}
-                >
-                  <h4 style={{ color: "#28ca2f", margin: "0 auto" }}>
-                    Gardening Kits
+              <div
+                style={linkStyle}
+                onMouseEnter={this.toggleHover}
+                onMouseLeave={this.toggleHover}
+                class="d-flex flex-column justify-content-center"
+              >
+                <h4 style={{ color: "#28ca2f", margin: "0 auto" }}>
+                  Gardening Kits
                   </h4>
-                  <p style={{ color: "white" }}>
-                    We provides all of the gardening related products i.e seeds,
-                    pestisides and heavy machine.
+                <p style={{ color: "white" }}>
+                  We provides all of the gardening related products i.e seeds,
+                  pestisides and heavy machine.
                   </p>
-                </Row>
-              </Col>
-
-              <Col className="servicemerge">
-                <Row
-                  style={linkStyle}
-                  onMouseEnter={this.toggleHover}
-                  onMouseLeave={this.toggleHover}
-                >
-                  <h4 style={{ color: "#28ca2f", margin: "0 auto" }}>
-                    Heavy Machine
+              </div>
+            </div>
+            <div>
+              <div
+                style={linkStyle}
+                onMouseEnter={this.toggleHover}
+                onMouseLeave={this.toggleHover}
+                class="d-flex flex-column justify-content-center"
+              >
+                <h4 style={{ color: "#28ca2f", margin: "0 auto" }}>
+                  Heavy Machine
                   </h4>
-                  <p style={{ color: "white" }}>
-                    No need to worry of labour costing more. Just rent all types
-                    of machine here!!
+                <p style={{ color: "white" }}>
+                  No need to worry of labour costing more. Just rent all types
+                  of machine here!!
                   </p>
-                </Row>
-                <Row>
-                  <img
-                    src={image2}
-                    alt="dd"
-                    style={{ width: "18rem", height: "12rem" }}
-                  />
-                </Row>
-              </Col>
-              <Col className="servicemerge">
-                <Row>
-                  <img
-                    src={image3}
-                    alt="dd"
-                    style={{ width: "18rem", height: "12rem" }}
-                  />
-                </Row>
-                <Row
-                  style={linkStyle}
-                  onMouseEnter={this.toggleHover}
-                  onMouseLeave={this.toggleHover}
-                >
-                  <h4 style={{ color: "#28ca2f", margin: "0 auto" }}>
-                    Supplier
+              </div>
+              <div>
+                <img
+                  src={image2}
+                  alt="dd"
+                  style={{ width: "18rem", height: "12rem" }}
+                />
+              </div>
+            </div>
+            <div>
+              <div>
+                <img
+                  src={image3}
+                  alt="dd"
+                  style={{ width: "18rem", height: "12rem" }}
+                />
+              </div>
+              <div
+                style={linkStyle}
+                onMouseEnter={this.toggleHover}
+                onMouseLeave={this.toggleHover}
+                class="d-flex flex-column justify-content-center"
+              >
+                <h4 style={{ color: "#28ca2f", margin: "0 auto" }}>
+                  Supplier
                   </h4>
-                  <p style={{ color: "white" }}>
-                    Now you produce. And we are here to sell your product. Just
-                    list your sell, and get proper pay for it.
+                <p style={{ color: "white" }}>
+                  Now you produce. And we are here to sell your product. Just
+                  list your sell, and get proper pay for it.
                   </p>
-                </Row>
-              </Col>
-              <Col>
-                <Row
-                  style={linkStyle}
-                  onMouseEnter={this.toggleHover}
-                  onMouseLeave={this.toggleHover}
-                >
-                  <h4 style={{ color: "#28ca2f", margin: "0 auto" }}>
-                    Consumer
+              </div>
+            </div>
+            <div>
+              <div
+                style={linkStyle}
+                onMouseEnter={this.toggleHover}
+                onMouseLeave={this.toggleHover}
+                class="d-flex flex-column justify-content-center"
+              >
+                <h4 style={{ color: "#28ca2f", margin: "0 auto" }}>
+                  Consumer
                   </h4>
-                  <p style={{ color: "white" }}>
-                    Why to visit Super Store and Pay High? Order all products
-                    and get deliver at your doorstep.
+                <p style={{ color: "white" }}>
+                  Why to visit Super Store and Pay High? Order all products
+                  and get deliver at your doorstep.
                   </p>
-                </Row>
-                <Row>
-                  <img
-                    src={image4}
-                    alt="dd"
-                    style={{ width: "18rem", height: "12rem" }}
-                  />
-                </Row>
-              </Col>
-            </Row>
-          </Jumbotron>
-        </Row>
-      </div>
+              </div>
+              <div>
+                <img
+                  src={image4}
+                  alt="dd"
+                  style={{ width: "18rem", height: "12rem" }}
+                />
+              </div>
+            </div>
+          </div>
+        </Jumbotron>
+      </>
     );
   }
 }

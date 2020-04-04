@@ -13,7 +13,7 @@ class CarouselHome extends React.Component {
     topic: [
       {
         name: "Farmer",
-        url:  image4,
+        url: image4,
         subject:
           "If you are a farmer then you are at perfect platfrom from where you can order all of your farming related products and you can sell your production also."
       },
@@ -34,42 +34,39 @@ class CarouselHome extends React.Component {
 
   render() {
     return (
-      <div>
-        <Row>
-          <Col>
-            {" "}
-            <Carousel>
-              <Carousel.Item>
-                <img
-                  style={{ width: "99%", height: "550px" }}
-                  src={image1}
-                  alt="Third slide"
-                />
-              </Carousel.Item>
-              <Carousel.Item>
-                <img
-                  style={{ width: "100%", height: "550px" }}
-                  src={image2}
-                  alt="Third slide"
-                />
-              </Carousel.Item>
-              <Carousel.Item>
-                <img
-                  style={{ width: "100%", height: "550px" }}
-                  src={image3}
-                  alt="First slide"
-                />
-              </Carousel.Item>
-            </Carousel>
-          </Col>
-        </Row>
+      <>
+
+        <Carousel>
+          <Carousel.Item>
+            <img
+              style={{ width: "100%" }}
+              src={image1}
+              alt="Third slide"
+            />
+          </Carousel.Item>
+          <Carousel.Item>
+            <img
+              style={{ width: "100%" }}
+              src={image2}
+              alt="Third slide"
+            />
+          </Carousel.Item>
+          <Carousel.Item>
+            <img
+              style={{ width: "100%" }}
+              src={image3}
+              alt="First slide"
+            />
+          </Carousel.Item>
+        </Carousel>
+
         <Container>
           <Row className="boxhome">
             {this.state.topic &&
               this.state.topic.map((item, index) => {
                 return (
                   <Col>
-                    <div 
+                    <div
                       class="styl_box"
                       style={{ backgroundImage: `url(${item.url})` }}
                     >
@@ -86,7 +83,7 @@ class CarouselHome extends React.Component {
               })}
           </Row>
         </Container>
-      </div>
+      </>
     );
   }
 }

@@ -18,25 +18,25 @@ class Blog extends Component {
     topic: [
       {
         name: "Bascis Step of Organic Farming",
-        url:image1,
+        url: image1,
         subject:
           "Organic farming refers agricultural system  reliant on green manure, compost ,biological pest contol and crop rotation and livestock production...."
       },
       {
         name: "Mustard Cultivation Income",
-        url:image2,
+        url: image2,
         subject:
           " Musturd is very popular oil seed crop, higly cultivated seeds crop among all the crops in india. Due to easy management practice and  contestant price ......."
       },
       {
         name: "Farm Mechnization",
-        url:image3,
+        url: image3,
         subject:
           "Mechanised agriculture is the process of using agricultural machinery to mechanise the work of agriculture, greatly increasing farm worker productivity. In modern times...."
       },
       {
         name: "Food Subsidiary",
-        url:image4,
+        url: image4,
         subject:
           "NABARD Loan for food Processing Industry in India. The NABARD loan was announced by the Indian Government, which offers 2000 crore funds for entrepreneurs to set up food.... "
       }
@@ -44,40 +44,36 @@ class Blog extends Component {
   };
   render() {
     return (
-      <div>
-        <Row>
-          <Jumbotron className="Blog text-center">
-            <h1>
-              Our <span style={{ color: "#28ca2f" }}>Blog</span>
-            </h1>
-            <Row>
-              {this.state.topic &&
-                this.state.topic.map((item, index) => {
-                  return (
-                    <Col key={index}>
-                      <Card style={{ width: "18rem" }} className="blogcard">
-                        <Card.Img
-                          variant="top"
-                          style={{ height: "10rem" }}
-                          src={item.url}
-                          className="blogimage"
-                        />
-                        <Card.Body>
-                          <Card.Title>{item.name}</Card.Title>
-                          <Card.Text>{item.subject}</Card.Text>
-                          <Button className="btn-second btn-success">
-                            Read
+      <>
+        <Jumbotron className="Blog text-center p-0 mt-2">
+          <h1 className='pt-5'>
+            Our <span style={{ color: "#28ca2f" }}>Blog</span>
+          </h1>
+          <div class="d-flex flex-row justify-content-sm-around align-item-strech flex-wrap bd-highlight">
+            {this.state.topic &&
+              this.state.topic.map((item, index) => {
+                return (
+                  <Card key={index} style={{ width: "18rem" }} className="blogcard mx-auto m-3">
+                    <Card.Img
+                      variant="top"
+                      style={{ height: "10rem" }}
+                      src={item.url}
+                      className="blogimage"
+                    />
+                    <Card.Body>
+                      <Card.Title>{item.name}</Card.Title>
+                      <Card.Text>{item.subject}</Card.Text>
+                      <Button className="btn-second btn-success">
+                        Read
                           </Button>{" "}
-                            
-                        </Card.Body>
-                      </Card>
-                    </Col>
-                  );
-                })}
-            </Row>
-          </Jumbotron>
-        </Row>
-      </div>
+
+                    </Card.Body>
+                  </Card>
+                );
+              })}
+          </div>
+        </Jumbotron>
+      </>
     );
   }
 }
