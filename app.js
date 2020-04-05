@@ -16,7 +16,8 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/users', usersRouter);
 
-// app.use('/table', require('./Controller/CRUD'));
+app.use('/table', require('./Controller/CRUD'));
+
 //Heroku
 if (process.env.NODE_ENV === 'production') {
   // Serve any static files
