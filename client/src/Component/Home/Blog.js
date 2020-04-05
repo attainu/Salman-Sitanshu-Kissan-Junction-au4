@@ -1,5 +1,9 @@
 import React, { Component } from "react";
-import { Button, Card, Jumbotron } from "react-bootstrap";
+import {
+  Button,
+  Card,
+  Jumbotron
+} from "react-bootstrap";
 import "./../../Css/homepage1.css";
 import image1 from "../../Image/blog1.jpg";
 import image2 from "../../Image/blog2.jpg";
@@ -37,11 +41,11 @@ class Blog extends Component {
   render() {
     return (
       <>
-        <Jumbotron className="Blog text-center p-0 mt-2">
-          <h1 className='pt-5'>
+        <Jumbotron className="Blog text-center mb-0 mt-2">
+          <h1 className=''>
             Our <span style={{ color: "#28ca2f" }}>Blog</span>
           </h1>
-          <div class="d-flex flex-row justify-content-sm-around align-item-strech flex-wrap bd-highlight">
+          <div className="d-flex flex-row justify-content-sm-around align-item-strech flex-wrap bd-highlight">
             {this.state.topic &&
               this.state.topic.map((item, index) => {
                 return (

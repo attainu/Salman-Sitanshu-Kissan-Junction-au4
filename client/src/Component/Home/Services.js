@@ -1,13 +1,5 @@
 import React, { Component } from "react";
-import {
-  Carousel,
-  Button,
-  Row,
-  Col,
-  Container,
-  Card,
-  Jumbotron
-} from "react-bootstrap";
+import { Jumbotron } from "react-bootstrap";
 import "./../../Css/homepage1.css";
 import image1 from '../../Image/service1.jpg';
 import image2 from '../../Image/service2.jpg';
@@ -46,7 +38,7 @@ class Service extends Component {
           <h1>
             <span style={{ color: "#28ca2f" }}>Our</span> Services
             </h1>
-          <div class="d-flex flex-row justify-content-center align-item-strech flex-wrap bd-highlight">
+          <div className="d-flex flex-row justify-content-center align-item-strech flex-wrap bd-highlight">
             <div>
               <div>
                 <img
@@ -63,7 +55,7 @@ class Service extends Component {
                 style={linkStyle}
                 onMouseEnter={this.toggleHover}
                 onMouseLeave={this.toggleHover}
-                class="d-flex flex-column justify-content-center"
+                className="d-flex flex-column justify-content-center"
               >
                 <h4 style={{ color: "#28ca2f", margin: "0 auto" }}>
                   Gardening Kits
@@ -79,7 +71,7 @@ class Service extends Component {
                 style={linkStyle}
                 onMouseEnter={this.toggleHover}
                 onMouseLeave={this.toggleHover}
-                class="d-flex flex-column justify-content-center"
+                className="d-flex flex-column justify-content-center"
               >
                 <h4 style={{ color: "#28ca2f", margin: "0 auto" }}>
                   Heavy Machine
@@ -109,7 +101,7 @@ class Service extends Component {
                 style={linkStyle}
                 onMouseEnter={this.toggleHover}
                 onMouseLeave={this.toggleHover}
-                class="d-flex flex-column justify-content-center"
+                className="d-flex flex-column justify-content-center"
               >
                 <h4 style={{ color: "#28ca2f", margin: "0 auto" }}>
                   Supplier
@@ -125,7 +117,7 @@ class Service extends Component {
                 style={linkStyle}
                 onMouseEnter={this.toggleHover}
                 onMouseLeave={this.toggleHover}
-                class="d-flex flex-column justify-content-center"
+                className="d-flex flex-column justify-content-center"
               >
                 <h4 style={{ color: "#28ca2f", margin: "0 auto" }}>
                   Consumer

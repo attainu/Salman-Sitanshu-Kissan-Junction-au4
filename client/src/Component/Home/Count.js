@@ -20,7 +20,7 @@ class Counter extends React.Component {
     const { end = 20 } = this.props
     return (<>
       <div className='text-center'>
-        <CountUp end={this.state.didViewCountUp ? end : 0} redraw={true} duration={6} onEnd={false} suffix=" K">
+        <CountUp end={this.state.didViewCountUp ? parseInt(end) : 0} redraw={true} duration={6} onEnd={() => false} suffix=" K">
           {({ countUpRef, start }) => (
             <VisibilitySensor onChange={this.onVisibilityChange} offset={{
               top:
