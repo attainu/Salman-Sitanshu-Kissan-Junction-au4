@@ -4,18 +4,15 @@ import img1 from '../../Image/service1.jpg'
 import img2 from '../../Image/service2.jpg'
 import PageDescription from '../Home/PageDescription';
 import Blog from '../Home/Blog';
-import { Image, Nav, Button } from 'react-bootstrap';
-import { Route, Link } from "react-router-dom";
+import { Image, Button } from 'react-bootstrap';
 
 export default function Content() {
   return (
     <>
       <div className="d-flex flex-column ">
         <div className="d-flex flex-fill justify-content-around flex-wrap m-5  flex-row">
-          <div >
-            <Image className='shadow content' src={img1} rounded />
-            <div className='text-center'>
-            </div>
+          <Image className='shadow content' src={img1} rounded />
+          <div className='text-center'>
           </div>
           <div className="d-flex flex-column justify-content-start">
             <h1 className='mb-0' style={{ 'font-weight': '500' }}>Watermelon Seeds</h1>
