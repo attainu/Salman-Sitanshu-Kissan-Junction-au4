@@ -13,8 +13,8 @@ function Profile(props) {
   return (
     <>
       <div class="d-flex flex-wrap justify-content-between flex-row m-5 cart-box">
-        <h1 className=' d-inline flex-fill m-3'>Shoppin Cart</h1>
-        <div className='mx-auto m-3'>
+        <h1 className=' d-inline flex-fill m-3 mb-2'>Shoppin Cart</h1>
+        <div className='mx-auto m-3 mb-5'>
           <Button className='ml-auto' variant="success" size="lg" onClick={() => notify({ type: 'success', msg: 'Order Placed Successfully' })}>
             Place Order
           </Button>
@@ -24,7 +24,7 @@ function Profile(props) {
             <tr>
               <td scope="row">
                 <img className="m-0 rounded-circle p-0 "
-                  width="60px"
+                  width="100px"
                   src='https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcQheGtOjDugQL_DtA6EDn5no8Hn5jnJNKJOdqoYwRXQJ6E24-fW&usqp=CAU'
                   alt="user pic" />
               </td>
@@ -43,7 +43,7 @@ function Profile(props) {
             <tr>
               <td scope="row">
                 <img className="m-0 rounded-circle p-0 "
-                  width="60px"
+                  width="100px"
                   src='https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcQheGtOjDugQL_DtA6EDn5no8Hn5jnJNKJOdqoYwRXQJ6E24-fW&usqp=CAU'
                   alt="user pic" />
               </td>
@@ -62,7 +62,7 @@ function Profile(props) {
             <tr>
               <td scope="row">
                 <img className="m-0 rounded-circle p-0 "
-                  width="60px"
+                  width="100px"
                   src='https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcQheGtOjDugQL_DtA6EDn5no8Hn5jnJNKJOdqoYwRXQJ6E24-fW&usqp=CAU'
                   alt="user pic" />
               </td>
@@ -81,7 +81,7 @@ function Profile(props) {
             <tr>
               <td scope="row">
                 <img className="m-0 rounded-circle p-0 "
-                  width="60px"
+                  width="100px"
                   src='https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcQheGtOjDugQL_DtA6EDn5no8Hn5jnJNKJOdqoYwRXQJ6E24-fW&usqp=CAU'
                   alt="user pic" />
               </td>

@@ -6,7 +6,7 @@ import { Link } from "react-router-dom";
 export default function NavBar() {
   return (
     <>
-      <Navbar bg="light" expand="lg">
+      <Navbar bg="light" expand="lg" sticky="top">
         <Link to='/'><Navbar.Brand href="#home"><img className='mr-1'
           src={logo}
           width='35px' />Agricom</Navbar.Brand></Link>
