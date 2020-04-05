@@ -41,8 +41,8 @@ class Blog extends Component {
   render() {
     return (
       <>
-        <Jumbotron className="Blog text-center p-0 mt-2">
-          <h1 className='pt-5'>
+        <Jumbotron className="Blog text-center mb-0 mt-2">
+          <h1 className=''>
             Our <span style={{ color: "#28ca2f" }}>Blog</span>
           </h1>
           <div className="d-flex flex-row justify-content-sm-around align-item-strech flex-wrap bd-highlight">

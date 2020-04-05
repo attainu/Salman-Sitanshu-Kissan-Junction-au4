@@ -6,6 +6,7 @@ import NavBar from './Component/Home/NavBar';
 import Profile from './Component/Farmer/Profile';
 import Footer from './Component/Home/Footer';
 import Content from './Component/Product/Content';
+import Cart from './Component/Farmer/Cart';
 import Notification from './Component/Notification/Notification';
 import {
   BrowserRouter as Router,
@@ -31,6 +32,9 @@ class App extends Component {
             </Route>
             <Route path='/test'>
               <Content />
+            </Route>
+            <Route path='/cart'>
+              <Cart />
             </Route>
           </Switch>
           <Footer />

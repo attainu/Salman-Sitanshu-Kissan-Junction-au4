@@ -33,9 +33,6 @@ function Profile(props) {
             <p className='pl-2'>Farmer</p>
             <table class="table table-borderless">
               <tbody>
-                {/* <tr>
-                  <th>Farmer</th>
-                </tr> */}
                 <tr>
                   <th scope="row">Email:</th>
                   <td>salmanahmed@gmail.com</td>
