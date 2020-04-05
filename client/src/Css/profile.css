@@ -32,3 +32,13 @@
   max-width: 550px;
   width: 100%;
 }
+
+.cart-btn{
+  min-width: 133px;
+}
+
+@media only screen and (max-width: 1000px) {
+  .cart-box{
+    margin: 0 !important;
+  }
+}

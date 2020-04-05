@@ -36,7 +36,7 @@ export default function NavBar() {
             <NavDropdown.Divider />
             <Link to='/profile'><NavDropdown.Item href="#action/3.1">Profile</NavDropdown.Item></Link>
             <Link to='/profile/purchased'><NavDropdown.Item href="#action/3.2">Ordered Product</NavDropdown.Item></Link>
-            <NavDropdown.Item href="#action/3.3">Something</NavDropdown.Item>
+            <Link to='/cart'><NavDropdown.Item href="#action/3.3">Cart</NavDropdown.Item></Link>
             <NavDropdown.Divider />
             <NavDropdown.Item href="#action/3.4">Logout</NavDropdown.Item>
           </NavDropdown>
