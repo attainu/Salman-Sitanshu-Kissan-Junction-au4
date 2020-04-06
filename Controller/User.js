@@ -1,9 +1,9 @@
-const Table = require('../Model/Model-Example');
+const Table = require('../Model/User');
 const express = require("express");
 const router = express.Router();
 
 // Create Operation
-router.post('/write', async (req, res) => {
+router.post('/', async (req, res) => {
   try {
     const { body } = req;
     let table = await Table.create(body);
@@ -16,7 +16,7 @@ router.post('/write', async (req, res) => {
 })
 
 // Read Operation
-router.get('/read', async (req, res) => {
+router.get('/', async (req, res) => {
   try {
     let table = await Table.findAll();
     // let table = await Table.findAll({ attributes: ['name'] }); //for select query
@@ -29,7 +29,7 @@ router.get('/read', async (req, res) => {
 })
 
 // Update Operation
-router.put('/update/:id', async (req, res) => {
+router.put('/:id', async (req, res) => {
   try {
     const { params, body } = req;
     let table = await Table.update(body, { where: { id: params.id } });
@@ -42,7 +42,7 @@ router.put('/update/:id', async (req, res) => {
 })
 
 // Delete Operation
-router.delete('/delete/:id', async (req, res) => {
+router.delete('/:id', async (req, res) => {
   try {
     const { params } = req;
 
