@@ -31,31 +31,33 @@ class FarmerHomePage extends React.Component {
   render() {
     return (
       <>
-        <Container>
-          <Row className="boxhome">
-            {this.state.topic &&
-              this.state.topic.map((item, index) => {
-                return (
-                  <Col
-                    className="col-lg-6 col-md-6 col-sm-12 mt-4 mb-5 "
-                    key={index}
-                  >
-                    <div
-                      class="styl_box1"
-                      style={{ backgroundImage: `url(${item.url})` }}
+        <div className="background">
+          <Container>
+            <Row className="boxhome">
+              {this.state.topic &&
+                this.state.topic.map((item, index) => {
+                  return (
+                    <Col
+                      className="col-lg-6 col-md-6 col-sm-12 mt-4 mb-5 "
+                      key={index}
                     >
-                      <div class="single_analize__block text-center ">
-                        <h2>{item.name}</h2>
-                        <Button className="btn-success mt-4">
-                          Explore More
-                        </Button>{" "}
+                      <div
+                        class="styl_box1"
+                        style={{ backgroundImage: `url(${item.url})` }}
+                      >
+                        <div class="single_analize__block text-center ">
+                          <h2>{item.name}</h2>
+                          <Button className="btn-success mt-4">
+                            Explore More
+                          </Button>{" "}
+                        </div>
                       </div>
-                    </div>
-                  </Col>
-                );
-              })}
-          </Row>
-        </Container>
+                    </Col>
+                  );
+                })}
+            </Row>
+          </Container>
+        </div>
       </>
     );
   }

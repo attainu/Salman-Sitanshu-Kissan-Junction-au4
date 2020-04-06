@@ -6,19 +6,19 @@ import {
   Col,
   Container,
   Card,
-  Jumbotron
+  Jumbotron,
 } from "react-bootstrap";
 import "./../../Css/homepage1.css";
-import image1 from '../../Image/service1.jpg';
-import image2 from '../../Image/service2.jpg';
-import image3 from '../../Image/service3.jpg';
-import image4 from '../../Image/service4.png';
+import image1 from "../../Image/service1.jpg";
+import image2 from "../../Image/service2.jpg";
+import image3 from "../../Image/service3.jpg";
+import image4 from "../../Image/service4.png";
 
 class Service extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      hover: false
+      hover: false,
     };
   }
   toggleHover = () => {
@@ -31,13 +31,13 @@ class Service extends Component {
       linkStyle = {
         backgroundColor: "#262626",
         width: "18rem",
-        height: "12rem"
+        height: "12rem",
       };
     } else {
       linkStyle = {
         backgroundColor: "#262626",
         width: "18rem",
-        height: "12rem"
+        height: "12rem",
       };
     }
     return (
@@ -45,7 +45,7 @@ class Service extends Component {
         <Jumbotron className="Blog text-center ">
           <h1>
             <span style={{ color: "#28ca2f" }}>Our</span> Services
-            </h1>
+          </h1>
           <div class="d-flex flex-row justify-content-center align-item-strech flex-wrap bd-highlight">
             <div>
               <div>
@@ -54,7 +54,7 @@ class Service extends Component {
                   alt="dd"
                   style={{
                     width: "18rem",
-                    height: "12rem"
+                    height: "12rem",
                   }}
                 />
               </div>
@@ -67,11 +67,11 @@ class Service extends Component {
               >
                 <h4 style={{ color: "#28ca2f", margin: "0 auto" }}>
                   Gardening Kits
-                  </h4>
+                </h4>
                 <p style={{ color: "white" }}>
                   We provides all of the gardening related products i.e seeds,
                   pestisides and heavy machine.
-                  </p>
+                </p>
               </div>
             </div>
             <div>
@@ -83,11 +83,11 @@ class Service extends Component {
               >
                 <h4 style={{ color: "#28ca2f", margin: "0 auto" }}>
                   Heavy Machine
-                  </h4>
+                </h4>
                 <p style={{ color: "white" }}>
                   No need to worry of labour costing more. Just rent all types
                   of machine here!!
-                  </p>
+                </p>
               </div>
               <div>
                 <img
@@ -111,13 +111,11 @@ class Service extends Component {
                 onMouseLeave={this.toggleHover}
                 class="d-flex flex-column justify-content-center"
               >
-                <h4 style={{ color: "#28ca2f", margin: "0 auto" }}>
-                  Supplier
-                  </h4>
+                <h4 style={{ color: "#28ca2f", margin: "0 auto" }}>Supplier</h4>
                 <p style={{ color: "white" }}>
                   Now you produce. And we are here to sell your product. Just
                   list your sell, and get proper pay for it.
-                  </p>
+                </p>
               </div>
             </div>
             <div>
@@ -127,13 +125,11 @@ class Service extends Component {
                 onMouseLeave={this.toggleHover}
                 class="d-flex flex-column justify-content-center"
               >
-                <h4 style={{ color: "#28ca2f", margin: "0 auto" }}>
-                  Consumer
-                  </h4>
+                <h4 style={{ color: "#28ca2f", margin: "0 auto" }}>Consumer</h4>
                 <p style={{ color: "white" }}>
-                  Why to visit Super Store and Pay High? Order all products
-                  and get deliver at your doorstep.
-                  </p>
+                  Why to visit Super Store and Pay High? Order all products and
+                  get deliver at your doorstep.
+                </p>
               </div>
               <div>
                 <img
