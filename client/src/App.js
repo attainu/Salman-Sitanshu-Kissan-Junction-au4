@@ -14,7 +14,7 @@ class App extends Component {
     return (
       <>
         <NavBar />
-        <MachineList />
+        <CompanyRegister />
       </>
     );
   }

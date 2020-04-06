@@ -93,7 +93,7 @@ class MachineList extends React.Component {
       <>
         <div className="container-fluid listbackground ">
           <Row>
-            <Col lg={3} md={3} sm={12} className="border-right">
+            <Col lg={3} md={3} sm={12} className="border-right sticky-top">
               <Row>
                 <Col lg={12} md={12} sm={12} className="mt-3">
                   <h3>
