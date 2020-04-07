@@ -13,7 +13,9 @@ const Address = db.define('address', {
   },
   locality: {
     type: Sequelize.STRING,
-    allowNull: false,
+  },
+  district: {
+    type: Sequelize.STRING,
   },
   city: {
     type: Sequelize.STRING,

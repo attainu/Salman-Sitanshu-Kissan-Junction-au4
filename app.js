@@ -2,28 +2,28 @@ var express = require('express');
 var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
-
-// var indexRouter = require('./routes/index');
-var usersRouter = require('./routes/users');
-
 var app = express();
+const passport = require('passport')
+const passportSetup = require('./config/passport-setup');
+
 
 app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
+app.use(passport.initialize())
 
-app.use('/users', usersRouter);
+// Auth Router
+app.use('/auth', require('./Controller/Outh'))
 
 // Routes
 app.use('/user', require('./Controller/User'));
 app.use('/address', require('./Controller/Address'));
-app.use('/order', require('./Controller/Order'));
-app.use('/sold', require('./Controller/Sold'));
 app.use('/product', require('./Controller/Product'));
 app.use('/conprd', require('./Controller/ConnectProduct'));
 app.use('/join', require('./Controller/Join'));
+
 
 //Heroku Config
 if (process.env.NODE_ENV === 'production') {

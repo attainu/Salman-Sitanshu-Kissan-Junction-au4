@@ -7,11 +7,9 @@ router.post('/', async (req, res) => {
   try {
     const { body } = req;
     let address = await Address.create(body);
-    res.json({
-      address
-    })
+    res.json(address)
   } catch (err) {
-    console.log(err);
+    res.json(err)
   }
 })
 
@@ -19,12 +17,9 @@ router.post('/', async (req, res) => {
 router.get('/', async (req, res) => {
   try {
     let address = await Address.findAll();
-    // let address = await Address.findAll({ attributes: ['name'] }); //for select query
-    res.json({
-      address
-    })
+    res.json(address)
   } catch (err) {
-    console.log(err);
+    res.json(err)
   }
 })
 
@@ -33,11 +28,9 @@ router.put('/:id', async (req, res) => {
   try {
     const { params, body } = req;
     let address = await Address.update(body, { where: { id: params.id } });
-    res.json({
-      address
-    })
+    res.json(address)
   } catch (err) {
-    console.log(err);
+    res.json(err)
   }
 })
 
@@ -45,13 +38,10 @@ router.put('/:id', async (req, res) => {
 router.delete('/:id', async (req, res) => {
   try {
     const { params } = req;
-
     let address = await Address.destroy({ where: { id: params.id } });
-    res.json({
-      address
-    })
+    res.json(address)
   } catch (err) {
-    console.log(err);
+    res.json(err)
   }
 })
 

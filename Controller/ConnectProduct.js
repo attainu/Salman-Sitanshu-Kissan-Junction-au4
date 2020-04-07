@@ -7,11 +7,9 @@ router.post('/', async (req, res) => {
   try {
     const { body } = req;
     let userproduct = await UserProduct.create(body);
-    res.json({
-      userproduct
-    })
+    res.json(userproduct)
   } catch (err) {
-    console.log(err);
+    res.json(err)
   }
 })
 
@@ -19,12 +17,9 @@ router.post('/', async (req, res) => {
 router.get('/', async (req, res) => {
   try {
     let userproduct = await UserProduct.findAll();
-    // let userproduct = await UserProduct.findAll({ attributes: ['name'] }); //for select query
-    res.json({
-      userproduct
-    })
+    res.json(userproduct)
   } catch (err) {
-    console.log(err);
+    res.json(err)
   }
 })
 
@@ -33,11 +28,9 @@ router.put('/:id', async (req, res) => {
   try {
     const { params, body } = req;
     let userproduct = await UserProduct.update(body, { where: { id: params.id } });
-    res.json({
-      userproduct
-    })
+    res.json(userproduct)
   } catch (err) {
-    console.log(err);
+    res.json(err)
   }
 })
 
@@ -45,13 +38,10 @@ router.put('/:id', async (req, res) => {
 router.delete('/:id', async (req, res) => {
   try {
     const { params } = req;
-
     let userproduct = await UserProduct.destroy({ where: { id: params.id } });
-    res.json({
-      userproduct
-    })
+    res.json(userproduct)
   } catch (err) {
-    console.log(err);
+    res.json(err)
   }
 })
 
