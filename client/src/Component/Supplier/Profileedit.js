@@ -1,8 +1,8 @@
 import React from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
-import { Row, Col, Form, Container } from "react-bootstrap";
+import { Row, Col, Form, Container, Button } from "react-bootstrap";
 import { FaHome } from "react-icons/fa";
-class CompanyRegister extends React.Component {
+class ProfileEdit extends React.Component {
   state = {
     companyname: "",
     gstnumber: "",
@@ -111,64 +111,65 @@ class CompanyRegister extends React.Component {
       },
     });
   };
-
   render() {
     return (
       <>
         <Container>
           <Row>
-            <Col lg={3} md={3} sm={12}>
-              <img
-                className="mt-3"
-                src="https://pngimg.com/uploads/farmer/farmer_PNG52.png"
-                style={{ width: "22rem", float: "right" }}
-                alt="ss"
-              ></img>
-            </Col>
-            <Col lg={9} md={9} sm={12} className="mt-3 mb-3">
+            <Col lg={2} md={2} sm={12}></Col>
+            <Col lg={8} md={8} sm={12} className="mt-3 mb-3">
               <div className="    shadow-lg  ">
                 <div className="card-body">
                   <h2 className="text-center mb-3">
                     {" "}
-                    Add <span style={{ color: "#28ca2f" }}>Company</span>{" "}
+                    Edit <span style={{ color: "#28ca2f" }}>Profile</span>{" "}
                   </h2>
+
                   <Form>
                     <Form.Group as={Row}>
                       <Form.Label column lg="3" sm="3">
-                        Company Name
+                        Name
                       </Form.Label>
                       <Col sm="9">
                         <Form.Control
                           type="text"
-                          placeholder="Enter Company Name"
+                          placeholder="Edit Name Here"
                         />
                       </Col>
                     </Form.Group>{" "}
                     <Form.Group as={Row}>
                       <Form.Label column sm="3">
-                        GST Number
+                        Email
+                      </Form.Label>
+                      <Col sm="9">
+                        <Form.Control type="email" placeholder="Edit Email" />
+                      </Col>
+                    </Form.Group>{" "}
+                    <Form.Group as={Row}>
+                      <Form.Label column sm="3">
+                        Contact Number
                       </Form.Label>
                       <Col sm="9">
                         <Form.Control
-                          type="text"
-                          placeholder="Enter GST Number"
+                          type="number"
+                          placeholder="Edit Contact Number"
                         />
                       </Col>
                     </Form.Group>{" "}
                     <Form.Group as={Row}>
                       <Form.Label column sm="3">
-                        Company Type
+                        Password
                       </Form.Label>
                       <Col sm="9">
                         <Form.Control
-                          type="text"
-                          placeholder="Private , Semi-Private"
+                          type="password"
+                          placeholder="Edit Password"
                         />
                       </Col>
                     </Form.Group>{" "}
                     <div>
                       <span>
-                        Add Address Detail <FaHome />
+                        Edit Address Detail <FaHome />
                         <hr></hr>
                       </span>
                       <Form.Group as={Row}>
@@ -184,6 +185,22 @@ class CompanyRegister extends React.Component {
                       </Form.Group>{" "}
                       <Form.Row>
                         <Form.Group as={Col} controlId="formGridState">
+                          <Form.Label>State</Form.Label>
+                          <Form.Control
+                            as="select"
+                            value={this.state.address.state}
+                            onChange={(e) => this.handlestate(e.target.value)}
+                          >
+                            {this.state.statelist.map((option) => {
+                              return (
+                                <option key={option} value={option}>
+                                  {option}
+                                </option>
+                              );
+                            })}
+                          </Form.Control>
+                        </Form.Group>
+                        <Form.Group as={Col} controlId="formGridState">
                           <Form.Label>City </Form.Label>
                           <Form.Control
                             as="select"
@@ -197,23 +214,6 @@ class CompanyRegister extends React.Component {
                                   value={option}
                                   label={option}
                                 >
-                                  {option}
-                                </option>
-                              );
-                            })}
-                          </Form.Control>
-                        </Form.Group>
-
-                        <Form.Group as={Col} controlId="formGridState">
-                          <Form.Label>State</Form.Label>
-                          <Form.Control
-                            as="select"
-                            value={this.state.address.state}
-                            onChange={(e) => this.handlestate(e.target.value)}
-                          >
-                            {this.state.statelist.map((option) => {
-                              return (
-                                <option key={option} value={option}>
                                   {option}
                                 </option>
                               );
@@ -246,21 +246,37 @@ class CompanyRegister extends React.Component {
                           <Form.Control />
                         </Form.Group>
                       </Form.Row>
-                    </div>
-                    <div class="text-center">
-                      <button type="button" class="btn btn-success">
-                        Register
-                      </button>
+                      <Form.Row>
+                        <Form.Group as={Col} controlId="formGridState">
+                          <div class="text-center">
+                            <Button
+                              className="btn btn-warning"
+                              style={{ backgroundColor: "orange" }}
+                            >
+                              Cancel
+                            </Button>
+                          </div>
+                        </Form.Group>
+
+                        <Form.Group as={Col} controlId="formGridZip">
+                          <div class="text-center">
+                            <Button className="btn btn-success">
+                              Edit Now
+                            </Button>
+                          </div>
+                        </Form.Group>
+                      </Form.Row>
                     </div>
                   </Form>
                 </div>
               </div>
             </Col>
+            <Col lg={2} md={2} sm={12}></Col>
           </Row>
-        </Container>{" "}
+        </Container>
       </>
     );
   }
 }
 
-export default CompanyRegister;
+export default ProfileEdit;
