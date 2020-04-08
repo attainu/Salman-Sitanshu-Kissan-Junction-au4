@@ -1,8 +1,6 @@
 const User = require('../Model/User');
 const Address = require('../Model/Address');
 const Product = require('../Model/Product');
-const Order = require('../Model/Order');
-const Sold = require('../Model/Sold');
 const ConnectProduct = require('../Model/ConnectProduct');
 const express = require("express");
 const router = express.Router();
@@ -21,17 +19,15 @@ router.get('/', async (req, res) => {
         }],
       }]
     })
-    res.json({ user })
+    res.json(user)
   }
   catch (error) {
-    res.json({
-      error
-    })
+    res.json(error)
   }
 })
 
 router.get('/:id', async (req, res) => {
-  const {id} = req.params
+  const { id } = req.params
 
   try {
     let user = await User.findOne({
@@ -48,14 +44,10 @@ router.get('/:id', async (req, res) => {
         }]
       }]
     })
-    res.json({
-      user
-    })
+    res.json(user)
   }
   catch (error) {
-    res.json({
-      error
-    })
+    res.json(error)
   }
 })
 

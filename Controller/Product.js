@@ -7,24 +7,30 @@ router.post('/', async (req, res) => {
   try {
     const { body } = req;
     let product = await Product.create(body);
-    res.json({
-      product
-    })
+    res.json(product)
   } catch (err) {
-    console.log(err);
+    res.json(err)
   }
 })
 
-// Read Operation
+// Read All Operation
 router.get('/', async (req, res) => {
   try {
     let product = await Product.findAll();
-    // let product = await Product.findAll({ attributes: ['name'] }); //for select query
-    res.json({
-      product
-    })
+    res.json(product)
   } catch (err) {
-    console.log(err);
+    res.json(err)
+  }
+})
+
+// Read One Operation
+router.get('/:id', async (req, res) => {
+  try {
+    const { id } = req.params;
+    let product = await Product.findByPk(id);
+    res.json(product);
+  } catch (err) {
+    res.json(err)
   }
 })
 
@@ -33,11 +39,9 @@ router.put('/:id', async (req, res) => {
   try {
     const { params, body } = req;
     let product = await Product.update(body, { where: { id: params.id } });
-    res.json({
-      product
-    })
+    res.json(product)
   } catch (err) {
-    console.log(err);
+    res.json(err)
   }
 })
 
@@ -45,13 +49,10 @@ router.put('/:id', async (req, res) => {
 router.delete('/:id', async (req, res) => {
   try {
     const { params } = req;
-
     let product = await Product.destroy({ where: { id: params.id } });
-    res.json({
-      product
-    })
+    res.json(product)
   } catch (err) {
-    console.log(err);
+    res.json(err)
   }
 })
 

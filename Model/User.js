@@ -1,9 +1,7 @@
 const db = require('../Database/db-connection');
 const Sequelize = require('sequelize');
-const Order = require('./Order');
 const Product = require('./Product');
 const Address = require('./Address');
-const Sold = require('./Sold');
 const ConnectProduct = require('./ConnectProduct');
 
 const User = db.define('user', {
@@ -19,7 +17,6 @@ const User = db.define('user', {
   },
   password: {
     type: Sequelize.TEXT,
-    allowNull: false,
   },
   email: {
     type: Sequelize.STRING,
@@ -28,23 +25,36 @@ const User = db.define('user', {
   },
   mobile: {
     type: Sequelize.BIGINT,
-    allowNull: false,
     unique: true
   },
   dob: {
     type: Sequelize.DATEONLY,
-    allowNull: true,
   },
   type: {
     type: Sequelize.STRING,
     allowNull: false,
     defaultValue: 'Consumer'
+  },
+  googleId: {
+    type: Sequelize.STRING,
+  },
+  img: {
+    type: Sequelize.STRING,
+    defaultValue: 'https://lakewangaryschool.sa.edu.au/wp-content/uploads/2017/11/placeholder-profile-sq.jpg'
   }
+
 }, {
   timestamps: false
 });
 
 User.belongsTo(Address);
+
+User.belongsToMany(Product, { through: ConnectProduct })
+Product.belongsToMany(User, { through: ConnectProduct })
+User.hasMany(ConnectProduct)
+ConnectProduct.belongsTo(User)
+Product.hasMany(ConnectProduct)
+ConnectProduct.belongsTo(Product)
 
 // User.belongsToMany(Product, {
 //   through: {
@@ -121,13 +131,6 @@ User.belongsTo(Address);
 // Order.belongsTo(User)
 // Product.hasMany(Order)
 // Order.belongsTo(Product)
-
-User.belongsToMany(Product, { through: ConnectProduct })
-Product.belongsToMany(User, { through: ConnectProduct })
-User.hasMany(ConnectProduct)
-ConnectProduct.belongsTo(User)
-Product.hasMany(ConnectProduct)
-ConnectProduct.belongsTo(Product)
 
 
 db.sync()

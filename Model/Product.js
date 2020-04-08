@@ -11,14 +11,26 @@ const Product = db.define('product', {
     type: Sequelize.STRING,
     allowNull: false,
     defaultValue: 'Product Name'
-  },
+  },//description type target dosage 
   amount: {
     type: Sequelize.INTEGER,
     allowNull: false,
   },
-  min_order: {
-    type: Sequelize.INTEGER,
-    allowNull: false,
+  // min_order: {
+  //   type: Sequelize.INTEGER,
+  //   allowNull: false,
+  // },
+  description: {
+    type: Sequelize.TEXT,
+  },
+  type: {
+    type: Sequelize.STRING,
+  },
+  target: {
+    type: Sequelize.STRING,
+  },
+  dosage: {
+    type: Sequelize.STRING,
   },
   quantity: {
     type: Sequelize.INTEGER,
@@ -30,7 +42,7 @@ const Product = db.define('product', {
     allowNull: false,
     defaultValue: 'India'
   },
-  scale: {
+  scale: {//kg days
     type: Sequelize.STRING,
     allowNull: false,
     defaultValue: 'unit'

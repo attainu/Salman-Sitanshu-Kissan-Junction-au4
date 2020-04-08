@@ -1,4 +1,4 @@
-const Table = require('../Model/User');
+const User = require('../Model/User');
 const express = require("express");
 const router = express.Router();
 
@@ -6,25 +6,31 @@ const router = express.Router();
 router.post('/', async (req, res) => {
   try {
     const { body } = req;
-    let table = await Table.create(body);
-    res.json({
-      table
-    })
+    let user = await User.create(body);
+    res.json(user);
   } catch (err) {
-    console.log(err);
+    res.json(err)
   }
 })
 
-// Read Operation
+// Read All Operation
 router.get('/', async (req, res) => {
   try {
-    let table = await Table.findAll();
-    // let table = await Table.findAll({ attributes: ['name'] }); //for select query
-    res.json({
-      table
-    })
+    let user = await User.findAll();
+    res.json(user);
   } catch (err) {
-    console.log(err);
+    res.json(err)
+  }
+})
+
+// Read One Operation
+router.get('/:id', async (req, res) => {
+  try {
+    const { id } = req.params;
+    let user = await User.findByPk(id);
+    res.json(user);
+  } catch (err) {
+    res.json(err)
   }
 })
 
@@ -32,12 +38,10 @@ router.get('/', async (req, res) => {
 router.put('/:id', async (req, res) => {
   try {
     const { params, body } = req;
-    let table = await Table.update(body, { where: { id: params.id } });
-    res.json({
-      table
-    })
+    let user = await User.update(body, { where: { id: params.id } });
+    res.json(user);
   } catch (err) {
-    console.log(err);
+    res.json(err)
   }
 })
 
@@ -45,13 +49,10 @@ router.put('/:id', async (req, res) => {
 router.delete('/:id', async (req, res) => {
   try {
     const { params } = req;
-
-    let table = await Table.destroy({ where: { id: params.id } });
-    res.json({
-      table
-    })
+    let user = await User.destroy({ where: { id: params.id } });
+    res.json(user);
   } catch (err) {
-    console.log(err);
+    res.json(err)
   }
 })
 
