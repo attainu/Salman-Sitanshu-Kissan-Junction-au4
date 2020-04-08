@@ -8,6 +8,7 @@ import Content from './Component/Product/Content';
 import Cart from './Component/Farmer/Cart';
 import Notification from './Component/Notification/Notification';
 // import Google from './Component/Google/login';
+import Auth from './Component/Authentication/RouteProtecting';
 import {
   BrowserRouter as Router,
   Switch,
@@ -15,7 +16,7 @@ import {
 } from "react-router-dom";
 // import FarmerHomePage from "./Component/Farmer/mainpage";
 import Login from "./Component/Supplier/login/main.js";
-// import CompanyRegister from "./Component/Supplier/CompanyRegister";
+import CompanyRegister from "./Component/Supplier/CompanyRegister";
 // import Productcategory from "./Component/Supplier/productcategory"; //product registarion based in categoty
 // import ProductDisplay from "./Component/Product/ProductListDisplay";
 // import MachineList from "./Component/Product/MachinaryList";
@@ -30,10 +31,11 @@ class App extends Component {
           <Notification />
           <Switch>
             <Route exact path='/' component={Home} />
-            <Route path='/profile' component={Profile} />
+            <Route path='/profile' component={Auth(Profile)} />
             <Route path='/test' component={Content} />
-            <Route path='/cart' component={Cart} />
+            <Route path='/cart' component={Auth(Cart)} />
             <Route path='/login' component={Login} />
+            <Route path='/company-register' component={Auth(CompanyRegister)} />
           </Switch>
           <Footer />
         </Router>

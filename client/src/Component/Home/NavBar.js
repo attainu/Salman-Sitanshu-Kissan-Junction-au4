@@ -4,9 +4,14 @@ import logo from '../../Image/logo.png'
 import { Link } from "react-router-dom";
 import Google from '../Google/login';
 import { connect } from "react-redux";
+import { bindActionCreators } from 'redux'
+import Action from '../../ActionCreater/user'
+
+const { logout } = Action;
+
 
 function NavBar(props) {
-  const { Authenticated } = props;
+  const { Authenticated, logout } = props;
   return (
     <>
       <Navbar bg="light" expand="lg" sticky="top">
@@ -19,7 +24,7 @@ function NavBar(props) {
 
             <Link to='/'><Nav.Link href="#home">Home</Nav.Link></Link>
             <Nav.Link href="#link">Services</Nav.Link>
-            <Nav.Link href="#link">Blog</Nav.Link>
+           <Link to='/app'> <Nav.Link href="#link">Blog</Nav.Link></Link>
           </Nav>
           <Nav className="ml-auto">
             <Nav.Link href="#home">About</Nav.Link>
@@ -50,7 +55,7 @@ function NavBar(props) {
                   <Link to='/profile/purchased'><NavDropdown.Item href="#action/3.2">Ordered Product</NavDropdown.Item></Link>
                   <Link to='/cart'><NavDropdown.Item href="#action/3.3">Cart</NavDropdown.Item></Link>
                   <NavDropdown.Divider />
-                  <NavDropdown.Item href="#action/3.4">Logout</NavDropdown.Item>
+                  <Link to='/'><NavDropdown.Item href="#action/3.3" onClick={() => logout()}>Logout</NavDropdown.Item></Link>
                 </>
               )}
 
@@ -71,9 +76,13 @@ function NavBar(props) {
 
 const take = (state) => {
   const { Authenticated } = state.user
-    return {
-      Authenticated
-    };
+  return {
+    Authenticated
+  };
 }
 
-export default connect(take)(NavBar)
+const change = (dispatch) => {
+  return bindActionCreators({ logout }, dispatch)
+}
+
+export default connect(take, change)(NavBar)

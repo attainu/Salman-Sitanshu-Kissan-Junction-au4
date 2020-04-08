@@ -1,6 +1,6 @@
 import React from 'react';
 import '../../Css/profile.css';
-import { Image, Table, Button } from 'react-bootstrap';
+import { Table, Button } from 'react-bootstrap';
 import { connect } from "react-redux";
 import { bindActionCreators } from 'redux'
 import Action from '../../ActionCreater/notification'
@@ -8,7 +8,7 @@ import Action from '../../ActionCreater/notification'
 const { notify } = Action;
 
 function Profile(props) {
-  const { notify } = props;
+  const { notify, Authenticated } = props;
 
   return (
     <>
@@ -106,7 +106,10 @@ function Profile(props) {
 }
 
 const take = (state) => {
-  return state;
+  const { Authenticated } = state.user
+  return {
+    Authenticated
+  };
 }
 
 const change = (dispatch) => {
