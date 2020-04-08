@@ -24,7 +24,7 @@ function NavBar(props) {
 
             <Link to='/'><Nav.Link href="#home">Home</Nav.Link></Link>
             <Nav.Link href="#link">Services</Nav.Link>
-            <Nav.Link href="#link">Blog</Nav.Link>
+           <Link to='/app'> <Nav.Link href="#link">Blog</Nav.Link></Link>
           </Nav>
           <Nav className="ml-auto">
             <Nav.Link href="#home">About</Nav.Link>

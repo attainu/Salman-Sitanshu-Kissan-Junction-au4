@@ -1,8 +1,8 @@
 let initialState = {
   name: undefined,
-  email: 1,
+  email: '1',
   mobile: undefined,
-  password: 1,
+  password: '1',
   Authenticated: false,
   companyname: undefined,
   gstnumber: undefined,

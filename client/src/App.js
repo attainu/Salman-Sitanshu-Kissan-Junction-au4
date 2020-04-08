@@ -8,6 +8,7 @@ import Content from './Component/Product/Content';
 import Cart from './Component/Farmer/Cart';
 import Notification from './Component/Notification/Notification';
 // import Google from './Component/Google/login';
+import Auth from './Component/Authentication/RouteProtecting';
 import {
   BrowserRouter as Router,
   Switch,
@@ -30,11 +31,11 @@ class App extends Component {
           <Notification />
           <Switch>
             <Route exact path='/' component={Home} />
-            <Route path='/profile' component={Profile} />
+            <Route path='/profile' component={Auth(Profile)} />
             <Route path='/test' component={Content} />
-            <Route path='/cart' component={Cart} />
+            <Route path='/cart' component={Auth(Cart)} />
             <Route path='/login' component={Login} />
-            <Route path='/company-register' component={CompanyRegister} />
+            <Route path='/company-register' component={Auth(CompanyRegister)} />
           </Switch>
           <Footer />
         </Router>
