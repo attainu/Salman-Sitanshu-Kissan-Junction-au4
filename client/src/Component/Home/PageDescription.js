@@ -1,9 +1,9 @@
-import React from 'react';
-import icon1 from '../../Image/agronomy.png'
-import icon2 from '../../Image/agriculture.png'
-import icon3 from '../../Image/farm.png'
-import icon4 from '../../Image/food.png'
-import icon5 from '../../Image/tractor.png'
+import React from "react";
+import icon1 from "../../Image/agronomy.png";
+import icon2 from "../../Image/agriculture.png";
+import icon3 from "../../Image/farm.png";
+import icon4 from "../../Image/food.png";
+import icon5 from "../../Image/tractor.png";
 export default function PageDescription() {
   return (
     <>
@@ -16,8 +16,9 @@ export default function PageDescription() {
         <div className="d-flex justify-content-sm-center flex-column bd-highlight">
           <div className="text-center box bd-highlight pb-3">
             <h4>
-              Smells racy free announcing than durable zesty smart exotic far feel. Screamin' affordable secret way absolutely.
-              </h4>
+              Smells racy free announcing than durable zesty smart exotic far
+              feel. Screamin' affordable secret way absolutely.
+            </h4>
           </div>
           <div className="box bd-highlight text-justify pb-3">
             <h5 className="text-secondary" style={{ fontWeight: '300' }}>
@@ -48,9 +49,6 @@ export default function PageDescription() {
           </div>
         </div>
       </div>
-
     </>
-
   );
-
 }
