@@ -7,7 +7,7 @@ import Sold from './Sold';
 import { Route, Link } from "react-router-dom";
 import { connect } from "react-redux";
 import { bindActionCreators } from 'redux'
-import Action from '../../ActionCreater/action'
+import Action from '../../ActionCreater/notification'
 
 const { notify } = Action;
 

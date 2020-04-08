@@ -1,7 +1,9 @@
 import { combineReducers } from "redux";
-import data from './notification';
+import ping from './notification';
+import user from './userInfo';
 const rootReducer = combineReducers({
-  notify: data,
+  notify: ping,
+  user: user
 });
 
 export default rootReducer;

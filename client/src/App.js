@@ -14,7 +14,7 @@ import {
   Route
 } from "react-router-dom";
 // import FarmerHomePage from "./Component/Farmer/mainpage";
-// import SupplierLogin from "./Component/Supplier/login/main.js";
+import Login from "./Component/Supplier/login/main.js";
 // import CompanyRegister from "./Component/Supplier/CompanyRegister";
 // import Productcategory from "./Component/Supplier/productcategory"; //product registarion based in categoty
 // import ProductDisplay from "./Component/Product/ProductListDisplay";
@@ -29,18 +29,11 @@ class App extends Component {
           <NavBar />
           <Notification />
           <Switch>
-            <Route exact path='/'>
-              <Home />
-            </Route>
-            <Route path='/profile'>
-              <Profile />
-            </Route>
-            <Route path='/test'>
-              <Content />
-            </Route>
-            <Route path='/cart'>
-              <Cart />
-            </Route>
+            <Route exact path='/' component={Home} />
+            <Route path='/profile' component={Profile} />
+            <Route path='/test' component={Content} />
+            <Route path='/cart' component={Cart} />
+            <Route path='/login' component={Login} />
           </Switch>
           <Footer />
         </Router>

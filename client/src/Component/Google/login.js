@@ -14,7 +14,7 @@ class Google extends Component {
   }
 
   googleResponse = (response) => {
-    console.log(response.profileObj)
+    console.log(response, response.profileObj)
     // console.log(tokenBlob)
     // const options = {
     //   method: 'POST',
@@ -47,20 +47,18 @@ class Google extends Component {
         </div>
       ) :
       (
-        <div>
-          <GoogleLogin
-            clientId="829821026200-pu1d85t4lfc8m8qohpqakgdvhe9595fi.apps.googleusercontent.com"
-            buttonText="Login"
-            onSuccess={this.googleResponse}
-            onFailure={this.onFailure}
-          />
-        </div>
+        <GoogleLogin
+          clientId="829821026200-pu1d85t4lfc8m8qohpqakgdvhe9595fi.apps.googleusercontent.com"
+          buttonText="Login"
+          onSuccess={this.googleResponse}
+          onFailure={this.onFailure}
+        />
       );
 
     return (
-      <div className="App">
+      <>
         {content}
-      </div>
+      </>
     );
   }
 }
