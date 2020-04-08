@@ -6,6 +6,7 @@ let initialState = {
 
 export default function movie(state = initialState, action) {
   let stateCopy = JSON.parse(JSON.stringify(state));
+  console.log('notify',action)
   const { type, payload } = action;
   switch (type) {
 
