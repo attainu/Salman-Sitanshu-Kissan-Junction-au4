@@ -1,8 +1,41 @@
 import React from "react";
-import image from "../../../Image/loginlogo.png";
+import { connect } from "react-redux";
+import { bindActionCreators } from 'redux'
+import Action from '../../../ActionCreater/user'
 
-export class Register extends React.Component {
+const { register } = Action;
+
+class Register extends React.Component {
+  constructor() {
+    super();
+    this.state = {
+      email: '',
+      password: '',
+      cpassword: '',
+      mobile: '',
+      name: '',
+    }
+    this.handleChange = this.handleChange.bind();
+    this.onSubmit = this.onSubmit.bind();
+  }
+
+  handleChange = (e) => {
+    this.setState({
+      [e.target.name]: e.target.value,
+    })
+  }
+
+
+  onSubmit = () => {
+    let { email, password, name, mobile } = this.state
+    this.props.register({
+      email, password, mobile, name
+    })
+  }
+
   render() {
+    const { register } = this.props;
+
     return (
       <div className="container">
         <div className="base-container" ref={this.props.containerRef}>
@@ -12,7 +45,8 @@ export class Register extends React.Component {
           </div>
           <div className="content">
             <div className="form">
-              <form>
+              <form
+              >
                 <div class="form-group form-inline">
                   <label for="exampleInputEmail1">Name</label>
                   <input
@@ -20,6 +54,9 @@ export class Register extends React.Component {
                     class="form-control"
                     id="exampleInputEmail1"
                     placeholder="Enter Full Name"
+                    name='name'
+                    value={this.state.name} onChange={this.handleChange}
+                    required
                   ></input>
                 </div>
                 <div className="form-group">
@@ -28,6 +65,7 @@ export class Register extends React.Component {
                     type="text"
                     name="email"
                     placeholder=" Enter emailId"
+                    value={this.state.email} onChange={this.handleChange}
                   />
                 </div>
                 <div className=" form-group form-inline">
@@ -35,32 +73,37 @@ export class Register extends React.Component {
                   <input
                     type="number"
                     className="form-control"
-                    name="username"
+                    name="mobile"
                     placeholder=" Enter contact number"
+                    value={this.state.mobile} onChange={this.handleChange}
                   />
                 </div>
 
                 <div className="form-group">
                   <label htmlFor="password">Password</label>
                   <input
-                    type="text"
+                    type="password"
                     name="password"
                     placeholder=" Type password Here"
+                    value={this.state.password} onChange={this.handleChange}
                   />
                 </div>
                 <div className="form-group">
                   <label htmlFor="password"> Confirm Password</label>
                   <input
-                    type="text"
-                    name="password"
+                    type="password"
+                    name="cpassword"
                     placeholder=" Type password Here"
+                    value={this.state.cpassword} onChange={this.handleChange}
                   />
                 </div>
               </form>
             </div>
           </div>
           <div className="footer">
-            <button type="button" className="btn">
+            <button type="submit"
+              onClick={this.onSubmit}
+              className="btn btn-success">
               Register
             </button>
           </div>
@@ -69,3 +112,14 @@ export class Register extends React.Component {
     );
   }
 }
+
+
+const take = (state) => {
+  return state;
+}
+
+const change = (dispatch) => {
+  return bindActionCreators({ register }, dispatch)
+}
+
+export default connect(take, change)(Register);

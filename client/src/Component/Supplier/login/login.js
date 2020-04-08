@@ -1,9 +1,40 @@
 import React from "react";
 import image from "../../../Image/loginlogo.png";
-export class Login extends React.Component {
+import { connect } from "react-redux";
+import { bindActionCreators } from 'redux'
+import Action from '../../../ActionCreater/user'
+
+const { login } = Action;
+
+class Login extends React.Component {
+  constructor() {
+    super();
+    this.state = {
+      email: '',
+      password: ''
+    }
+    this.handleChange = this.handleChange.bind();
+    this.onSubmit = this.onSubmit.bind();
+  }
+
+  handleChange = (e) => {
+    this.setState({
+      [e.target.name]: e.target.value,
+    })
+  }
+
+  onSubmit = () => {
+    let { email, password, } = this.state
+    this.props.login({
+      email, password
+    })
+  }
+
   render() {
+    let { email, password } = this.state
+
     return (
-      <div className="logincontainer">
+      <div classpassword="logincontainer">
         <div className="base-container" ref={this.props.containerRef}>
           <div className="header">
             {" "}
@@ -21,16 +52,16 @@ export class Login extends React.Component {
             <div className="form">
               <div className="form-group">
                 <label htmlFor="username">Username</label>
-                <input type="text" name="username" placeholder="username" />
+                <input type="text" name="email" placeholder="username" value={email} onChange={this.handleChange} />
               </div>
               <div className="form-group">
                 <label htmlFor="password">Password</label>
-                <input type="password" name="password" placeholder="password" />
+                <input type="password" name="password" placeholder="password" value={password} onChange={this.handleChange} />
               </div>
             </div>
           </div>
           <div className="footer">
-            <button type="button" className="btn">
+            <button type="button" onClick={this.onSubmit} className="btn">
               Login
             </button>
           </div>
@@ -39,3 +70,14 @@ export class Login extends React.Component {
     );
   }
 }
+
+
+const take = (state) => {
+  return state;
+}
+
+const change = (dispatch) => {
+  return bindActionCreators({ login }, dispatch)
+}
+
+export default connect(take, change)(Login);

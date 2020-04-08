@@ -1,6 +1,8 @@
 import React from "react";
-import "./style.css";
-import { Login, Register } from "./index";
+// import "./style.css";
+// import { Login, Register } from "./index";
+import Register from './register'
+import Login from './login'
 
 class SupplierLogin extends React.Component {
   constructor(props) {
