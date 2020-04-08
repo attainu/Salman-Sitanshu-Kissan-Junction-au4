@@ -5,6 +5,7 @@ var logger = require('morgan');
 var app = express();
 const passport = require('passport')
 const passportSetup = require('./config/passport-setup');
+var cors = require('cors');
 
 
 app.use(logger('dev'));
@@ -13,9 +14,10 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(passport.initialize())
+app.use(cors())
 
 // Auth Router
-app.use('/auth', require('./Controller/Outh'))
+app.use('/oauth', require('./Controller/Outh'))
 
 // Routes
 app.use('/user', require('./Controller/User'));

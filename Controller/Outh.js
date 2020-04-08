@@ -2,6 +2,12 @@ const express = require("express");
 const router = express.Router();
 const passport = require('passport')
 
+router.post('/api', (req, res) => {
+  console.log(req.body)
+  res.json({ msg: 'connected' })
+})
+
+
 // auth with login /auth/google
 router.get('/google', passport.authenticate('google', {
   scope: ['profile', 'email']

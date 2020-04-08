@@ -2,6 +2,7 @@ import React from 'react';
 import { Navbar, Nav, NavDropdown, Form, Button, FormControl } from 'react-bootstrap';
 import logo from '../../Image/logo.png'
 import { Link } from "react-router-dom";
+import Google from '../Google/login';
 
 export default function NavBar() {
   return (
@@ -33,6 +34,7 @@ export default function NavBar() {
               <Button className='mr-3' variant="outline-success">Signin</Button>
               <Button variant="outline-success">Signup</Button>
             </NavDropdown.Item>
+            <Google className='btn btn-outline-primary' />
             <NavDropdown.Divider />
             <Link to='/profile'><NavDropdown.Item href="#action/3.1">Profile</NavDropdown.Item></Link>
             <Link to='/profile/purchased'><NavDropdown.Item href="#action/3.2">Ordered Product</NavDropdown.Item></Link>

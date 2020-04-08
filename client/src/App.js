@@ -8,6 +8,7 @@ import Footer from './Component/Home/Footer';
 import Content from './Component/Product/Content';
 import Cart from './Component/Farmer/Cart';
 import Notification from './Component/Notification/Notification';
+// import Google from './Component/Google/login';
 import {
   BrowserRouter as Router,
   Switch,
