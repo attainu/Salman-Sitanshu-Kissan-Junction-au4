@@ -15,7 +15,7 @@ import {
 } from "react-router-dom";
 // import FarmerHomePage from "./Component/Farmer/mainpage";
 import Login from "./Component/Supplier/login/main.js";
-// import CompanyRegister from "./Component/Supplier/CompanyRegister";
+import CompanyRegister from "./Component/Supplier/CompanyRegister";
 // import Productcategory from "./Component/Supplier/productcategory"; //product registarion based in categoty
 // import ProductDisplay from "./Component/Product/ProductListDisplay";
 // import MachineList from "./Component/Product/MachinaryList";
@@ -34,6 +34,7 @@ class App extends Component {
             <Route path='/test' component={Content} />
             <Route path='/cart' component={Cart} />
             <Route path='/login' component={Login} />
+            <Route path='/company-register' component={CompanyRegister} />
           </Switch>
           <Footer />
         </Router>

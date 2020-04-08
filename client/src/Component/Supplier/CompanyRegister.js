@@ -2,63 +2,92 @@ import React from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { Row, Col, Form, Container } from "react-bootstrap";
 import { FaHome } from "react-icons/fa";
+import { connect } from "react-redux";
+import { bindActionCreators } from 'redux'
+import Action from '../../ActionCreater/user'
+
+const { companyRegister } = Action;
+
 class CompanyRegister extends React.Component {
-  state = {
-    companyname: "",
-    gstnumber: "",
-    type: "",
-    address: {
+  constructor() {
+    super();
+    this.state = {
+      companyname: "",
+      gstnumber: "",
+      type: "",
       adress1: "",
       city: "",
       statename: "Choose State....",
       district: "",
       pincode: "",
-    },
-    statelist: [
-      "Choose State here....",
-      "Andhra Pradesh",
-      "Arunachal Pradesh",
-      "Assam",
-      "Bihar",
-      "Chhattisgarh",
-      "Goa",
-      "Gujarat",
-      "Haryana",
-      "Himachal Pradesh",
-      "Jammu and Kashmir",
-      "Jharkhand",
-      "Karnataka",
-      "Kerala",
-      "Madhya Pradesh",
-      "Maharashtra",
-      "Manipur",
-      "Meghalaya",
-      "Mizoram",
-      "Nagaland",
-      "Odisha",
-      "Punjab",
-      "Rajasthan",
-      "Sikkim",
-      "Tamil Nadu",
-      "Telangana",
-      "Tripura",
-      "Uttarakhand",
-      "Uttar Pradesh",
-      "West Bengal",
-      "Andaman and Nicobar Islands",
-      "Chandigarh",
-      "Dadra and Nagar Haveli",
-      "Daman and Diu",
-      "Delhi",
-      "Lakshadweep",
-      "Puducherry",
-    ],
-    result: [],
-    cityfetch: [],
-    districtfetch: [],
-  };
+      statelist: [
+        "Choose State here....",
+        "Andhra Pradesh",
+        "Arunachal Pradesh",
+        "Assam",
+        "Bihar",
+        "Chhattisgarh",
+        "Goa",
+        "Gujarat",
+        "Haryana",
+        "Himachal Pradesh",
+        "Jammu and Kashmir",
+        "Jharkhand",
+        "Karnataka",
+        "Kerala",
+        "Madhya Pradesh",
+        "Maharashtra",
+        "Manipur",
+        "Meghalaya",
+        "Mizoram",
+        "Nagaland",
+        "Odisha",
+        "Punjab",
+        "Rajasthan",
+        "Sikkim",
+        "Tamil Nadu",
+        "Telangana",
+        "Tripura",
+        "Uttarakhand",
+        "Uttar Pradesh",
+        "West Bengal",
+        "Andaman and Nicobar Islands",
+        "Chandigarh",
+        "Dadra and Nagar Haveli",
+        "Daman and Diu",
+        "Delhi",
+        "Lakshadweep",
+        "Puducherry",
+      ],
+      result: [],
+      cityfetch: [],
+      districtfetch: [],
+    };
+    this.handleChange = this.handleChange.bind();
+    this.onSubmit = this.onSubmit.bind();
+    this.handlestate = this.handlestate.bind();
+  }
+
+  handleChange = (e) => {
+    this.setState({
+      [e.target.name]: e.target.value,
+    })
+  }
+
+  onSubmit = () => {
+    console.log('This State', this.state)
+    let { companyname, type, gstnumber, adress1, statename, city, district, pincode } = this.state
+    this.props.companyRegister({
+      companyname,
+      type,
+      gstnumber,
+      adress1, statename, city, district, pincode
+    })
+  }
+
   //state update
-  handlestate = (value) => {
+  handlestate = (e) => {
+    const value = e.target.value
     this.setState({
       cityfetch: [],
       districtfetch: [],
@@ -81,36 +110,15 @@ class CompanyRegister extends React.Component {
         this.setState({
           cityfetch: array1,
           districtfetch: array2,
+          city: array1[0],
+          district: array2[0]
         });
       });
     });
 
-    this.setState({
-      address: {
-        ...this.state.jasper,
-        statename: value,
-      },
-    });
+    this.handleChange(e);
   };
 
-  //city update
-  handlecity = (value) => {
-    this.setState({
-      address: {
-        ...this.state.jasper,
-        city: value,
-      },
-    });
-  };
-  //distcict update
-  handledistrict = (value) => {
-    this.setState({
-      address: {
-        ...this.state.jasper,
-        district: value,
-      },
-    });
-  };
 
   render() {
     return (
@@ -129,8 +137,8 @@ class CompanyRegister extends React.Component {
               <div className="    shadow-lg  ">
                 <div className="card-body">
                   <h2 className="text-center mb-3">
-                    {" "}
-                    Add <span style={{ color: "#28ca2f" }}>Company</span>{" "}
+
+                    Add <span style={{ color: "#28ca2f" }}>Company</span>
                   </h2>
                   <Form>
                     <Form.Group as={Row}>
@@ -141,9 +149,12 @@ class CompanyRegister extends React.Component {
                         <Form.Control
                           type="text"
                           placeholder="Enter Company Name"
+                          name='companyname'
+                          value={this.state.companyname}
+                          onChange={this.handleChange}
                         />
                       </Col>
-                    </Form.Group>{" "}
+                    </Form.Group>
                     <Form.Group as={Row}>
                       <Form.Label column sm="3">
                         GST Number
@@ -152,9 +163,12 @@ class CompanyRegister extends React.Component {
                         <Form.Control
                           type="text"
                           placeholder="Enter GST Number"
+                          name='gstnumber'
+                          value={this.state.gstnumber}
+                          onChange={this.handleChange}
                         />
                       </Col>
-                    </Form.Group>{" "}
+                    </Form.Group>
                     <Form.Group as={Row}>
                       <Form.Label column sm="3">
                         Company Type
@@ -163,9 +177,12 @@ class CompanyRegister extends React.Component {
                         <Form.Control
                           type="text"
                           placeholder="Private , Semi-Private"
+                          name='type'
+                          value={this.state.type}
+                          onChange={this.handleChange}
                         />
                       </Col>
-                    </Form.Group>{" "}
+                    </Form.Group>
                     <div>
                       <span>
                         Add Address Detail <FaHome />
@@ -179,16 +196,20 @@ class CompanyRegister extends React.Component {
                           <Form.Control
                             type="text"
                             placeholder="1234 Main St"
+                            name='adress1'
+                            value={this.state.adress1}
+                            onChange={this.handleChange}
                           />
                         </Col>
-                      </Form.Group>{" "}
+                      </Form.Group>
                       <Form.Row>
                         <Form.Group as={Col} controlId="formGridState">
                           <Form.Label>City </Form.Label>
                           <Form.Control
                             as="select"
-                            value={this.state.address.city}
-                            onChange={(e) => this.handlecity(e.target.value)}
+                            name='city'
+                            value={this.state.city}
+                            onChange={this.handleChange}
                           >
                             {this.state.cityfetch.map((option) => {
                               return (
@@ -208,10 +229,17 @@ class CompanyRegister extends React.Component {
                           <Form.Label>State</Form.Label>
                           <Form.Control
                             as="select"
-                            value={this.state.address.state}
-                            onChange={(e) => this.handlestate(e.target.value)}
+                            name='statename'
+                            value={this.state.state}
+                            onChange={this.handlestate}
                           >
                             {this.state.statelist.map((option) => {
+                              if (option === 'Choose State here....')
+                                return (
+                                  <option className='dropdown-item disabled' key={option} value={option} >
+                                    {option}
+                                  </option>
+                                )
                               return (
                                 <option key={option} value={option}>
                                   {option}
@@ -226,10 +254,9 @@ class CompanyRegister extends React.Component {
                           <Form.Label>District</Form.Label>
                           <Form.Control
                             as="select"
-                            value={this.state.address.district}
-                            onChange={(e) =>
-                              this.handledistrict(e.target.value)
-                            }
+                            name='district'
+                            value={this.state.district}
+                            onChange={this.handleChange}
                           >
                             {this.state.districtfetch.map((option) => {
                               return (
@@ -243,12 +270,20 @@ class CompanyRegister extends React.Component {
 
                         <Form.Group as={Col} controlId="formGridZip">
                           <Form.Label>Zip</Form.Label>
-                          <Form.Control />
+                          <Form.Control
+                            type="number"
+                            placeholder="400008"
+                            name='pincode'
+                            value={this.state.pincode}
+                            onChange={this.handleChange} />
                         </Form.Group>
                       </Form.Row>
                     </div>
                     <div class="text-center">
-                      <button type="button" class="btn btn-success">
+                      <button
+                        type="button"
+                        class="btn btn-success"
+                        onClick={this.onSubmit}>
                         Register
                       </button>
                     </div>
@@ -257,10 +292,18 @@ class CompanyRegister extends React.Component {
               </div>
             </Col>
           </Row>
-        </Container>{" "}
+        </Container>
       </>
     );
   }
 }
 
-export default CompanyRegister;
+const take = (state) => {
+  return state;
+}
+
+const change = (dispatch) => {
+  return bindActionCreators({ companyRegister }, dispatch)
+}
+
+export default connect(take, change)(CompanyRegister);

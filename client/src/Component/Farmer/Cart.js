@@ -1,6 +1,6 @@
 import React from 'react';
 import '../../Css/profile.css';
-import { Image, Table, Button } from 'react-bootstrap';
+import { Table, Button } from 'react-bootstrap';
 import { connect } from "react-redux";
 import { bindActionCreators } from 'redux'
 import Action from '../../ActionCreater/notification'
