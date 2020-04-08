@@ -14,7 +14,7 @@ class Google extends Component {
   }
 
   googleResponse = (response) => {
-    console.log(response.profileObj)
+    console.log(response,response.profileObj)
     // console.log(tokenBlob)
     // const options = {
     //   method: 'POST',
