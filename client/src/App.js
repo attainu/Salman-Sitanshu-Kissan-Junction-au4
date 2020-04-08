@@ -9,6 +9,7 @@ import Cart from './Component/Farmer/Cart';
 import Notification from './Component/Notification/Notification';
 // import Google from './Component/Google/login';
 import Auth from './Component/Authentication/RouteProtecting';
+import NotFound from './Component/Authentication/NotFound';
 import {
   BrowserRouter as Router,
   Switch,
@@ -36,6 +37,7 @@ class App extends Component {
             <Route path='/cart' component={Auth(Cart)} />
             <Route path='/login' component={Login} />
             <Route path='/company-register' component={Auth(CompanyRegister)} />
+            <Route path='*' component={NotFound} />
           </Switch>
           <Footer />
         </Router>
