@@ -9,7 +9,7 @@ export default (ComposedComponent) => {
         this.props.history.replace("/");
     }
     componentWillUpdate() {
-      if (!this.props.authenticated)
+      if (this.props.authenticated)
         this.props.history.replace("/");
     }
     render() {

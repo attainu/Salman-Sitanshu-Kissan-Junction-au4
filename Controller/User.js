@@ -40,7 +40,7 @@ router.post("/login", async (req, res) => {
         res.sendStatus(403);
       } else {
         res.json({
-          user: { user: user },
+          user,
           token: token,
         });
       }
@@ -59,9 +59,7 @@ router.get("/tokenverify", (req, res) => {
       if (err) {
         res.sendStatus(403);
       } else {
-        res.json({
-          user: data,
-        });
+        res.json(data);
       }
     });
   } else {

@@ -6,10 +6,12 @@ import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import { Redirect } from "react-router";
 import Action from "../../ActionCreater/user";
+import Notify from "../../ActionCreater/notification";
 
 const { register } = Action;
+const { notify } = Notify;
 
-class Signup extends React.Component {
+class Signup extends Component {
   constructor() {
     super();
     this.state = {
@@ -52,9 +54,10 @@ class Signup extends React.Component {
         mobile: mobile,
         type: role,
       },
-    }).then(function (response) {});
+    }).then(function (response) { });
 
     setTimeout(() => {
+      this.props.notify({ type: 'success', msg: 'Register Succefully' })
       this.setState(() => ({ toLoginRedirect: true }));
     }, 1000);
   };
@@ -209,7 +212,7 @@ const take = (state) => {
 };
 
 const change = (dispatch) => {
-  return bindActionCreators({ register }, dispatch);
+  return bindActionCreators({ register, notify }, dispatch);
 };
 
 export default connect(take, change)(Signup);

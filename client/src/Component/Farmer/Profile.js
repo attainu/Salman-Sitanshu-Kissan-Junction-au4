@@ -12,7 +12,7 @@ import Action from '../../ActionCreater/notification'
 const { notify } = Action;
 
 function Profile(props) {
-  const { notify } = props;
+  const { notify, name, email, mobile } = props;
 
   return (
     <>
@@ -29,17 +29,17 @@ function Profile(props) {
             </div>
           </div>
           <div class="d-flex flex-column justify-content-start">
-            <h1 className='mb-0' style={{ 'font-weight': '500' }}>Salman Ahmed</h1>
+            <h1 className='mb-0' style={{ 'font-weight': '500' }}>{name}</h1>
             <p className='pl-2'>Farmer</p>
             <table class="table table-borderless">
               <tbody>
                 <tr>
                   <th scope="row">Email:</th>
-                  <td>salmanahmed@gmail.com</td>
+                  <td>{email}</td>
                 </tr>
                 <tr>
                   <th scope="row">Phone: </th>
-                  <td>+91 9987952528</td>
+                  <td>+91 {mobile}</td>
                 </tr>
                 <tr>
                   <th scope="row">Address: </th>
@@ -76,20 +76,20 @@ function Profile(props) {
 
           </div>
         </div>
-        <Nav variant="tabs" className="justify-content-center" defaultActiveKey="/product">
-          <Link to='/profile/'>
+        <Nav variant="tabs" className="justify-content-center" defaultActiveKey="/profile">
+          <Link to='/profile'>
             <Nav.Item>
-              <Nav.Link href="/product">Your Products</Nav.Link>
+              <Nav.Link href="/profile">Your Products</Nav.Link>
             </Nav.Item>
           </Link>
           <Link to='/profile/purchased'>
             <Nav.Item>
-              <Nav.Link href="purchased">Purchased</Nav.Link>
+              <Nav.Link href="/profile/purchased">Purchased</Nav.Link>
             </Nav.Item>
           </Link>
           <Link to='/profile/sold'>
             <Nav.Item>
-              <Nav.Link href="sold">Sold</Nav.Link>
+              <Nav.Link href="/profile/sold">Sold</Nav.Link>
             </Nav.Item>
           </Link>
         </Nav>
@@ -138,7 +138,11 @@ function Profile(props) {
 }
 
 const take = (state) => {
-  return state;
+  console.log('Profile', state)
+  const { name, email, mobile } = state.user.currentUser
+  return {
+    name, email, mobile
+  };
 }
 
 const change = (dispatch) => {

@@ -1,6 +1,11 @@
-// import axios from 'axios';
+import axios from 'axios';
 
 let Action = {};
+const link = {
+  login: 'http://localhost:5000/user/login',
+  register: 'http://localhost:5000/user/',
+  token: 'http://localhost:5000/user/tokenverify',
+}
 
 const notify = {
   type: "notify",
@@ -11,18 +16,52 @@ const notify = {
 };
 
 Action.register = (data) => {
-  if (data.name && data.email && data.password && data.mobile) {
-    console.log(data, "hello");
-    return { type: "register", payload: data };
-  } else return notify;
-};
+  console.log('Register', data)
+  return (async (dispatch) => {
+    let value = await axios.post(link.register, data);
+    if (value.data.email)
+      dispatch({
+        type: "register", payload: value.data
+      })
+    else dispatch(notify)
+  })
+}
 
 Action.login = (data) => {
-  if (data.email && data.password) return { type: "login", payload: data };
-  else return notify;
-};
+  return (async (dispatch) => {
+    let value = await axios.post(link.login, data);
+    localStorage.setItem("token", value.data.token);
+    if (value.data.user.length)
+      dispatch({
+        type: "login", payload: value.data.user[0]
+      })
+    else dispatch(notify)
+  })
+}
+
+Action.token = (token) => {
+  return (async (dispatch) => {
+    let data = await fetch(link.token, {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+        Accept: "application/json",
+        Authorization: `Bearer ${token}`,
+      },
+    })
+    data = await data.json();
+    console.log('Tpkrn', data)
+    if (data.user) {
+      dispatch({
+        type: "login", payload: data.user[0]
+      })
+    }
+    else dispatch({ type: '' })
+  })
+}
 
 Action.logout = () => {
+  localStorage.removeItem("token")
   return { type: "logout" };
 };
 

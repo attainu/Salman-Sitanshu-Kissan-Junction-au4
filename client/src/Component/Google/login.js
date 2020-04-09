@@ -1,20 +1,26 @@
 
 import React, { Component } from 'react';
 import { GoogleLogin } from 'react-google-login';
-import axios from 'axios'
+import { connect } from "react-redux";
+import { bindActionCreators } from "redux";
+import Action from "../../ActionCreater/user";
+
+const { login } = Action;
+
 
 class Google extends Component {
   constructor() {
     super();
     this.state = { isAuthenticated: false, user: null, token: '' };
-  }
-
-  logout = () => {
-    this.setState({ isAuthenticated: false, token: '', user: null })
+    this.googleResponse = this.googleResponse;
   }
 
   googleResponse = (response) => {
     console.log(response, response.profileObj)
+    const { googleId, imageUrl, email, name } = response.profileObj;
+    this.props.login({
+      googleId, email, name, img: imageUrl
+    })
     // console.log(tokenBlob)
     // const options = {
     //   method: 'POST',
@@ -32,35 +38,48 @@ class Google extends Component {
   }
 
   render() {
-    let content = !!this.state.isAuthenticated ?
-      (
-        <div>
-          <p>Authenticated</p>
-          <div>
-            {this.state.user.email}
-          </div>
-          <div>
-            <button onClick={this.logout} className="button">
-              Log out
-                        </button>
-          </div>
-        </div>
-      ) :
-      (
+    // let content = !!this.state.isAuthenticated ?
+    //   (
+    //     <div>
+    //       <p>Authenticated</p>
+    //       <div>
+    //         {this.state.user.email}
+    //       </div>
+    //       <div>
+    //         <button onClick={this.logout} className="button">
+    //           Log out
+    //         </button>
+    //       </div>
+    //     </div>
+    //   ) :
+    //   (
+    //     <GoogleLogin
+    //       clientId="829821026200-pu1d85t4lfc8m8qohpqakgdvhe9595fi.apps.googleusercontent.com"
+    //       buttonText="Login"
+    //       onSuccess={this.googleResponse}
+    //       onFailure={this.onFailure}
+    //     />
+    // );
+
+    return (
+      <>
         <GoogleLogin
           clientId="829821026200-pu1d85t4lfc8m8qohpqakgdvhe9595fi.apps.googleusercontent.com"
           buttonText="Login"
           onSuccess={this.googleResponse}
           onFailure={this.onFailure}
         />
-      );
-
-    return (
-      <>
-        {content}
       </>
     );
   }
 }
 
-export default Google;
+const take = (state) => {
+  return state;
+};
+
+const change = (dispatch) => {
+  return bindActionCreators({ login }, dispatch);
+};
+
+export default connect(take, change)(Google);
