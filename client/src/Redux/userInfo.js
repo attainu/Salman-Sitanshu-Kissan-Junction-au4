@@ -14,10 +14,17 @@ let initialState = {
   statename: undefined,
   district: undefined,
   pincode: undefined,
+
+  productType: undefined,
+  productName: undefined,
+  price: undefined,
+  productSize: undefined,
+  productDosage: undefined,
+  targetplant: undefined,
+  description: undefined,
 };
 
 export default function user(state = initialState, action) {
-  console.log(action);
   let stateCopy = JSON.parse(JSON.stringify(state));
   const { type, payload } = action;
   switch (type) {
@@ -59,6 +66,18 @@ export default function user(state = initialState, action) {
       stateCopy.statename = payload.statename;
       stateCopy.district = payload.district;
       stateCopy.pincode = payload.pincode;
+      console.log("State", stateCopy);
+      return stateCopy;
+
+    case "productregister":
+      console.log("Payload", payload);
+      stateCopy.productType = payload.productType;
+      stateCopy.productName = payload.productName;
+      stateCopy.price = payload.price;
+      stateCopy.productSize = payload.productSize;
+      stateCopy.productDosage = payload.productDosage;
+      stateCopy.targetplant = payload.targetplant;
+      stateCopy.description = payload.description;
       console.log("State", stateCopy);
       return stateCopy;
 

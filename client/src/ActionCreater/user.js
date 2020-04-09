@@ -40,5 +40,18 @@ Action.companyRegister = (data) => {
     return { type: "company-register", payload: data };
   else return notify;
 };
+Action.productregister = (data) => {
+  if (
+    data.productType &&
+    data.productName &&
+    data.price &&
+    data.productSize &&
+    data.productDosage &&
+    data.targetplant &&
+    data.description
+  )
+    return { type: "productregister", payload: data };
+  else return notify;
+};
 
 export default Action;

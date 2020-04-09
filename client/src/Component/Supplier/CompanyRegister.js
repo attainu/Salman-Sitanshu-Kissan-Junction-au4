@@ -3,9 +3,10 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import { Row, Col, Form, Container } from "react-bootstrap";
 import { FaHome } from "react-icons/fa";
 import { connect } from "react-redux";
-import { bindActionCreators } from 'redux'
-import Action from '../../ActionCreater/user'
-
+import { bindActionCreators } from "redux";
+import Action from "../../ActionCreater/user";
+import { Redirect } from "react-router";
+import axios from "axios";
 const { companyRegister } = Action;
 
 class CompanyRegister extends React.Component {
@@ -62,6 +63,7 @@ class CompanyRegister extends React.Component {
       result: [],
       cityfetch: [],
       districtfetch: [],
+      todashboardredirect: false,
     };
     this.handleChange = this.handleChange.bind();
     this.onSubmit = this.onSubmit.bind();
@@ -71,23 +73,57 @@ class CompanyRegister extends React.Component {
   handleChange = (e) => {
     this.setState({
       [e.target.name]: e.target.value,
-    })
-  }
+    });
+  };
 
-  onSubmit = () => {
-    console.log('This State', this.state)
-    let { companyname, type, gstnumber, adress1, statename, city, district, pincode } = this.state
+  onSubmit = (event) => {
+    console.log(this.state);
+    event.preventDefault();
+    let {
+      companyname,
+      type,
+      gstnumber,
+      adress1,
+      statename,
+      city,
+      district,
+      pincode,
+    } = this.state;
     this.props.companyRegister({
       companyname,
       type,
       gstnumber,
-      adress1, statename, city, district, pincode
-    })
-  }
+      adress1,
+      statename,
+      city,
+      district,
+      pincode,
+    });
+    axios({
+      method: "post",
+      url: "http://localhost:5000/company/add",
+      data: {
+        GST_number: gstnumber,
+        company_name: companyname,
+        company_type: type,
+        company_address: adress1,
+        company_city: city,
+        company_district: district,
+        company_state: statename,
+        company_pincode: pincode,
+      },
+    }).then(function (response) {
+      console.log(response);
+    });
+
+    setTimeout(() => {
+      this.setState(() => ({ todashboardredirect: true }));
+    }, 1000);
+  };
 
   //state update
   handlestate = (e) => {
-    const value = e.target.value
+    const value = e.target.value;
     this.setState({
       cityfetch: [],
       districtfetch: [],
@@ -111,7 +147,7 @@ class CompanyRegister extends React.Component {
           cityfetch: array1,
           districtfetch: array2,
           city: array1[0],
-          district: array2[0]
+          district: array2[0],
         });
       });
     });
@@ -119,8 +155,10 @@ class CompanyRegister extends React.Component {
     this.handleChange(e);
   };
 
-
   render() {
+    if (this.state.todashboardredirect) {
+      return <Redirect to="/" />;
+    }
     return (
       <>
         <Container>
@@ -137,7 +175,6 @@ class CompanyRegister extends React.Component {
               <div className="    shadow-lg  ">
                 <div className="card-body">
                   <h2 className="text-center mb-3">
-
                     Add <span style={{ color: "#28ca2f" }}>Company</span>
                   </h2>
                   <Form>
@@ -149,7 +186,7 @@ class CompanyRegister extends React.Component {
                         <Form.Control
                           type="text"
                           placeholder="Enter Company Name"
-                          name='companyname'
+                          name="companyname"
                           value={this.state.companyname}
                           onChange={this.handleChange}
                         />
@@ -163,7 +200,7 @@ class CompanyRegister extends React.Component {
                         <Form.Control
                           type="text"
                           placeholder="Enter GST Number"
-                          name='gstnumber'
+                          name="gstnumber"
                           value={this.state.gstnumber}
                           onChange={this.handleChange}
                         />
@@ -177,7 +214,7 @@ class CompanyRegister extends React.Component {
                         <Form.Control
                           type="text"
                           placeholder="Private , Semi-Private"
-                          name='type'
+                          name="type"
                           value={this.state.type}
                           onChange={this.handleChange}
                         />
@@ -196,7 +233,7 @@ class CompanyRegister extends React.Component {
                           <Form.Control
                             type="text"
                             placeholder="1234 Main St"
-                            name='adress1'
+                            name="adress1"
                             value={this.state.adress1}
                             onChange={this.handleChange}
                           />
@@ -207,7 +244,7 @@ class CompanyRegister extends React.Component {
                           <Form.Label>City </Form.Label>
                           <Form.Control
                             as="select"
-                            name='city'
+                            name="city"
                             value={this.state.city}
                             onChange={this.handleChange}
                           >
@@ -229,17 +266,21 @@ class CompanyRegister extends React.Component {
                           <Form.Label>State</Form.Label>
                           <Form.Control
                             as="select"
-                            name='statename'
+                            name="statename"
                             value={this.state.state}
                             onChange={this.handlestate}
                           >
                             {this.state.statelist.map((option) => {
-                              if (option === 'Choose State here....')
+                              if (option === "Choose State here....")
                                 return (
-                                  <option className='dropdown-item disabled' key={option} value={option} >
+                                  <option
+                                    className="dropdown-item disabled"
+                                    key={option}
+                                    value={option}
+                                  >
                                     {option}
                                   </option>
-                                )
+                                );
                               return (
                                 <option key={option} value={option}>
                                   {option}
@@ -254,7 +295,7 @@ class CompanyRegister extends React.Component {
                           <Form.Label>District</Form.Label>
                           <Form.Control
                             as="select"
-                            name='district'
+                            name="district"
                             value={this.state.district}
                             onChange={this.handleChange}
                           >
@@ -273,9 +314,10 @@ class CompanyRegister extends React.Component {
                           <Form.Control
                             type="number"
                             placeholder="400008"
-                            name='pincode'
+                            name="pincode"
                             value={this.state.pincode}
-                            onChange={this.handleChange} />
+                            onChange={this.handleChange}
+                          />
                         </Form.Group>
                       </Form.Row>
                     </div>
@@ -283,7 +325,8 @@ class CompanyRegister extends React.Component {
                       <button
                         type="button"
                         class="btn btn-success"
-                        onClick={this.onSubmit}>
+                        onClick={this.onSubmit}
+                      >
                         Register
                       </button>
                     </div>
@@ -300,10 +343,10 @@ class CompanyRegister extends React.Component {
 
 const take = (state) => {
   return state;
-}
+};
 
 const change = (dispatch) => {
-  return bindActionCreators({ companyRegister }, dispatch)
-}
+  return bindActionCreators({ companyRegister }, dispatch);
+};
 
 export default connect(take, change)(CompanyRegister);

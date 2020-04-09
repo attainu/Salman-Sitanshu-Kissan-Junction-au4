@@ -1,60 +1,63 @@
-const db = require('../Database/db-connection');
-const Sequelize = require('sequelize');
-const Product = require('./Product');
-const Address = require('./Address');
-const ConnectProduct = require('./ConnectProduct');
-
-const User = db.define('user', {
-  id: {
-    type: Sequelize.INTEGER,
-    autoIncrement: true,
-    primaryKey: true
+const db = require("../Database/db-connection");
+const Sequelize = require("sequelize");
+const Product = require("./Product");
+const Address = require("./Address");
+const ConnectProduct = require("./ConnectProduct");
+const Company = require("./SellerCompany");
+const User = db.define(
+  "user",
+  {
+    id: {
+      type: Sequelize.INTEGER,
+      autoIncrement: true,
+      primaryKey: true,
+    },
+    name: {
+      type: Sequelize.STRING,
+      allowNull: false,
+      defaultValue: "User Name",
+    },
+    password: {
+      type: Sequelize.TEXT,
+    },
+    email: {
+      type: Sequelize.STRING,
+      allowNull: false,
+      unique: true,
+    },
+    mobile: {
+      type: Sequelize.BIGINT,
+      unique: true,
+    },
+    dob: {
+      type: Sequelize.DATEONLY,
+    },
+    type: {
+      type: Sequelize.STRING,
+      allowNull: false,
+      defaultValue: "Consumer",
+    },
+    googleId: {
+      type: Sequelize.STRING,
+    },
+    img: {
+      type: Sequelize.STRING,
+      defaultValue:
+        "https://lakewangaryschool.sa.edu.au/wp-content/uploads/2017/11/placeholder-profile-sq.jpg",
+    },
   },
-  name: {
-    type: Sequelize.STRING,
-    allowNull: false,
-    defaultValue: 'User Name'
-  },
-  password: {
-    type: Sequelize.TEXT,
-  },
-  email: {
-    type: Sequelize.STRING,
-    allowNull: false,
-    unique: true
-  },
-  mobile: {
-    type: Sequelize.BIGINT,
-    unique: true
-  },
-  dob: {
-    type: Sequelize.DATEONLY,
-  },
-  type: {
-    type: Sequelize.STRING,
-    allowNull: false,
-    defaultValue: 'Consumer'
-  },
-  googleId: {
-    type: Sequelize.STRING,
-  },
-  img: {
-    type: Sequelize.STRING,
-    defaultValue: 'https://lakewangaryschool.sa.edu.au/wp-content/uploads/2017/11/placeholder-profile-sq.jpg'
+  {
+    timestamps: false,
   }
-
-}, {
-  timestamps: false
-});
-
+);
+User.belongsTo(Company);
 User.belongsTo(Address);
-
-User.belongsToMany(Product, { through: ConnectProduct })
-Product.belongsToMany(User, { through: ConnectProduct })
-User.hasMany(ConnectProduct)
-ConnectProduct.belongsTo(User)
-Product.hasMany(ConnectProduct)
-ConnectProduct.belongsTo(Product)
+User.belongsToMany(Product, { through: ConnectProduct });
+Product.belongsToMany(User, { through: ConnectProduct });
+User.hasMany(ConnectProduct);
+ConnectProduct.belongsTo(User);
+Product.hasMany(ConnectProduct);
+ConnectProduct.belongsTo(Product);
 
 // User.belongsToMany(Product, {
 //   through: {
@@ -116,8 +119,6 @@ ConnectProduct.belongsTo(Product)
 //   constraints: false
 // });
 
-
-
 // User.belongsToMany(Product, { through: Sold })
 // Product.belongsToMany(User, { through: Sold })
 // User.hasMany(Sold)
@@ -132,8 +133,6 @@ ConnectProduct.belongsTo(Product)
 // Product.hasMany(Order)
 // Order.belongsTo(Product)
 
-
-db.sync()
-  .then(() => console.log('User DB has created'))
+db.sync().then(() => console.log("User DB has created"));
 
 module.exports = User;
