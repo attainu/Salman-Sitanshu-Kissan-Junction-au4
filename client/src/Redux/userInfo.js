@@ -4,28 +4,34 @@ let initialState = {
   mobile: undefined,
   password: undefined,
   Authenticated: false,
-}
+  role: undefined,
+};
 
 export default function user(state = initialState, action) {
+  console.log(action);
   let stateCopy = JSON.parse(JSON.stringify(state));
-  console.log('user',action)
+
   const { type, payload } = action;
   switch (type) {
-
-    case 'register':
+    case "register":
       stateCopy.name = payload.name;
       stateCopy.email = payload.email;
       stateCopy.password = payload.password;
       stateCopy.mobile = payload.mobile;
-      console.log('State', stateCopy)
+      stateCopy.role = payload.role;
+      console.log("State", stateCopy);
       return stateCopy;
 
-    case 'login':
-      if (payload.password === stateCopy.password && payload.email == stateCopy.email)
+    case "login":
+      if (
+        payload.password === stateCopy.password &&
+        payload.email == stateCopy.email
+      )
         stateCopy.Authenticated = true;
-      console.log('State', stateCopy)
+      console.log("State", stateCopy);
       return stateCopy;
 
-    default: return stateCopy;
+    default:
+      return stateCopy;
   }
 }
