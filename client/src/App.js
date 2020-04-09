@@ -8,10 +8,12 @@ import Content from "./Component/Product/Content";
 import Cart from "./Component/Farmer/Cart";
 import Notification from "./Component/Notification/Notification";
 // import Google from './Component/Google/login';
+import Auth from "./Component/Authentication/RouteProtecting";
+import NotFound from "./Component/Authentication/NotFound";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
-import FarmerHomePage from "./Component/Farmer/mainpage";
+// import FarmerHomePage from "./Component/Farmer/mainpage";
 
-// import CompanyRegister from "./Component/Supplier/CompanyRegister";
+import CompanyRegister from "./Component/Supplier/CompanyRegister";
 // import Productcategory from "./Component/Supplier/productcategory"; //product registarion based in categoty
 // import ProductDisplay from "./Component/Product/ProductListDisplay";
 // import MachineList from "./Component/Product/MachinaryList";
@@ -48,24 +50,14 @@ class App extends Component {
         <Router>
           <NavBar />
           <Switch>
-            <Route exact path="/">
-              <Signup />
-            </Route>
-            <Route path="/signup">
-              <Signup />
-            </Route>
-            <Route path="/login">
-              <Login />
-            </Route>
-            <Route path="/profile">
-              <Profile />
-            </Route>
-            <Route path="/test">
-              <Content />
-            </Route>
-            <Route path="/cart">
-              <Cart />
-            </Route>
+            <Route exact path="/" component={Signup} />
+            <Route path="/login" component={Login} />
+            <Route path="/profile" component={Auth(Profile)} />
+            <Route path="/test" component={Content} />
+            <Route path="/cart" component={Auth(Cart)} />
+            <Route path="/login" component={Login} />
+            <Route path="/company-register" component={Auth(CompanyRegister)} />
+            <Route path="*" component={NotFound} />
           </Switch>
           <Footer />
         </Router>{" "}
