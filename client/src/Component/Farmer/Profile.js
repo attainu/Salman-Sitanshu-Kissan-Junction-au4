@@ -12,14 +12,14 @@ import Action from '../../ActionCreater/notification'
 const { notify } = Action;
 
 function Profile(props) {
-  const { notify, name, email, mobile } = props;
+  const { notify, name, email, mobile,img } = props;
 
   return (
     <>
       <div class="d-flex flex-column ">
         <div class="d-flex flex-fill justify-content-around flex-wrap m-5  flex-row">
           <div class="my-auto profile-img">
-            <Image className='shadow' src="https://lakewangaryschool.sa.edu.au/wp-content/uploads/2017/11/placeholder-profile-sq.jpg" rounded fluid />
+            <Image className='shadow' src={img} rounded fluid />
             <div className='text-center'>
               <Button className='btn-1 mt-3'
                 onClick={() => notify({ type: 'success', msg: 'Edit Profile' })}
@@ -139,9 +139,9 @@ function Profile(props) {
 
 const take = (state) => {
   console.log('Profile', state)
-  const { name, email, mobile } = state.user.currentUser
+  const { name, email, mobile, img } = state.user.currentUser
   return {
-    name, email, mobile
+    name, email, mobile, img
   };
 }
 

@@ -63,7 +63,7 @@ class App extends Component {
             <Route path="/signup" component={Signup} />
             <Route path="/login" component={Login} />
             <Route path="/profile" component={Auth(Profile)} />
-            <Route path="/test" component={Content} />
+            <Route path="/test" component={Auth(Content)} />
             <Route path="/cart" component={Auth(Cart)} />
             <Route path="/company-register" component={Auth(CompanyRegister)} />
             <Route path="*" component={NotFound} />

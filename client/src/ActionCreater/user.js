@@ -5,6 +5,7 @@ const link = {
   login: 'http://localhost:5000/user/login',
   register: 'http://localhost:5000/user/',
   token: 'http://localhost:5000/user/tokenverify',
+  google: 'http://localhost:5000/user/google'
 }
 
 const notify = {
@@ -16,7 +17,6 @@ const notify = {
 };
 
 Action.register = (data) => {
-  console.log('Register', data)
   return (async (dispatch) => {
     let value = await axios.post(link.register, data);
     if (value.data.email)
@@ -31,15 +31,29 @@ Action.login = (data) => {
   return (async (dispatch) => {
     let value = await axios.post(link.login, data);
     localStorage.setItem("token", value.data.token);
-    if (value.data.user.length)
+    console.log('Login', value.data.data)
+    if (value.data)
       dispatch({
-        type: "login", payload: value.data.user[0]
+        type: "login", payload: value.data.data
+      })
+    else dispatch(notify)
+  })
+}
+
+Action.google = (data) => {
+  return (async (dispatch) => {
+    let value = await axios.post(link.google, data);
+    localStorage.setItem("token", value.data.token);
+    if (value.data.data)
+      dispatch({
+        type: "login", payload: value.data.data
       })
     else dispatch(notify)
   })
 }
 
 Action.token = (token) => {
+  console.log('Token 1', token)
   return (async (dispatch) => {
     let data = await fetch(link.token, {
       method: "GET",
@@ -50,10 +64,10 @@ Action.token = (token) => {
       },
     })
     data = await data.json();
-    console.log('Tpkrn', data)
-    if (data.user) {
+    console.log('Token 2', data)
+    if (data) {
       dispatch({
-        type: "login", payload: data.user[0]
+        type: "login", payload: data
       })
     }
     else dispatch({ type: '' })

@@ -5,7 +5,7 @@ import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import Action from "../../ActionCreater/user";
 
-const { login } = Action;
+const { google } = Action;
 
 
 class Google extends Component {
@@ -18,7 +18,7 @@ class Google extends Component {
   googleResponse = (response) => {
     console.log(response, response.profileObj)
     const { googleId, imageUrl, email, name } = response.profileObj;
-    this.props.login({
+    this.props.google({
       googleId, email, name, img: imageUrl
     })
     // console.log(tokenBlob)
@@ -79,7 +79,7 @@ const take = (state) => {
 };
 
 const change = (dispatch) => {
-  return bindActionCreators({ login }, dispatch);
+  return bindActionCreators({ google }, dispatch);
 };
 
 export default connect(take, change)(Google);
