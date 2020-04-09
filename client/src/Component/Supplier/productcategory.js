@@ -24,7 +24,7 @@ class Productcategory extends React.Component {
   render() {
     return (
       <>
-        <ProductRegister seed={this.state.machine} />
+        <ProductRegister product={this.state.machine} />
       </>
     );
   }

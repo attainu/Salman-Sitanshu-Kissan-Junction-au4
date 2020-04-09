@@ -4,13 +4,48 @@ const router = express.Router();
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 const secret = "agricom";
-// Create Operation
+// route for create profile using bycrypt
 router.post("/", async (req, res) => {
   try {
     const { body } = req;
 
     let user = await User.create(body);
     res.json(user);
+  } catch (err) {
+    res.json(err);
+  }
+});
+
+//route for create profile using bycrypt
+router.post("/signupBycrpyt", async (req, res) => {
+ 
+    const { body } = req;
+    try{
+      await bcrypt.hash(body.password, 10, async function(err,hash) {
+       body.password=hash;
+        let user = await User.create(body);
+      res.json(user);
+    });
+  
+  } catch (err) {
+    res.json(err);
+  }
+});
+router.post("/loginverify", async (req, res) => {
+  try {
+    const { body } = req;
+     
+    let user = await User.findOne({
+      where: {
+        email: [body.email]
+     
+      },
+    });
+    
+    await bcrypt.compare(body.password,user.password , function(err, result) {
+    res.json(result);
+});
+    
   } catch (err) {
     res.json(err);
   }

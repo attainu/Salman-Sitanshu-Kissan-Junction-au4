@@ -16,7 +16,7 @@ import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import Action from "./ActionCreater/user";
 import CompanyRegister from "./Component/Supplier/CompanyRegister";
-// import Productcategory from "./Component/Supplier/productcategory"; //product registarion based in categoty
+import Productcategory from "./Component/Supplier/productcategory"; //product registarion based in categoty
 // import ProductDisplay from "./Component/Product/ProductListDisplay";
 // import MachineList from "./Component/Product/MachinaryList";
 // import ProfileEdit from "./Component/Supplier/Profileedit";
@@ -61,11 +61,12 @@ class App extends Component {
           <Switch>
             <Route exact path="/" component={Home} />
             <Route path="/signup" component={Signup} />
-            <Route path="/login" component={Login} />
             <Route path="/profile" component={Auth(Profile)} />
-            <Route path="/test" component={Auth(Content)} />
+            <Route path="/test" component={Content} />
+            <Route path="/product-register" component={Productcategory} />
             <Route path="/cart" component={Auth(Cart)} />
-            <Route path="/company-register" component={Auth(CompanyRegister)} />
+            <Route path="/login" component={Login} />
+            <Route path="/company-register" component={CompanyRegister} />
             <Route path="*" component={NotFound} />
           </Switch>
           <Footer />

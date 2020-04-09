@@ -1,12 +1,82 @@
 import React from "react";
 import "../../Css/supplierproduct.css";
-import { Form } from "react-bootstrap";
+import { Form, Button } from "react-bootstrap";
+import { Redirect } from "react-router";
+import Action from "../../ActionCreater/user";
+import { connect } from "react-redux";
+import { bindActionCreators } from "redux";
+import axios from "axios";
+const { productregister } = Action;
+
 class ProductRegister extends React.Component {
-  state = {
-    flag: false,
+  constructor() {
+    super();
+    this.state = {
+      productType: "",
+      productName: "",
+      price: "",
+      productSize: "",
+      productDosage: "",
+      targetplant: "",
+      description: "",
+      todashboardredirect: false,
+    };
+    this.handleChange = this.handleChange.bind();
+    this.onSubmit = this.onSubmit.bind();
+  }
+
+  handleChange = (e) => {
+    this.setState({
+      [e.target.name]: e.target.value,
+    });
   };
+
+  onSubmit = (event) => {
+    console.log(this.state);
+    event.preventDefault();
+    let {
+      productType,
+      productName,
+      price,
+      productSize,
+      productDosage,
+      targetplant,
+      description,
+    } = this.state;
+    this.props.productregister({
+      productType,
+      productName,
+      price,
+      productSize,
+      productDosage,
+      targetplant,
+      description,
+    });
+    axios({
+      method: "post",
+      url: "http://localhost:5000/product/",
+      data: {
+        productType: productType,
+        productName: productName,
+        price: price,
+        productSize: productSize,
+        productDosage: productDosage,
+        targetplant: targetplant,
+        description: description,
+      },
+    }).then(function (response) {
+      console.log(response);
+    });
+
+    setTimeout(() => {
+      this.setState(() => ({ todashboardredirect: true }));
+    }, 1000);
+  };
+
   render() {
-    console.log(this.props);
+    if (this.state.todashboardredirect) {
+      return <Redirect to="/login" />;
+    }
 
     return (
       <>
@@ -31,7 +101,7 @@ class ProductRegister extends React.Component {
                     <h3 class="register-heading">
                       Add{" "}
                       <span style={{ color: "#28ca2f" }}>
-                        {this.props.seed.subject}
+                        {this.props.product.subject}
                       </span>{" "}
                     </h3>
                     <div class="row register-form">
@@ -40,28 +110,40 @@ class ProductRegister extends React.Component {
                           <input
                             type="text"
                             class="form-control"
-                            placeholder={this.props.seed.type}
+                            placeholder={this.props.product.type}
+                            name="productType"
+                            value={this.state.productType}
+                            onChange={this.handleChange}
                           />
                         </div>
                         <div class="form-group">
                           <input
                             type="text"
                             class="form-control"
-                            placeholder={this.props.seed.target}
+                            placeholder="Product Name"
+                            name="productName"
+                            value={this.state.productName}
+                            onChange={this.handleChange}
                           />
                         </div>
                         <div class="form-group">
                           <input
                             type="number"
                             class="form-control"
-                            placeholder={this.props.seed.price}
+                            placeholder={this.props.product.price}
+                            name="price"
+                            value={this.state.price}
+                            onChange={this.handleChange}
                           />
                         </div>
                         <div class="form-group">
                           <input
                             type="text"
                             class="form-control"
-                            placeholder={this.props.seed.size}
+                            placeholder={this.props.product.size}
+                            name="productSize"
+                            value={this.state.productSize}
+                            onChange={this.handleChange}
                           />
                         </div>
                       </div>
@@ -70,7 +152,10 @@ class ProductRegister extends React.Component {
                           <input
                             type="text"
                             class="form-control"
-                            placeholder={this.props.seed.dosage}
+                            placeholder={this.props.product.dosage}
+                            name="productDosage"
+                            value={this.state.productDosage}
+                            onChange={this.handleChange}
                           />
                         </div>
                         <div class="form-group">
@@ -78,17 +163,21 @@ class ProductRegister extends React.Component {
                             type="text"
                             name="txtEmpPhone"
                             class="form-control"
-                            placeholder={this.props.seed.description}
+                            placeholder={this.props.product.description}
+                            name="description"
+                            value={this.state.description}
+                            onChange={this.handleChange}
                           />
                         </div>
                         <div class="form-group">
-                          <select class="form-control">
-                            <option class="hidden" selected disabled>
-                              Avaliable for Doorstep Delivery?
-                            </option>
-                            <option>Yes</option>
-                            <option>No</option>
-                          </select>
+                          <input
+                            type="text"
+                            class="form-control"
+                            placeholder={this.props.product.target}
+                            name="targetplant"
+                            value={this.state.targetplant}
+                            onChange={this.handleChange}
+                          />
                         </div>
                         <div class="form-group">
                           <Form.File
@@ -98,11 +187,13 @@ class ProductRegister extends React.Component {
                             custom
                           />
                         </div>
-                        <input
-                          type="submit"
-                          class="btnRegister"
-                          value="Register"
-                        />
+                        <Button
+                          variant="outline-success align-center"
+                          onClick={this.onSubmit}
+                        >
+                          {" "}
+                          Add Product
+                        </Button>
                       </div>
                     </div>
                   </div>
@@ -115,4 +206,13 @@ class ProductRegister extends React.Component {
     );
   }
 }
-export default ProductRegister;
+
+const take = (state) => {
+  return state;
+};
+
+const change = (dispatch) => {
+  return bindActionCreators({ productregister }, dispatch);
+};
+
+export default connect(take, change)(ProductRegister);

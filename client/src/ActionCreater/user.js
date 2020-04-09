@@ -2,10 +2,10 @@ import axios from 'axios';
 
 let Action = {};
 const link = {
-  login: 'http://localhost:5000/user/login',
-  register: 'http://localhost:5000/user/',
-  token: 'http://localhost:5000/user/tokenverify',
-  google: 'http://localhost:5000/user/google'
+  login: '/user/login',
+  register: '/user/',
+  token: '/user/tokenverify',
+  google: '/user/google'
 }
 
 const notify = {
@@ -31,8 +31,7 @@ Action.login = (data) => {
   return (async (dispatch) => {
     let value = await axios.post(link.login, data);
     localStorage.setItem("token", value.data.token);
-    console.log('Login', value.data.data)
-    if (value.data)
+    if (value.data.data)
       dispatch({
         type: "login", payload: value.data.data
       })
@@ -91,6 +90,19 @@ Action.companyRegister = (data) => {
     data.pincode
   )
     return { type: "company-register", payload: data };
+  else return notify;
+};
+Action.productregister = (data) => {
+  if (
+    data.productType &&
+    data.productName &&
+    data.price &&
+    data.productSize &&
+    data.productDosage &&
+    data.targetplant &&
+    data.description
+  )
+    return { type: "productregister", payload: data };
   else return notify;
 };
 

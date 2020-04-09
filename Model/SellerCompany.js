@@ -1,39 +1,39 @@
 const db = require("../Database/db-connection");
 const Sequelize = require("sequelize");
 
-const Product = db.define(
-  "product",
+const Company = db.define(
+  "company",
   {
     id: {
       type: Sequelize.INTEGER,
       autoIncrement: true,
       primaryKey: true,
     },
-    productType: {
+    company_name: {
+      type: Sequelize.STRING,
+    },
+    GST_number: {
       type: Sequelize.STRING,
       allowNull: false,
-      defaultValue: "Product Name",
     },
-    productName: {
+
+    company_type: {
       type: Sequelize.STRING,
     },
-    price: {
+    company_address: {
+      type: Sequelize.STRING,
+    },
+    company_city: {
+      type: Sequelize.STRING,
+    },
+    company_district: {
+      type: Sequelize.STRING,
+    },
+    company_state: {
+      type: Sequelize.STRING,
+    },
+    company_pincode: {
       type: Sequelize.INTEGER,
-      allowNull: false,
-    },
-
-    productSize: {
-      type: Sequelize.STRING,
-    },
-
-    productDosage: {
-      type: Sequelize.STRING,
-    },
-    targetplant: {
-      type: Sequelize.STRING,
-    },
-    description: {
-      type: Sequelize.TEXT,
     },
   },
   {
@@ -41,6 +41,6 @@ const Product = db.define(
   }
 );
 
-db.sync().then(() => console.log("Product DB has created"));
+db.sync().then(() => console.log(" Company DB has created"));
 
-module.exports = Product;
+module.exports = Company;
