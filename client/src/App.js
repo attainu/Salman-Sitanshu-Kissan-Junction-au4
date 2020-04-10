@@ -27,7 +27,7 @@ const { token } = Action;
 
 class App extends Component {
   componentDidMount = () => {
-    if(localStorage.token){
+    if (localStorage.token) {
       const Token = localStorage.token;
       this.props.token(Token);
     }
@@ -61,10 +61,10 @@ class App extends Component {
           <Switch>
             <Route exact path="/" component={Home} />
             <Route path="/signup" component={Signup} />
-            <Route path="/profile" component={Auth(Profile)} />
+            <Auth path="/profile" component={Profile} />
             <Route path="/test" component={Content} />
             <Route path="/product-register" component={Productcategory} />
-            <Route path="/cart" component={Auth(Cart)} />
+            <Auth path="/cart" component={Cart} />
             <Route path="/login" component={Login} />
             <Route path="/company-register" component={CompanyRegister} />
             <Route path="*" component={NotFound} />

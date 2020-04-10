@@ -9,7 +9,8 @@ const link = {
   userUpdate: '/user/',
   companyR: '/company/',
   productR: '/product/',
-  userProduct: '/conprd/'
+  userProduct: '/conprd/',
+  join: '/join/'
 }
 
 const notify = {
@@ -20,12 +21,26 @@ const notify = {
   },
 };
 
+Action.join = (id) => {
+  console.log('came here', id)
+  return (async (dispatch) => {
+    console.log('came here')
+    let data = await axios(`${link.join}${id}`);
+    console.log('Joinn', data)
+    if (data.data.id)
+      dispatch({
+        type: "login", payload: data.data
+      })
+    else dispatch(notify)
+  })
+}
+
 Action.register = (data) => {
   return (async (dispatch) => {
     let value = await axios.post(link.register, data);
     if (value.data.email)
       dispatch({
-        type: "register", payload: value.data
+        type: "register"
       })
     else dispatch(notify)
   })
@@ -106,10 +121,9 @@ Action.productregister = (data, id) => {
       productId: product.data.id
     });
     console.log('Udated UserProduct', value)
-    // if (value.data[0] = 1)
-    //   dispatch({ type: "register" });
-    // else 
-    dispatch(notify)
+    if (value.data[0] = 1)
+      dispatch({ type: "register" });
+    else dispatch(notify)
   })
 }
 // Action.productregister = (data) => {

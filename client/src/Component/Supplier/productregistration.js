@@ -233,7 +233,7 @@ class ProductRegister extends React.Component {
 }
 
 const take = (state) => {
-  const { id } = state.user.currentUser.info
+  const { id } = state.user.currentUser
   return {
     id
   };
