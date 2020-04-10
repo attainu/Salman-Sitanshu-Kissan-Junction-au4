@@ -240,28 +240,6 @@ class CompanyRegister extends React.Component {
                       </Form.Group>
                       <Form.Row>
                         <Form.Group as={Col} controlId="formGridState">
-                          <Form.Label>City </Form.Label>
-                          <Form.Control
-                            as="select"
-                            name="company_city"
-                            value={this.state.company_city}
-                            onChange={this.handleChange}
-                          >
-                            {this.state.cityfetch.map((option) => {
-                              return (
-                                <option
-                                  key={option}
-                                  value={option}
-                                  label={option}
-                                >
-                                  {option}
-                                </option>
-                              );
-                            })}
-                          </Form.Control>
-                        </Form.Group>
-
-                        <Form.Group as={Col} controlId="formGridState">
                           <Form.Label>State</Form.Label>
                           <Form.Control
                             as="select"
@@ -288,6 +266,28 @@ class CompanyRegister extends React.Component {
                             })}
                           </Form.Control>
                         </Form.Group>
+                        <Form.Group as={Col} controlId="formGridState">
+                          <Form.Label>City </Form.Label>
+                          <Form.Control
+                            as="select"
+                            name="company_city"
+                            value={this.state.company_city}
+                            onChange={this.handleChange}
+                          >
+                            {this.state.cityfetch.map((option, index) => {
+                              return (
+                                <option
+                                  key={option + index}
+                                  value={option}
+                                  label={option}
+                                >
+                                  {option}
+                                </option>
+                              );
+                            })}
+                          </Form.Control>
+                        </Form.Group>
+
                       </Form.Row>
                       <Form.Row>
                         <Form.Group as={Col} controlId="formGridState">
@@ -298,9 +298,9 @@ class CompanyRegister extends React.Component {
                             value={this.state.company_district}
                             onChange={this.handleChange}
                           >
-                            {this.state.districtfetch.map((option) => {
+                            {this.state.districtfetch.map((option, index) => {
                               return (
-                                <option key={option} value={option}>
+                                <option key={option + index} value={option}>
                                   {option}
                                 </option>
                               );
@@ -341,7 +341,7 @@ class CompanyRegister extends React.Component {
 }
 
 const take = (state) => {
-  const { id } = state.user.currentUser.info
+  const { id } = state.user.currentUser
   return {
     id
   };

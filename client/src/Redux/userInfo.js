@@ -1,8 +1,5 @@
 let initialState = {
   currentUser: {
-    info: {},
-    address: {},
-    product: []
   },
   Authenticated: undefined,
 };
@@ -16,7 +13,7 @@ export default function user(state = initialState, action) {
       return stateCopy;
 
     case "login":
-      stateCopy.currentUser.info = payload;
+      stateCopy.currentUser = payload;
       stateCopy.Authenticated = true;
       console.log("State", stateCopy);
       return stateCopy;
@@ -27,11 +24,12 @@ export default function user(state = initialState, action) {
       console.log("State", stateCopy);
       return stateCopy;
 
+    //not required
     case "company-register":
       stateCopy.currentUser.address = payload;
       console.log("State", stateCopy);
       return stateCopy;
-
+    //not required
     case "productregister":
       console.log("Payload", payload);
       stateCopy.currentUser.product = payload;
