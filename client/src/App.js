@@ -11,12 +11,12 @@ import Notification from "./Component/Notification/Notification";
 import Auth from "./Component/Authentication/RouteProtecting";
 import NotFound from "./Component/Authentication/NotFound";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
-// import FarmerHomePage from "./Component/Farmer/mainpage";
+import FarmerHomePage from "./Component/Farmer/mainpage";
 
 import CompanyRegister from "./Component/Supplier/CompanyRegister";
 import Productcategory from "./Component/Supplier/productcategory"; //product registarion based in categoty
-// import ProductDisplay from "./Component/Product/ProductListDisplay";
-// import MachineList from "./Component/Product/MachinaryList";
+import ProductDisplay from "./Component/Product/ProductListDisplay";
+import MachineList from "./Component/Product/MachinaryList";
 // import ProfileEdit from "./Component/Supplier/Profileedit";
 import Login from "./Component/Login/login";
 import Signup from "./Component/Login/siginup";
@@ -51,8 +51,11 @@ class App extends Component {
         <Router>
           <NavBar />
           <Switch>
-            <Route exact path="/" component={Signup} />
+            <Route exact path="/" component={Home} />
             <Route path="/login" component={Login} />
+             <Route path="/farmer" component={FarmerHomePage} />
+             <Route path="/product-list" component={ProductDisplay} />
+             <Route path="/machine-list" component={MachineList} />
             <Route path="/profile" component={Auth(Profile)} />
             <Route path="/test" component={Content} />
             <Route path="/product-register" component={Productcategory} />

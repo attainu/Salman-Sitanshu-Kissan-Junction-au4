@@ -8,6 +8,8 @@ import image3 from '../../Image/carosal3.png';
 import image4 from '../../Image/work1.jpg';
 import image5 from '../../Image/work2.jpg';
 import image6 from '../../Image/work3.jpg';
+import { Redirect } from "react-router";
+
 class CarouselHome extends React.Component {
   state = {
     topic: [
@@ -29,10 +31,34 @@ class CarouselHome extends React.Component {
         subject:
           "No need to visit field to get grains!!! Just order here and and get all kinds of garins deliverd at your doorstep. Why to wait? Go and order."
       }
-    ]
+    ],
+    redirectToFarmer:false,
+    redirectToSeller:false,
+    redirectToCustomer:false
   };
+//Handling category to route
+  handleCategory=(value)=>{
+    if(value==='Farmer')
+    this.setState({redirectToFarmer:true})
+      if(value==='Seller')
+    this.setState({redirectToSeller:true})
+      if(value==='Consumer')
+    this.setState({redirectToCustomer:true})
+  }
 
   render() {
+    //redirect to farmer 
+    if (this.state.redirectToFarmer) {
+      return <Redirect to="/farmer" />;
+    }
+    //redirect to seller
+    if (this.state.redirectToSeller) {
+      return <Redirect to="/seller" />;
+    }
+    //redirect to customer
+    if (this.state.redirectToCustomer) {
+      return <Redirect to="/customer" />;
+    }
     return (
       <>
 
@@ -73,7 +99,7 @@ class CarouselHome extends React.Component {
                       <div className="single_analize__block text-center ">
                         <h2>{item.name}</h2>
                         <p>{item.subject}</p>
-                        <Button className="btn-text btn_new btn-success">
+                        <Button className="btn-text btn_new btn-success" onClick={()=>{this.handleCategory(item.name)}}>
                           Explore More
                         </Button>{" "}
                       </div>
