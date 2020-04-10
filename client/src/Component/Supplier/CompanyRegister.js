@@ -6,21 +6,20 @@ import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import Action from "../../ActionCreater/user";
 import { Redirect } from "react-router";
-import axios from "axios";
 const { companyRegister } = Action;
 
 class CompanyRegister extends React.Component {
   constructor() {
     super();
     this.state = {
-      companyname: "",
-      gstnumber: "",
-      type: "",
-      adress1: "",
-      city: "",
-      statename: "Choose State....",
-      district: "",
-      pincode: "",
+      company_name: "",
+      GST_number: "",
+      company_type: "",
+      company_address: "",
+      company_city: "",
+      company_state: "Choose State....",
+      company_district: "",
+      company_pincode: "",
       statelist: [
         "Choose State here....",
         "Andhra Pradesh",
@@ -80,45 +79,45 @@ class CompanyRegister extends React.Component {
     console.log(this.state);
     event.preventDefault();
     let {
-      companyname,
-      type,
-      gstnumber,
-      adress1,
-      statename,
-      city,
-      district,
-      pincode,
+      company_name,
+      company_type,
+      GST_number,
+      company_address,
+      company_state,
+      company_city,
+      company_district,
+      company_pincode,
     } = this.state;
     this.props.companyRegister({
-      companyname,
-      type,
-      gstnumber,
-      adress1,
-      statename,
-      city,
-      district,
-      pincode,
-    });
-    axios({
-      method: "post",
-      url: "http://localhost:5000/company/add",
-      data: {
-        GST_number: gstnumber,
-        company_name: companyname,
-        company_type: type,
-        company_address: adress1,
-        company_city: city,
-        company_district: district,
-        company_state: statename,
-        company_pincode: pincode,
-      },
-    }).then(function (response) {
-      console.log(response);
-    });
+      company_name,
+      company_type,
+      GST_number,
+      company_address,
+      company_state,
+      company_city,
+      company_district,
+      company_pincode,
+    }, this.props.id);
+    // axios({
+    //   method: "post",
+    //   url: "http://localhost:5000/company/add",
+    //   data: {
+    //     GST_number: GST_number,
+    //     company_name: company_name,
+    //     company_type: company_type,
+    //     company_address: company_address,
+    //     company_city: company_city,
+    //     company_district: company_district,
+    //     company_state: company_state,
+    //     company_pincode: company_pincode,
+    //   },
+    // }).then(function (response) {
+    //   console.log(response);
+    // });
 
-    setTimeout(() => {
-      this.setState(() => ({ todashboardredirect: true }));
-    }, 1000);
+    // setTimeout(() => {
+    //   this.setState(() => ({ todashboardredirect: true }));
+    // }, 1000);
   };
 
   //state update
@@ -146,8 +145,8 @@ class CompanyRegister extends React.Component {
         this.setState({
           cityfetch: array1,
           districtfetch: array2,
-          city: array1[0],
-          district: array2[0],
+          company_city: array1[0],
+          company_district: array2[0],
         });
       });
     });
@@ -186,8 +185,8 @@ class CompanyRegister extends React.Component {
                         <Form.Control
                           type="text"
                           placeholder="Enter Company Name"
-                          name="companyname"
-                          value={this.state.companyname}
+                          name="company_name"
+                          value={this.state.company_name}
                           onChange={this.handleChange}
                         />
                       </Col>
@@ -200,8 +199,8 @@ class CompanyRegister extends React.Component {
                         <Form.Control
                           type="text"
                           placeholder="Enter GST Number"
-                          name="gstnumber"
-                          value={this.state.gstnumber}
+                          name="GST_number"
+                          value={this.state.GST_number}
                           onChange={this.handleChange}
                         />
                       </Col>
@@ -214,8 +213,8 @@ class CompanyRegister extends React.Component {
                         <Form.Control
                           type="text"
                           placeholder="Private , Semi-Private"
-                          name="type"
-                          value={this.state.type}
+                          name="company_type"
+                          value={this.state.company_type}
                           onChange={this.handleChange}
                         />
                       </Col>
@@ -233,8 +232,8 @@ class CompanyRegister extends React.Component {
                           <Form.Control
                             type="text"
                             placeholder="1234 Main St"
-                            name="adress1"
-                            value={this.state.adress1}
+                            name="company_address"
+                            value={this.state.company_address}
                             onChange={this.handleChange}
                           />
                         </Col>
@@ -244,8 +243,8 @@ class CompanyRegister extends React.Component {
                           <Form.Label>City </Form.Label>
                           <Form.Control
                             as="select"
-                            name="city"
-                            value={this.state.city}
+                            name="company_city"
+                            value={this.state.company_city}
                             onChange={this.handleChange}
                           >
                             {this.state.cityfetch.map((option) => {
@@ -266,7 +265,7 @@ class CompanyRegister extends React.Component {
                           <Form.Label>State</Form.Label>
                           <Form.Control
                             as="select"
-                            name="statename"
+                            name="company_state"
                             value={this.state.state}
                             onChange={this.handlestate}
                           >
@@ -295,8 +294,8 @@ class CompanyRegister extends React.Component {
                           <Form.Label>District</Form.Label>
                           <Form.Control
                             as="select"
-                            name="district"
-                            value={this.state.district}
+                            name="company_district"
+                            value={this.state.company_district}
                             onChange={this.handleChange}
                           >
                             {this.state.districtfetch.map((option) => {
@@ -314,8 +313,8 @@ class CompanyRegister extends React.Component {
                           <Form.Control
                             type="number"
                             placeholder="400008"
-                            name="pincode"
-                            value={this.state.pincode}
+                            name="company_pincode"
+                            value={this.state.company_pincode}
                             onChange={this.handleChange}
                           />
                         </Form.Group>
@@ -342,7 +341,10 @@ class CompanyRegister extends React.Component {
 }
 
 const take = (state) => {
-  return state;
+  const { id } = state.user.currentUser.info
+  return {
+    id
+  };
 };
 
 const change = (dispatch) => {

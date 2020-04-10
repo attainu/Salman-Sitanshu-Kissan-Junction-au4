@@ -1,6 +1,6 @@
 const Sequelize = require("sequelize");
 //                           DB Name         username    password
-const db = new Sequelize("agricom", "postgres", "5432", {
+const db = new Sequelize("agricom", "postgres", "postgres", {
   host: "localhost",
   dialect: "postgres",
 });
@@ -13,7 +13,7 @@ const db = new Sequelize("agricom", "postgres", "5432", {
 
 db.authenticate()
   .then(() => {
-    console.log(`Database connected ${connection}`);
+    console.log(`Database connected`);
   })
   .catch((err) => console.error(err));
 

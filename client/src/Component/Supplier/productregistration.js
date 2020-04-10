@@ -19,7 +19,7 @@ class ProductRegister extends React.Component {
       productDosage: "",
       targetplant: "",
       description: "",
-      imageurl:"",
+      imageurl: "",
       todashboardredirect: false,
     };
     this.handleChange = this.handleChange.bind();
@@ -31,13 +31,13 @@ class ProductRegister extends React.Component {
       [e.target.name]: e.target.value,
     });
   };
-// For image upload on clodinary
- uploadImage = async e => {
+  // For image upload on clodinary
+  uploadImage = async e => {
     const files = e.target.files;
     const data = new FormData()
     data.append('file', files[0])
     data.append('upload_preset', 'sitanshu')
-    
+
     const res = await fetch(
       'https://api.cloudinary.com/v1_1/drr1rnoxf/image/upload',
       {
@@ -47,11 +47,11 @@ class ProductRegister extends React.Component {
     )
     const file = await res.json();
     this.setState({
-      imageurl:file.secure_url
+      imageurl: file.secure_url
     })
     console.log(this.state.imageurl);
   }
-//form on submit event
+  //form on submit event
   onSubmit = (event) => {
     console.log(this.state);
     event.preventDefault();
@@ -72,29 +72,30 @@ class ProductRegister extends React.Component {
       productSize,
       productDosage,
       targetplant,
-      description
-      
-    });
-    axios({
-      method: "post",
-      url: "http://localhost:5000/product/",
-      data: {
-        productType: productType,
-        productName: productName,
-        price: price,
-        productSize: productSize,
-        productDosage: productDosage,
-        targetplant: targetplant,
-        description: description,
-        imageurl:imageurl
-      },
-    }).then(function (response) {
-      console.log(response);
-    });
+      description,
+      imageurl
 
-    setTimeout(() => {
-      this.setState(() => ({ todashboardredirect: true }));
-    }, 1000);
+    }, this.props.id);
+    // axios({
+    //   method: "post",
+    //   url: "http://localhost:5000/product/",
+    //   data: {
+    //     productType,
+    //     productName,
+    //     price,
+    //     productSize,
+    //     productDosage,
+    //     targetplant,
+    //     description,
+    //     imageurl
+    //   },
+    // }).then(function (response) {
+    //   console.log(response);
+    // });
+
+    // setTimeout(() => {
+    //   this.setState(() => ({ todashboardredirect: true }));
+    // }, 1000);
   };
 
   render() {
@@ -123,10 +124,10 @@ class ProductRegister extends React.Component {
                     aria-labelledby="home-tab"
                   >
                     <h3 class="register-heading">
-                      Add{" "}
+                      Add
                       <span style={{ color: "#28ca2f" }}>
                         {this.props.product.subject}
-                      </span>{" "}
+                      </span>
                     </h3>
                     <div class="row register-form">
                       <div class="col-md-6">
@@ -215,7 +216,7 @@ class ProductRegister extends React.Component {
                           variant="outline-success align-center"
                           onClick={this.onSubmit}
                         >
-                          {" "}
+
                           Add Product
                         </Button>
                       </div>
@@ -232,7 +233,10 @@ class ProductRegister extends React.Component {
 }
 
 const take = (state) => {
-  return state;
+  const { id } = state.user.currentUser.info
+  return {
+    id
+  };
 };
 
 const change = (dispatch) => {

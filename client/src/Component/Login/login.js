@@ -4,10 +4,10 @@ import "../../Css/loginpage.css";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import Action from "../../ActionCreater/user";
-import axios from "axios";
 import { Redirect } from "react-router";
 
 const { login } = Action;
+
 class Login extends React.Component {
   constructor() {
     super();
@@ -33,16 +33,17 @@ class Login extends React.Component {
       email,
       password,
     });
-    axios({
-      method: "post",
-      url: "http://localhost:5000/user/login",
-      data: {
-        password: password,
-        email: email,
-      },
-    }).then(function (response) {
-      localStorage.setItem("token", response.data.token);
-    });
+    // axios({
+    //   method: "post",
+    //   url: "http://localhost:5000/user/login",
+    //   data: {
+    //     password: password,
+    //     email: email,
+    //   },
+    // }).then(function (response) {
+    //   console.log('Loginnn',response)
+    //   localStorage.setItem("token", response.data.token);
+    // });
 
     /* setTimeout(() => {
       this.setState(() => ({ toLoginafterRedirect: true }));

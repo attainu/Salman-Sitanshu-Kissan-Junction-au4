@@ -1,27 +1,10 @@
 let initialState = {
-  name: undefined,
-  email: "1",
-  mobile: undefined,
-  password: "1",
-  Authenticated: false,
-  role: undefined,
-
-  companyname: undefined,
-  gstnumber: undefined,
-  type: undefined,
-  adress1: undefined,
-  city: undefined,
-  statename: undefined,
-  district: undefined,
-  pincode: undefined,
-
-  productType: undefined,
-  productName: undefined,
-  price: undefined,
-  productSize: undefined,
-  productDosage: undefined,
-  targetplant: undefined,
-  description: undefined,
+  currentUser: {
+    info: {},
+    address: {},
+    product: []
+  },
+  Authenticated: undefined,
 };
 
 export default function user(state = initialState, action) {
@@ -29,55 +12,29 @@ export default function user(state = initialState, action) {
   const { type, payload } = action;
   switch (type) {
     case "register":
-      stateCopy.name = payload.name;
-      stateCopy.email = payload.email;
-      stateCopy.password = payload.password;
-      stateCopy.mobile = payload.mobile;
-      stateCopy.role = payload.role;
       console.log("State", stateCopy);
       return stateCopy;
 
     case "login":
-      console.log(payload);
-      if (
-        payload.password === stateCopy.password &&
-        payload.email == stateCopy.email
-      )
-        stateCopy.Authenticated = true;
+      stateCopy.currentUser.info = payload;
+      stateCopy.Authenticated = true;
       console.log("State", stateCopy);
       return stateCopy;
 
     case "logout":
       stateCopy.Authenticated = false;
-      stateCopy.name = "";
-      stateCopy.email = "";
-      stateCopy.password = "";
-      stateCopy.mobile = "";
+      stateCopy.currentUser = {};
       console.log("State", stateCopy);
       return stateCopy;
 
     case "company-register":
-      console.log("Payload", payload);
-      stateCopy.companyname = payload.companyname;
-      stateCopy.gstnumber = payload.gstnumber;
-      stateCopy.type = payload.type;
-      stateCopy.adress1 = payload.adress1;
-      stateCopy.city = payload.city;
-      stateCopy.statename = payload.statename;
-      stateCopy.district = payload.district;
-      stateCopy.pincode = payload.pincode;
+      stateCopy.currentUser.address = payload;
       console.log("State", stateCopy);
       return stateCopy;
 
     case "productregister":
       console.log("Payload", payload);
-      stateCopy.productType = payload.productType;
-      stateCopy.productName = payload.productName;
-      stateCopy.price = payload.price;
-      stateCopy.productSize = payload.productSize;
-      stateCopy.productDosage = payload.productDosage;
-      stateCopy.targetplant = payload.targetplant;
-      stateCopy.description = payload.description;
+      stateCopy.currentUser.product = payload;
       console.log("State", stateCopy);
       return stateCopy;
 

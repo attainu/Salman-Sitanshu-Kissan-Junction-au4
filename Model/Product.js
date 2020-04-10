@@ -45,5 +45,5 @@ const Product = db.define(
 );
 
 db.sync().then(() => console.log("Product DB has created"));
-
+ 
 module.exports = Product;

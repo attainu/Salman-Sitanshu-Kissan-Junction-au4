@@ -5,12 +5,15 @@ import { connect } from 'react-redux';
 export default (ComposedComponent) => {
   class RequireAuth extends Component {
     componentWillMount() {
+      console.log('Uthentz Mount', this.props.Authenticated)
       if (!this.props.Authenticated)
         this.props.history.replace("/");
     }
     componentWillUpdate() {
-      if (!this.props.authenticated)
+      console.log('Uthentz Outside', this.props.Authenticated)
+      if (!this.props.Authenticated) {
         this.props.history.replace("/");
+      }
     }
     render() {
       return (

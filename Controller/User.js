@@ -70,12 +70,14 @@ router.post("/login", async (req, res) => {
         password: [body.password],
       },
     });
-    await jwt.sign({ user }, secret, (err, token) => {
+    const data = user[0].dataValues;
+    console.log('Login BE', data)
+    jwt.sign(data, secret, (err, token) => {
       if (err) {
         res.sendStatus(403);
       } else {
         res.json({
-          user: { user: user },
+          data,
           token: token,
         });
       }
@@ -94,15 +96,38 @@ router.get("/tokenverify", (req, res) => {
       if (err) {
         res.sendStatus(403);
       } else {
-        res.json({
-          user: data,
-        });
+        res.json(data);
       }
     });
   } else {
     res.sendStatus(403);
   }
 });
+
+router.post("/google", async (req, res) => {
+  try {
+    const { body } = req;
+
+    const [user] = await User.findOrCreate({
+      where: { googleId: body.googleId },
+      defaults: body
+    });
+    const data = user.dataValues;
+    console.log('Google BE', data)
+    jwt.sign(data, secret, (err, token) => {
+      if (err) {
+        res.sendStatus(403);
+      } else {
+        res.json({
+          data,
+          token: token,
+        });
+      }
+    });
+  } catch (err) {
+    res.json(err);
+  }
+})
 
 // Read One Operation
 router.get("/:id", async (req, res) => {
