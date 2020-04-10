@@ -35,6 +35,9 @@ const Product = db.define(
     description: {
       type: Sequelize.TEXT,
     },
+     imageurl: {
+      type: Sequelize.STRING,
+    },
   },
   {
     timestamps: false,

@@ -1,8 +1,6 @@
 let initialState = {
   currentUser: {},
-  address: {},
   Authenticated: undefined,
-  product: {}
 };
 
 export default function user(state = initialState, action) {
@@ -22,19 +20,17 @@ export default function user(state = initialState, action) {
     case "logout":
       stateCopy.Authenticated = false;
       stateCopy.currentUser = {};
-      stateCopy.address = {};
-      stateCopy.product = {};
       console.log("State", stateCopy);
       return stateCopy;
 
     case "company-register":
-      stateCopy.address = payload;
+      stateCopy.currentUser.address = payload;
       console.log("State", stateCopy);
       return stateCopy;
 
     case "productregister":
       console.log("Payload", payload);
-      stateCopy.product = payload;
+      stateCopy.currentUser.product = payload;
       console.log("State", stateCopy);
       return stateCopy;
 

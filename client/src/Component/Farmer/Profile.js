@@ -19,7 +19,7 @@ function Profile(props) {
       <div class="d-flex flex-column ">
         <div class="d-flex flex-fill justify-content-around flex-wrap m-5  flex-row">
           <div class="my-auto profile-img">
-            <Image className='shadow' src={img} rounded fluid />
+            <Image className='shadow' src={img} width='300vh' rounded/>
             <div className='text-center'>
               <Button className='btn-1 mt-3'
                 onClick={() => notify({ type: 'success', msg: 'Edit Profile' })}
@@ -138,7 +138,6 @@ function Profile(props) {
 }
 
 const take = (state) => {
-  console.log('Profile', state)
   const { name, email, mobile, img } = state.user.currentUser
   return {
     name, email, mobile, img
