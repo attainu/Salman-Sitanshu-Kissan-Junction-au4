@@ -1,5 +1,9 @@
 let initialState = {
-  currentUser: {},
+  currentUser: {
+    info: {},
+    address: {},
+    product: []
+  },
   Authenticated: undefined,
 };
 
@@ -12,7 +16,7 @@ export default function user(state = initialState, action) {
       return stateCopy;
 
     case "login":
-      stateCopy.currentUser = payload;
+      stateCopy.currentUser.info = payload;
       stateCopy.Authenticated = true;
       console.log("State", stateCopy);
       return stateCopy;

@@ -138,7 +138,7 @@ function Profile(props) {
 }
 
 const take = (state) => {
-  const { name, email, mobile, img } = state.user.currentUser
+  const { name, email, mobile, img } = state.user.currentUser.info
   return {
     name, email, mobile, img
   };

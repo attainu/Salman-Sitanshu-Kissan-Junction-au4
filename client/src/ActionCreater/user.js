@@ -5,7 +5,11 @@ const link = {
   login: '/user/login',
   register: '/user/',
   token: '/user/tokenverify',
-  google: '/user/google'
+  google: '/user/google',
+  userUpdate: '/user/',
+  companyR: '/company/',
+  productR: '/product/',
+  userProduct: '/conprd/'
 }
 
 const notify = {
@@ -78,32 +82,48 @@ Action.logout = () => {
   return { type: "logout" };
 };
 
-Action.companyRegister = (data) => {
-  if (
-    data.companyname &&
-    data.gstnumber &&
-    data.type &&
-    data.adress1 &&
-    data.city &&
-    data.statename &&
-    data.district &&
-    data.pincode
-  )
-    return { type: "company-register", payload: data };
-  else return notify;
-};
-Action.productregister = (data) => {
-  if (
-    data.productType &&
-    data.productName &&
-    data.price &&
-    data.productSize &&
-    data.productDosage &&
-    data.targetplant &&
-    data.description
-  )
-    return { type: "productregister", payload: data };
-  else return notify;
-};
+Action.companyRegister = (data, id) => {
+  console.log('Company', id)
+  return (async (dispatch) => {
+    let company = await axios.post(link.companyR, data);
+    console.log('After post comapny', company.data.id)
+    let value = await axios.put(`${link.userUpdate}${id}`, { companyId: company.data.id });
+    console.log('Udated user', value.data)
+    if (value.data[0] = 1)
+      dispatch({ type: "register" });
+    else dispatch(notify)
+  })
+}
+
+Action.productregister = (data, id) => {
+  console.log('Product', id)
+  return (async (dispatch) => {
+    let product = await axios.post(link.productR, data);
+    console.log('After post product', product.data.id)
+    let value = await axios.post(link.userProduct, {
+      connectType: 'myproduct',
+      userId: id,
+      productId: product.data.id
+    });
+    console.log('Udated UserProduct', value)
+    // if (value.data[0] = 1)
+    //   dispatch({ type: "register" });
+    // else 
+    dispatch(notify)
+  })
+}
+// Action.productregister = (data) => {
+//   if (
+//     data.productType &&
+//     data.productName &&
+//     data.price &&
+//     data.productSize &&
+//     data.productDosage &&
+//     data.targetplant &&
+//     data.description
+//   )
+//     return { type: "productregister", payload: data };
+//   else return notify;
+// };
 
 export default Action;
