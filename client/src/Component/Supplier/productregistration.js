@@ -19,6 +19,7 @@ class ProductRegister extends React.Component {
       productDosage: "",
       targetplant: "",
       description: "",
+      imageurl:"",
       todashboardredirect: false,
     };
     this.handleChange = this.handleChange.bind();
@@ -30,7 +31,27 @@ class ProductRegister extends React.Component {
       [e.target.name]: e.target.value,
     });
   };
-
+// For image upload on clodinary
+ uploadImage = async e => {
+    const files = e.target.files;
+    const data = new FormData()
+    data.append('file', files[0])
+    data.append('upload_preset', 'sitanshu')
+    
+    const res = await fetch(
+      'https://api.cloudinary.com/v1_1/drr1rnoxf/image/upload',
+      {
+        method: 'POST',
+        body: data
+      }
+    )
+    const file = await res.json();
+    this.setState({
+      imageurl:file.secure_url
+    })
+    console.log(this.state.imageurl);
+  }
+//form on submit event
   onSubmit = (event) => {
     console.log(this.state);
     event.preventDefault();
@@ -42,6 +63,7 @@ class ProductRegister extends React.Component {
       productDosage,
       targetplant,
       description,
+      imageurl
     } = this.state;
     this.props.productregister({
       productType,
@@ -50,7 +72,8 @@ class ProductRegister extends React.Component {
       productSize,
       productDosage,
       targetplant,
-      description,
+      description
+      
     });
     axios({
       method: "post",
@@ -63,6 +86,7 @@ class ProductRegister extends React.Component {
         productDosage: productDosage,
         targetplant: targetplant,
         description: description,
+        imageurl:imageurl
       },
     }).then(function (response) {
       console.log(response);
@@ -181,10 +205,10 @@ class ProductRegister extends React.Component {
                         </div>
                         <div class="form-group">
                           <Form.File
-                            id="custom-file-translate-scss"
-                            label="Add Product Image"
-                            lang="en"
-                            custom
+                            type="file"
+                            name="file"
+                            placeholder="Upload Product Image"
+                            onChange={this.uploadImage}
                           />
                         </div>
                         <Button

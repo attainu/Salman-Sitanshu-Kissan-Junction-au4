@@ -20,6 +20,7 @@ import Productcategory from "./Component/Supplier/productcategory"; //product re
 // import ProfileEdit from "./Component/Supplier/Profileedit";
 import Login from "./Component/Login/login";
 import Signup from "./Component/Login/siginup";
+ 
 class App extends Component {
   componentDidMount = () => {
     const token = localStorage.token;
