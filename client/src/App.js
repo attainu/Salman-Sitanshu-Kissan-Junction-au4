@@ -53,11 +53,10 @@ class App extends Component {
             <Route path="/lend_machine" component={MachineList} />
 
             <Route path="/signup" component={Signup} />
-
-            <Route path="/profile" component={Auth(Profile)} />
+            <Auth path="/profile" component={Profile} />
             <Route path="/test" component={Content} />
             <Route path="/product-register" component={Productcategory} />
-            <Route path="/cart" component={Auth(Cart)} />
+            <Auth path="/cart" component={Cart} />
             <Route path="/login" component={Login} />
             <Route path="/company-register" component={CompanyRegister} />
             <Route path="*" component={NotFound} />
