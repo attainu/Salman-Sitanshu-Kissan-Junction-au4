@@ -22,7 +22,21 @@ router.get('/', async (req, res) => {
     res.json(err)
   }
 })
-
+//Read All Operation
+router.get('/select', async (req, res) => {
+  try {
+     let product = await Product.findAll({
+      where: {
+       productType: ['Seed','Pesticides']
+     
+      },
+    });
+    
+    res.json(product)
+  } catch (err) {
+    res.json(err)
+  }
+})
 // Read One Operation
 router.get('/:id', async (req, res) => {
   try {

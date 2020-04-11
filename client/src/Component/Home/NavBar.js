@@ -30,7 +30,7 @@ function NavBar(props) {
             <Nav.Link href="#home">About</Nav.Link>
             <Link to='/test'><Nav.Link href="#link">Contacts</Nav.Link></Link>
           </Nav>
-          <NavDropdown alignRight id="dropdown-no-caret" className="p-0"
+          <NavDropdown focusFirstItemOnShow={false} alignRight id="dropdown-no-caret" className="p-0"
             title={
               <img className="m-0 rounded-circle p-0 "
                 width="35px"
@@ -39,9 +39,9 @@ function NavBar(props) {
             id={`dropdown-button-drop`}
           >
             {(!Authenticated) ? (<>
-              <NavDropdown.Item href="#action/3.1">
+              <NavDropdown.Item >
                 <Link to='/login'><Button className='mr-3' variant="outline-success">Signin</Button></Link>
-                <Button variant="outline-success">Signup</Button>
+                <Link to='/signup'><Button variant="outline-success">Signup</Button></Link>
               </NavDropdown.Item>
               <NavDropdown.Divider className="text-center" />
               <NavDropdown.Item href="#action/3.1">
@@ -51,11 +51,11 @@ function NavBar(props) {
             ) : (
                 <>
                   <NavDropdown.Divider />
-                  <Link to='/profile'><NavDropdown.Item href="#action/3.1">Profile</NavDropdown.Item></Link>
-                  <Link to='/profile/purchased'><NavDropdown.Item href="#action/3.2">Ordered Product</NavDropdown.Item></Link>
-                  <Link to='/cart'><NavDropdown.Item href="#action/3.3">Cart</NavDropdown.Item></Link>
+                  <Link to='/profile'><NavDropdown.Item href='/profile' >Profile</NavDropdown.Item></Link>
+                  <Link to='/profile/purchased'><NavDropdown.Item href='/' >Ordered Product</NavDropdown.Item></Link>
+                  <Link to='/cart'><NavDropdown.Item href='/'>Cart</NavDropdown.Item></Link>
                   <NavDropdown.Divider />
-                  <Link to='/'><NavDropdown.Item href="#action/3.3" onClick={() => logout()}>Logout</NavDropdown.Item></Link>
+                  <Link to='/'><NavDropdown.Item href="/" onClick={() => logout()}>Logout</NavDropdown.Item></Link>
                 </>
               )}
 

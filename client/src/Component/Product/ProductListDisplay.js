@@ -7,42 +7,18 @@ import TargetCrop from "./TargetCropFilter";
 class ProductDisplay extends React.Component {
   state = {
     seedPestiside: [
-      {
-        name: "seed1",
-        price: "1000",
-        url:
-          "https://i.pinimg.com/originals/63/02/ab/6302abd85cb038367d3887738cdbe251.jpg",
-        targrt_plant: "Paddy,Rice",
-      },
-      {
-        name: "seed1",
-        price: "1000",
-        url:
-          "https://i.pinimg.com/originals/63/02/ab/6302abd85cb038367d3887738cdbe251.jpg",
-        targrt_plant: "Paddy,Rice",
-      },
-      {
-        name: "seed1",
-        price: "1000",
-        url:
-          "https://www.trendingpackaging.com/wp-content/uploads/2016/09/roundup.png",
-        targrt_plant: "Paddy,Rice",
-      },
-      {
-        name: "seed1",
-        price: "1000",
-        url:
-          "https://5.imimg.com/data5/QP/OU/MY-7157443/chemical-pesticides-500x500.jpg",
-        targrt_plant: "Paddy,Rice",
-      },
-      {
-        name: "seed1",
-        price: "1000",
-        url:
-          "https://5.imimg.com/data5/WA/LA/MY-11343903/organic-paddy-seed-500x500.jpg",
-        targrt_plant: "Paddy,Rice",
-      },
+     
     ],
+  };
+
+   componentDidMount = () => {
+    var waiter = fetch("http://localhost:5000/product/");
+    waiter.then((res) => {
+      res.json().then((data) => {
+       this.setState({seedPestiside:data})
+      });
+      console.log(this.state.seedPestiside)
+    });
   };
   render() {
     return (

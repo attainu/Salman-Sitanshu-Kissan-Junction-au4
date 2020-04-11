@@ -6,10 +6,12 @@ import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import { Redirect } from "react-router";
 import Action from "../../ActionCreater/user";
+import Notify from "../../ActionCreater/notification";
 
 const { register } = Action;
+const { notify } = Notify;
 
-class Signup extends React.Component {
+class Signup extends Component {
   constructor() {
     super();
     this.state = {
@@ -52,9 +54,10 @@ class Signup extends React.Component {
         mobile: mobile,
         type: role,
       },
-    }).then(function (response) {});
+    }).then(function (response) { });
 
     setTimeout(() => {
+      this.props.notify({ type: 'success', msg: 'Register Succefully' })
       this.setState(() => ({ toLoginRedirect: true }));
     }, 1000);
   };
@@ -80,15 +83,15 @@ class Signup extends React.Component {
                 <div className="card1">
                   <article class="card-body ">
                     <h4 class="card-title mt-3 text-center">
-                      <span style={{ color: "#28ca2f" }}>Create Account</span>{" "}
+                      <span style={{ color: "#28ca2f" }}>Create Account</span>
                     </h4>
 
                     <form>
                       <div class="form-group input-group">
                         <div class="input-group-prepend">
                           <span class="input-group-text">
-                            {" "}
-                            <i class="fa fa-user"></i>{" "}
+                            
+                            <i class="fa fa-user"></i>
                           </span>
                         </div>
                         <input
@@ -102,8 +105,8 @@ class Signup extends React.Component {
                       <div class="form-group input-group">
                         <div class="input-group-prepend">
                           <span class="input-group-text">
-                            {" "}
-                            <i class="fa fa-envelope"></i>{" "}
+                            
+                            <i class="fa fa-envelope"></i>
                           </span>
                         </div>
                         <input
@@ -118,15 +121,15 @@ class Signup extends React.Component {
                       <div class="form-group input-group">
                         <div class="input-group-prepend">
                           <span class="input-group-text">
-                            {" "}
-                            <i class="fa fa-phone"></i>{" "}
+                            
+                            <i class="fa fa-phone"></i>
                           </span>
                         </div>
 
                         <input
                           class="form-control"
                           placeholder="Phone number"
-                          type="text"
+                          type="number"
                           name="mobile"
                           value={this.state.mobile}
                           onChange={this.handleChange}
@@ -135,12 +138,13 @@ class Signup extends React.Component {
                       <div class="form-group input-group">
                         <div class="input-group-prepend">
                           <span class="input-group-text">
-                            {" "}
-                            <i class="fa fa-building"></i>{" "}
+                            
+                            <i class="fa fa-building"></i>
                           </span>
                         </div>
                         <select
                           class="form-control"
+                          name='role'
                           onChange={this.handleChange}
                           value={this.state.role}
                         >
@@ -153,8 +157,8 @@ class Signup extends React.Component {
                       <div class="form-group input-group">
                         <div class="input-group-prepend">
                           <span class="input-group-text">
-                            {" "}
-                            <i class="fa fa-lock"></i>{" "}
+                            
+                            <i class="fa fa-lock"></i>
                           </span>
                         </div>
                         <input
@@ -169,8 +173,8 @@ class Signup extends React.Component {
                       <div class="form-group input-group">
                         <div class="input-group-prepend">
                           <span class="input-group-text">
-                            {" "}
-                            <i class="fa fa-lock"></i>{" "}
+                            
+                            <i class="fa fa-lock"></i>
                           </span>
                         </div>
                         <input
@@ -187,13 +191,13 @@ class Signup extends React.Component {
                           variant="outline-success align-center"
                           onClick={this.onSubmit}
                         >
-                          {" "}
-                          Create Account{" "}
+                          
+                          Create Account
                         </Button>
                       </div>
                     </form>
                   </article>
-                </div>{" "}
+                </div>
               </Col>
               <Col lg={2} md={2} sm={12}></Col>
             </Row>
@@ -209,7 +213,7 @@ const take = (state) => {
 };
 
 const change = (dispatch) => {
-  return bindActionCreators({ register }, dispatch);
+  return bindActionCreators({ register, notify }, dispatch);
 };
 
 export default connect(take, change)(Signup);

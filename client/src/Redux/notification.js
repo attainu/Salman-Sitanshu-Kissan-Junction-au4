@@ -13,7 +13,6 @@ export default function movie(state = initialState, action) {
       stateCopy.type = payload.type;
       stateCopy.msg = payload.msg;
       stateCopy.reset += 1;
-      console.log(stateCopy)
       return stateCopy;
 
     default: return stateCopy;

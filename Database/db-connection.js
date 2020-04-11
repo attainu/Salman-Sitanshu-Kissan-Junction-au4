@@ -13,7 +13,7 @@ const db = new Sequelize("agricom", "postgres", "5432", {
 
 db.authenticate()
   .then(() => {
-    console.log(`Database connected ${connection}`);
+    console.log(`Database connected`);
   })
   .catch((err) => console.error(err));
 

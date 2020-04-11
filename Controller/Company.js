@@ -3,7 +3,7 @@ const express = require("express");
 const router = express.Router();
 
 // Create Operation
-router.post("/add", async (req, res) => {
+router.post("/", async (req, res) => {
   try {
     const { body } = req;
     let company = await Company.create(body);
@@ -14,7 +14,7 @@ router.post("/add", async (req, res) => {
 });
 
 // Read Operation
-router.get("/read", async (req, res) => {
+router.get("/", async (req, res) => {
   try {
     let company = await Company.findAll();
     res.json(company);

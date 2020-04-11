@@ -1,5 +1,6 @@
 const User = require('../Model/User');
 const Address = require('../Model/Address');
+const SellerCompany = require('../Model/SellerCompany');
 const Product = require('../Model/Product');
 const ConnectProduct = require('../Model/ConnectProduct');
 const express = require("express");
@@ -38,11 +39,15 @@ router.get('/:id', async (req, res) => {
         model: Address,
       },
       {
+        model: SellerCompany,
+      },
+      {
         model: ConnectProduct,
         include: [{
           model: Product
         }]
-      }]
+      }
+    ]
     })
     res.json(user)
   }

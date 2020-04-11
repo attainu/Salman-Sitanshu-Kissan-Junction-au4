@@ -37,6 +37,7 @@ const Product = db.define(
     },
      imageurl: {
       type: Sequelize.STRING,
+      defaultValue:"https://res.cloudinary.com/drr1rnoxf/image/upload/v1586495345/sitanshu/qnfz7y2ylnqa6ws8h44e.png"
     },
   },
   {
@@ -45,5 +46,5 @@ const Product = db.define(
 );
 
 db.sync().then(() => console.log("Product DB has created"));
-
+ 
 module.exports = Product;
