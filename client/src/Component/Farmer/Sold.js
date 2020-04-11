@@ -1,5 +1,7 @@
 import React from 'react';
-import { Table} from 'react-bootstrap';
+import {
+    Table
+} from 'react-bootstrap';
 
 export default function Buyer() {
   return (
@@ -53,6 +55,6 @@ export default function Buyer() {
       </Table>
     </>
 
-  );
+    );
 
 }

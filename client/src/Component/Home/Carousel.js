@@ -8,31 +8,37 @@ import image3 from '../../Image/carosal3.png';
 import image4 from '../../Image/work1.jpg';
 import image5 from '../../Image/work2.jpg';
 import image6 from '../../Image/work3.jpg';
+ 
+import { Link } from "react-router-dom";
+
 class CarouselHome extends React.Component {
   state = {
     topic: [
       {
-        name: "Farmer",
+        name: "farmer",
         url: image4,
         subject:
           "If you are a farmer then you are at perfect platfrom from where you can order all of your farming related products and you can sell your production also."
       },
       {
-        name: "Supplier",
+        name: "supplier",
         url: image5,
         subject:
           "Sell your wide variety of products related to farming, through our platform. We have millions of farmers connected from all parts of country. "
       },
       {
-        name: "Consumer",
+        name: "consumer",
         url: image6,
         subject:
           "No need to visit field to get grains!!! Just order here and and get all kinds of garins deliverd at your doorstep. Why to wait? Go and order."
       }
-    ]
+    ],
+   
   };
+ 
 
   render() {
+    
     return (
       <>
 
@@ -73,9 +79,9 @@ class CarouselHome extends React.Component {
                       <div className="single_analize__block text-center ">
                         <h2>{item.name}</h2>
                         <p>{item.subject}</p>
-                        <Button className="btn-text btn_new btn-success">
-                          Explore More
-                        </Button>{" "}
+                 <Link to={`/${item.name}`}>             <Button className="btn-text btn_new btn-success" >
+                          Explore More 
+                        </Button>{" "}</Link>
                       </div>
                     </div>
                   </Col>

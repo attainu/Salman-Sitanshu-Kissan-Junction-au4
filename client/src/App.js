@@ -11,14 +11,18 @@ import Notification from "./Component/Notification/Notification";
 import Auth from "./Component/Authentication/RouteProtecting";
 import NotFound from "./Component/Authentication/NotFound";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+
+import FarmerHomePage from "./Component/Farmer/mainpage";
+
 // import FarmerHomePage from "./Component/Farmer/mainpage";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import Action from "./ActionCreater/user";
+
 import CompanyRegister from "./Component/Supplier/CompanyRegister";
 import Productcategory from "./Component/Supplier/productcategory"; //product registarion based in categoty
-// import ProductDisplay from "./Component/Product/ProductListDisplay";
-// import MachineList from "./Component/Product/MachinaryList";
+import ProductDisplay from "./Component/Product/ProductListDisplay";
+import MachineList from "./Component/Product/MachinaryList";
 // import ProfileEdit from "./Component/Supplier/Profileedit";
 import Login from "./Component/Login/login";
 import Signup from "./Component/Login/siginup";
@@ -32,27 +36,8 @@ class App extends Component {
       const Token = localStorage.token;
       this.props.token(Token);
     }
-    // if (token) {
-    //   return fetch("http://localhost:5000/user/tokenverify", {
-    //     method: "GET",
-    //     headers: {
-    //       "Content-Type": "application/json",
-    //       Accept: "application/json",
-    //       Authorization: `Bearer ${token}`,
-    //     },
-    //   })
-    //     .then((resp) => resp.json())
-    //     .then((data) => {
-    //       if (data.message) {
-    //         // An error will occur if the token is invalid.
-    //         // If this happens, you may want to remove the invalid token.
-    //         localStorage.removeItem("token");
-    //       } else {
-    //         console.log('Appp,js', data.user[0])
-    //       }
-    //     });
-    // }
   };
+
   render() {
     return (
       <>
@@ -61,9 +46,16 @@ class App extends Component {
           <Notification />
           <Switch>
             <Route exact path="/" component={Home} />
+
+            <Route path="/login" component={Login} />
+            <Route exact path="/farmer" component={FarmerHomePage} />
+            <Route path="/farmer/:lend_machine" component={MachineList} />
+            <Route path="/product_seed" component={ProductDisplay} />
+            <Route path="/lend_machine" component={MachineList} />
+
             <Route path="/signup" component={Signup} />
             <Route path="/profile" component={Profile} />
-            <Route path="/test" component={Content} />
+            <Route path="/single-product" component={Content} />
             <Route path="/product-register" component={Productcategory} />
             <Auth path="/cart" component={Cart} />
             <Route path="/login" component={Login} />
