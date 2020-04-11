@@ -45,7 +45,7 @@ export default function Purchase() {
             <td>₹750</td>
           </tr>
           <tr>
-            <td colspan="5"></td>
+            <td colSpan="5"></td>
             <th>Total Expenditure:</th>
             <td>₹60000</td>
           </tr>

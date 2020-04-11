@@ -45,7 +45,7 @@ export default function Buyer() {
             <td>₹750</td>
           </tr>
           <tr>
-            <td colspan="5"></td>
+            <td colSpan="5"></td>
             <th>Total Revenue:</th>
             <td>₹60000</td>
           </tr>

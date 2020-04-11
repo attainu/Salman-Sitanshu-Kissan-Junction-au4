@@ -22,6 +22,7 @@ import Productcategory from "./Component/Supplier/productcategory"; //product re
 // import ProfileEdit from "./Component/Supplier/Profileedit";
 import Login from "./Component/Login/login";
 import Signup from "./Component/Login/siginup";
+import ProfileEdit from "./Component/Supplier/Profileedit";
 
 const { token } = Action;
 
@@ -61,12 +62,13 @@ class App extends Component {
           <Switch>
             <Route exact path="/" component={Home} />
             <Route path="/signup" component={Signup} />
-            <Auth path="/profile" component={Profile} />
+            <Route path="/profile" component={Profile} />
             <Route path="/test" component={Content} />
             <Route path="/product-register" component={Productcategory} />
             <Auth path="/cart" component={Cart} />
             <Route path="/login" component={Login} />
             <Route path="/company-register" component={CompanyRegister} />
+            <Route path="/profile-edit" component={ProfileEdit} />
             <Route path="*" component={NotFound} />
           </Switch>
           <Footer />

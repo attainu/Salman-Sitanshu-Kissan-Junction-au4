@@ -42,19 +42,19 @@ class Signup extends Component {
       password,
       mobile,
       name,
-      role,
+      type: role,
     });
-    axios({
-      method: "post",
-      url: "http://localhost:5000/user/",
-      data: {
-        name: name,
-        password: password,
-        email: email,
-        mobile: mobile,
-        type: role,
-      },
-    }).then(function (response) { });
+    // axios({
+    //   method: "post",
+    //   url: "http://localhost:5000/user/",
+    //   data: {
+    //     name: name,
+    //     password: password,
+    //     email: email,
+    //     mobile: mobile,
+    //     type: role,
+    //   },
+    // }).then(function (response) { });
 
     setTimeout(() => {
       this.props.notify({ type: 'success', msg: 'Register Succefully' })
@@ -90,7 +90,7 @@ class Signup extends Component {
                       <div class="form-group input-group">
                         <div class="input-group-prepend">
                           <span class="input-group-text">
-                            
+
                             <i class="fa fa-user"></i>
                           </span>
                         </div>
@@ -105,7 +105,7 @@ class Signup extends Component {
                       <div class="form-group input-group">
                         <div class="input-group-prepend">
                           <span class="input-group-text">
-                            
+
                             <i class="fa fa-envelope"></i>
                           </span>
                         </div>
@@ -121,7 +121,7 @@ class Signup extends Component {
                       <div class="form-group input-group">
                         <div class="input-group-prepend">
                           <span class="input-group-text">
-                            
+
                             <i class="fa fa-phone"></i>
                           </span>
                         </div>
@@ -138,7 +138,7 @@ class Signup extends Component {
                       <div class="form-group input-group">
                         <div class="input-group-prepend">
                           <span class="input-group-text">
-                            
+
                             <i class="fa fa-building"></i>
                           </span>
                         </div>
@@ -157,7 +157,7 @@ class Signup extends Component {
                       <div class="form-group input-group">
                         <div class="input-group-prepend">
                           <span class="input-group-text">
-                            
+
                             <i class="fa fa-lock"></i>
                           </span>
                         </div>
@@ -173,7 +173,7 @@ class Signup extends Component {
                       <div class="form-group input-group">
                         <div class="input-group-prepend">
                           <span class="input-group-text">
-                            
+
                             <i class="fa fa-lock"></i>
                           </span>
                         </div>
@@ -191,7 +191,7 @@ class Signup extends Component {
                           variant="outline-success align-center"
                           onClick={this.onSubmit}
                         >
-                          
+
                           Create Account
                         </Button>
                       </div>

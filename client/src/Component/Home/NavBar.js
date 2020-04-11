@@ -14,7 +14,7 @@ function NavBar(props) {
   const { Authenticated, logout } = props;
   return (
     <>
-      <Navbar bg="light" expand="lg" sticky="top">
+      <Navbar className='shadow' bg="light" expand="lg" sticky="top">
         <Link to='/'><Navbar.Brand href="#home"><img className='mr-1'
           src={logo}
           width='35px' />Agricom</Navbar.Brand></Link>
