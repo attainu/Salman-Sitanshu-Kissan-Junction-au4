@@ -4,88 +4,29 @@ import "../../Css/machinelist.css";
 import Slider from "./CategorySlider";
 import MyComponent from "./PriceRangeFilter";
 import TargetCrop from "./TargetCropFilter";
+import { connect } from "react-redux";
+import { Link } from "react-router-dom";
+
 class MachineList extends React.Component {
   state = {
-    seedPestiside: [
-      {
-        name: "Tractor",
-        price: "₹ 600/h",
-        url:
-          "https://lh3.googleusercontent.com/proxy/WmjsPvE4GiuS-VpxBs_hn2wTK9FstdfTVSwdxybG8HRXvrGpzkjmSwliOE52e0UrQ48UV2UY9klW_UcEGJqhwOjrSUP6Esw0FfQho-S_M5xklQIlEcssaz06Snv-",
-        targrt_plant: "Paddy,Rice",
-        power: "121 Hp",
-      },
-      {
-        name: "Harvestor",
-        price: "₹ 1000/h",
-        url: "https://miro.medium.com/max/2732/1*NGfEMLnfOQESRSW3Wh8HEA.jpeg",
-        targrt_plant: "Paddy,Rice",
-        power: "180 Hp",
-      },
-      {
-        name: "Sprinkle Machine",
-        price: "₹ 1000/h",
-        url:
-          "https://3.imimg.com/data3/BJ/NV/MY-11660582/battery-powered-sprayer-250x250.jpg",
-        targrt_plant: "Paddy,Rice",
-        power: "19 Hp",
-      },
-      {
-        name: "Corn Shellr Machine",
-        price: "₹ 1000/h",
-        url:
-          "https://5.imimg.com/data5/WV/LF/UB/SELLER-3213215/corn-sheller-pedal-operated-500x500.jpg",
-        targrt_plant: "Paddy,Rice",
-        power: "190 Hp",
-      },
-      {
-        name: "seed1",
-        price: "₹ 1000/h",
-        url:
-          "https://5.imimg.com/data5/WA/LA/MY-11343903/organic-paddy-seed-500x500.jpg",
-        targrt_plant: "Paddy,Rice",
-        power: "119 Hp",
-      },
-      {
-        name: "Tractor",
-        price: "₹ 600/h",
-        url:
-          "https://lh3.googleusercontent.com/proxy/WmjsPvE4GiuS-VpxBs_hn2wTK9FstdfTVSwdxybG8HRXvrGpzkjmSwliOE52e0UrQ48UV2UY9klW_UcEGJqhwOjrSUP6Esw0FfQho-S_M5xklQIlEcssaz06Snv-",
-        targrt_plant: "Paddy,Rice",
-        power: "121 Hp",
-      },
-      {
-        name: "Harvestor",
-        price: "₹ 1000/h",
-        url: "https://miro.medium.com/max/2732/1*NGfEMLnfOQESRSW3Wh8HEA.jpeg",
-        targrt_plant: "Paddy,Rice",
-        power: "180 Hp",
-      },
-      {
-        name: "Sprinkle Machine",
-        price: "₹ 1000/h",
-        url:
-          "https://3.imimg.com/data3/BJ/NV/MY-11660582/battery-powered-sprayer-250x250.jpg",
-        targrt_plant: "Paddy,Rice",
-        power: "19 Hp",
-      },
-      {
-        name: "Corn Shellr Machine",
-        price: "₹ 1000/h",
-        url:
-          "https://5.imimg.com/data5/WV/LF/UB/SELLER-3213215/corn-sheller-pedal-operated-500x500.jpg",
-        targrt_plant: "Paddy,Rice",
-        power: "190 Hp",
-      },
-      {
-        name: "seed1",
-        price: "₹ 1000/h",
-        url:
-          "https://5.imimg.com/data5/WA/LA/MY-11343903/organic-paddy-seed-500x500.jpg",
-        targrt_plant: "Paddy,Rice",
-        power: "119 Hp",
-      },
-    ],
+    machine: [],
+  };
+
+  //product data fetch all types of machine
+  componentDidMount = () => {
+    var data = fetch("http://localhost:5000/product/selectmachine");
+    data.then((res) => {
+      res.json().then((data) => {
+        this.setState({
+          machine: data,
+        });
+        //props to add machine list in redux state
+        this.props.dispatch({
+          type: "add_machine",
+          payload: this.state.machine,
+        });
+      });
+    });
   };
 
   render() {
@@ -100,24 +41,26 @@ class MachineList extends React.Component {
                     <span style={{ color: "#28ca2f" }}>Apply</span> Filter Here
                     <hr></hr>
                   </h3>
-                  <Slider />
+                  <Slider type={["Tractor", "Pesticider"]} />
                 </Col>
               </Row>
-              <MyComponent />
-              <TargetCrop />
+              <MyComponent type="machine" />
+              <TargetCrop type="machine" />
             </Col>
             <Col lg={9} md={9} sm={12}>
               <Row id="ads">
-                {this.state.seedPestiside &&
-                  this.state.seedPestiside.map((item, index) => {
+                {this.props.machine &&
+                  this.props.machine.map((item, index) => {
                     return (
-                      <Col lg={4} md={4} sm={12}>
+                      <Col lg={4} md={4} sm={12} key={index}>
                         <div class="card rounded mt-5">
                           <div class="card-image">
-                            <span class="card-notify-year">{item.power}</span>
+                            <span class="card-notify-year">
+                              {item.productSize}
+                            </span>
                             <img
                               class="img-fluid"
-                              src={item.url}
+                              src={item.imageurl}
                               alt="Alternate Text"
                               style={{ width: "18.rem", height: "12rem" }}
                             />
@@ -127,15 +70,23 @@ class MachineList extends React.Component {
                               {item.price}
                             </span>
                             <span class="card-detail-badge">
-                              Target Crop- {item.targrt_plant}
+                              Target Crop- {item.targetplant}
                             </span>
                           </div>
                           <div class="card-body text-center">
                             <div class="ad-title m-auto">
-                              <h5>{item.name}</h5>
+                              <h5>{item.productName}</h5>
                             </div>
 
-                            <Button class="ad-btn">Preview Here</Button>
+                            <Link
+                              to={{
+                                pathname: "/single-product",
+                                aboutProps: { item: item, type: "machine" },
+                              }}
+                            >
+                              {" "}
+                              <Button class="ad-btn">Preview Here</Button>
+                            </Link>
                           </div>
                         </div>
                       </Col>
@@ -150,4 +101,16 @@ class MachineList extends React.Component {
   }
 }
 
-export default MachineList;
+const mapStateToProps = (state) => {
+  return {
+    machine: state.productList.machineListCopy,
+  };
+};
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    dispatch: dispatch,
+  };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(MachineList);

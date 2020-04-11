@@ -18,34 +18,31 @@ router.post("/", async (req, res) => {
 
 //route for create profile using bycrypt
 router.post("/signupBycrpyt", async (req, res) => {
- 
-    const { body } = req;
-    try{
-      await bcrypt.hash(body.password, 10, async function(err,hash) {
-       body.password=hash;
-        let user = await User.create(body);
+  const { body } = req;
+  try {
+    await bcrypt.hash(body.password, 10, async function (err, hash) {
+      body.password = hash;
+      let user = await User.create(body);
       res.json(user);
     });
-  
   } catch (err) {
     res.json(err);
   }
 });
+
 router.post("/loginverify", async (req, res) => {
   try {
     const { body } = req;
-     
+
     let user = await User.findOne({
       where: {
-        email: [body.email]
-     
+        email: [body.email],
       },
     });
-    
-    await bcrypt.compare(body.password,user.password , function(err, result) {
-    res.json(result);
-});
-    
+
+    await bcrypt.compare(body.password, user.password, function (err, result) {
+      res.json(result);
+    });
   } catch (err) {
     res.json(err);
   }
@@ -71,7 +68,7 @@ router.post("/login", async (req, res) => {
       },
     });
     const data = user[0].dataValues;
-    console.log('Login BE', data)
+    console.log("Login BE", data);
     jwt.sign(data, secret, (err, token) => {
       if (err) {
         res.sendStatus(403);
@@ -110,10 +107,10 @@ router.post("/google", async (req, res) => {
 
     const [user] = await User.findOrCreate({
       where: { googleId: body.googleId },
-      defaults: body
+      defaults: body,
     });
     const data = user.dataValues;
-    console.log('Google BE', data)
+    console.log("Google BE", data);
     jwt.sign(data, secret, (err, token) => {
       if (err) {
         res.sendStatus(403);
@@ -127,7 +124,7 @@ router.post("/google", async (req, res) => {
   } catch (err) {
     res.json(err);
   }
-})
+});
 
 // Read One Operation
 router.get("/:id", async (req, res) => {

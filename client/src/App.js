@@ -54,7 +54,7 @@ class App extends Component {
 
             <Route path="/signup" component={Signup} />
             <Auth path="/profile" component={Profile} />
-            <Route path="/test" component={Content} />
+            <Route path="/single-product" component={Content} />
             <Route path="/product-register" component={Productcategory} />
             <Auth path="/cart" component={Cart} />
             <Route path="/login" component={Login} />
