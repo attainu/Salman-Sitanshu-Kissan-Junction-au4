@@ -4,9 +4,11 @@ import "../../Css/loginpage.css";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import Action from "../../ActionCreater/user";
+import Notify from "../../ActionCreater/notification";
 import { Redirect } from "react-router";
 
 const { login } = Action;
+const { notify } = Notify;
 
 class Login extends React.Component {
   constructor() {
@@ -33,6 +35,10 @@ class Login extends React.Component {
       email,
       password,
     });
+    setTimeout(() => {
+      this.props.notify({ type: 'success', msg: 'Login Succefully' })
+      this.setState(() => ({ toLoginafterRedirect: true }));
+    }, 1000);
     // axios({
     //   method: "post",
     //   url: "http://localhost:5000/user/login",
@@ -45,9 +51,6 @@ class Login extends React.Component {
     //   localStorage.setItem("token", response.data.token);
     // });
 
-    /* setTimeout(() => {
-      this.setState(() => ({ toLoginafterRedirect: true }));
-    }, 1000);*/
   };
 
   render() {
@@ -149,7 +152,7 @@ const take = (state) => {
 };
 
 const change = (dispatch) => {
-  return bindActionCreators({ login }, dispatch);
+  return bindActionCreators({ login, notify }, dispatch);
 };
 
 export default connect(take, change)(Login);

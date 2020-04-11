@@ -3,10 +3,14 @@ import { CardDeck, Card, Button } from 'react-bootstrap';
 import icon1 from '../../Image/service1.jpg'
 import icon2 from '../../Image/service2.jpg'
 import icon3 from '../../Image/work2.jpg'
+import { Link } from "react-router-dom";
 
 export default function YourProduct() {
   return (
     <>
+      <Link to='/product-register' className='d-flex justify-content-center'>
+        <Button as="input" className=' mt-4 w-md-25' type="button" value="Add Product" />
+      </Link>
       <CardDeck className='m-4 d-flex flex-wrap justify-content-center flex-row'>
         <Card className='box4 m-3 shadow'>
           <Card.Img variant="top" src={icon1} />

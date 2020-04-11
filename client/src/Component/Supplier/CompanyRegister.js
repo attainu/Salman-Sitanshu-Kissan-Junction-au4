@@ -6,6 +6,8 @@ import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import Action from "../../ActionCreater/user";
 import { Redirect } from "react-router";
+import Data from '../../Data/states'
+
 const { companyRegister } = Action;
 
 class CompanyRegister extends React.Component {
@@ -20,45 +22,7 @@ class CompanyRegister extends React.Component {
       company_state: "Choose State....",
       company_district: "",
       company_pincode: "",
-      statelist: [
-        "Choose State here....",
-        "Andhra Pradesh",
-        "Arunachal Pradesh",
-        "Assam",
-        "Bihar",
-        "Chhattisgarh",
-        "Goa",
-        "Gujarat",
-        "Haryana",
-        "Himachal Pradesh",
-        "Jammu and Kashmir",
-        "Jharkhand",
-        "Karnataka",
-        "Kerala",
-        "Madhya Pradesh",
-        "Maharashtra",
-        "Manipur",
-        "Meghalaya",
-        "Mizoram",
-        "Nagaland",
-        "Odisha",
-        "Punjab",
-        "Rajasthan",
-        "Sikkim",
-        "Tamil Nadu",
-        "Telangana",
-        "Tripura",
-        "Uttarakhand",
-        "Uttar Pradesh",
-        "West Bengal",
-        "Andaman and Nicobar Islands",
-        "Chandigarh",
-        "Dadra and Nagar Haveli",
-        "Daman and Diu",
-        "Delhi",
-        "Lakshadweep",
-        "Puducherry",
-      ],
+      statelist: Data.states,
       result: [],
       cityfetch: [],
       districtfetch: [],
@@ -98,26 +62,10 @@ class CompanyRegister extends React.Component {
       company_district,
       company_pincode,
     }, this.props.id);
-    // axios({
-    //   method: "post",
-    //   url: "http://localhost:5000/company/add",
-    //   data: {
-    //     GST_number: GST_number,
-    //     company_name: company_name,
-    //     company_type: company_type,
-    //     company_address: company_address,
-    //     company_city: company_city,
-    //     company_district: company_district,
-    //     company_state: company_state,
-    //     company_pincode: company_pincode,
-    //   },
-    // }).then(function (response) {
-    //   console.log(response);
-    // });
 
-    // setTimeout(() => {
-    //   this.setState(() => ({ todashboardredirect: true }));
-    // }, 1000);
+    setTimeout(() => {
+      this.setState(() => ({ todashboardredirect: true }));
+    }, 1000);
   };
 
   //state update
@@ -156,7 +104,7 @@ class CompanyRegister extends React.Component {
 
   render() {
     if (this.state.todashboardredirect) {
-      return <Redirect to="/" />;
+      return <Redirect to="/profile" />;
     }
     return (
       <>
