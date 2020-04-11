@@ -72,6 +72,13 @@ function productList(state = productState, action) {
       });
       stateCopy.productListCopy = [...categoryCropFiltered];
       return stateCopy;
+
+    case "clearFilter":
+      if (action.payload === "product")
+        stateCopy.productListCopy = [...stateCopy.productList];
+      else if (action.payload === "machine")
+        stateCopy.machineListCopy = [...stateCopy.machineList];
+      return stateCopy;
     default:
       return state;
   }

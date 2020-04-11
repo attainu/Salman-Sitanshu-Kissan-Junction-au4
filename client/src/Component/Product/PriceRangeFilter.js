@@ -55,7 +55,8 @@ class MyComponent extends React.Component {
               }
             />
             <Button
-              className="btn btn-success ml-5"
+              variant="outline-success"
+              className="  ml-5"
               onClick={() => {
                 this.applyFilter();
               }}

@@ -1,11 +1,12 @@
 import React from "react";
-import { Row, Col } from "react-bootstrap";
+import { Row, Col, Button } from "react-bootstrap";
 import "../../Css/productlist.css";
 import Slider from "./CategorySlider";
 import MyComponent from "./PriceRangeFilter";
 import TargetCrop from "./TargetCropFilter";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
+import { FaFilter } from "react-icons/fa";
 
 class ProductDisplay extends React.Component {
   state = {
@@ -28,6 +29,13 @@ class ProductDisplay extends React.Component {
     });
   };
 
+  //clear filter
+  clearFilter = () => {
+    this.props.dispatch({
+      type: "clearFilter",
+      payload: "product",
+    });
+  };
   render() {
     return (
       <>
@@ -40,6 +48,14 @@ class ProductDisplay extends React.Component {
                     <span style={{ color: "#28ca2f" }}>Apply</span> Filter Here
                     <hr></hr>
                   </h3>
+                  <Button
+                    className="btn btn-warning"
+                    onClick={() => {
+                      this.clearFilter();
+                    }}
+                  >
+                    <FaFilter /> Clear Filter
+                  </Button>
                   <Slider type={["Seed", "Pesticides"]} />
                 </Col>
               </Row>

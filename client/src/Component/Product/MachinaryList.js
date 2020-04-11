@@ -6,7 +6,7 @@ import MyComponent from "./PriceRangeFilter";
 import TargetCrop from "./TargetCropFilter";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
-
+import { FaFilter } from "react-icons/fa";
 class MachineList extends React.Component {
   state = {
     machine: [],
@@ -29,6 +29,14 @@ class MachineList extends React.Component {
     });
   };
 
+  //clear filter
+  clearFilter = () => {
+    this.props.dispatch({
+      type: "clearFilter",
+      payload: "machine",
+    });
+  };
+
   render() {
     return (
       <>
@@ -41,9 +49,18 @@ class MachineList extends React.Component {
                     <span style={{ color: "#28ca2f" }}>Apply</span> Filter Here
                     <hr></hr>
                   </h3>
+                  <Button
+                    className="btn btn-warning"
+                    onClick={() => {
+                      this.clearFilter();
+                    }}
+                  >
+                    <FaFilter /> Clear Filter
+                  </Button>
                   <Slider type={["Tractor", "Pesticider"]} />
                 </Col>
               </Row>
+
               <MyComponent type="machine" />
               <TargetCrop type="machine" />
             </Col>
