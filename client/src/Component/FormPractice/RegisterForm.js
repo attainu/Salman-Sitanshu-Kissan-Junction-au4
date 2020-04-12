@@ -1,6 +1,6 @@
 import React from "react";
 import { Row, Col, Form, Container, Button } from "react-bootstrap";
-// import "../../Css/loginpage.css";
+import "../../Css/loginpage.css";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import Action from "../../ActionCreater/user";
@@ -60,7 +60,7 @@ class Register extends React.Component {
 
     return (
       <>
-        <div className="d-flex justify-content-center p-5">
+        <div className="loginfull d-flex justify-content-center p-5">
           <Form className='shadow p-5 bg-light rounded text-center w-50'>
             <h2 className="text-center mb-2">Register</h2>
             <Form.Group controlId="formBasicName">

@@ -35,7 +35,7 @@ class Service extends Component {
     return (
       <>
         <Jumbotron className="Blog text-center ">
-          <h1>
+          <h1 className="mb-4">
             <span style={{ color: "#28ca2f" }}>Our</span> Services
             </h1>
           <div className="d-flex flex-row justify-content-center align-item-strech flex-wrap bd-highlight">
@@ -55,9 +55,9 @@ class Service extends Component {
                 style={linkStyle}
                 onMouseEnter={this.toggleHover}
                 onMouseLeave={this.toggleHover}
-                className="d-flex flex-column justify-content-center"
+                className="d-flex p-3 flex-column justify-content-center"
               >
-                <h4 style={{ color: "#28ca2f", margin: "0 auto" }}>
+                <h4 style={{ color: "#28ca2f" }}>
                   Gardening Kits
                 </h4>
                 <p style={{ color: "white" }}>
@@ -71,9 +71,9 @@ class Service extends Component {
                 style={linkStyle}
                 onMouseEnter={this.toggleHover}
                 onMouseLeave={this.toggleHover}
-                className="d-flex flex-column justify-content-center"
+                className="d-flex p-3 flex-column justify-content-center"
               >
-                <h4 style={{ color: "#28ca2f", margin: "0 auto" }}>
+                <h4 style={{ color: "#28ca2f" }}>
                   Heavy Machine
                 </h4>
                 <p style={{ color: "white" }}>
@@ -101,9 +101,9 @@ class Service extends Component {
                 style={linkStyle}
                 onMouseEnter={this.toggleHover}
                 onMouseLeave={this.toggleHover}
-                className="d-flex flex-column justify-content-center"
+                className="d-flex p-3 flex-column justify-content-center"
               >
-                <h4 style={{ color: "#28ca2f", margin: "0 auto" }}>Supplier</h4>
+                <h4 style={{ color: "#28ca2f" }}>Supplier</h4>
                 <p style={{ color: "white" }}>
                   Now you produce. And we are here to sell your product. Just
                   list your sell, and get proper pay for it.
@@ -115,9 +115,9 @@ class Service extends Component {
                 style={linkStyle}
                 onMouseEnter={this.toggleHover}
                 onMouseLeave={this.toggleHover}
-                className="d-flex flex-column justify-content-center"
+                className="d-flex p-3 flex-column justify-content-center"
               >
-                <h4 style={{ color: "#28ca2f", margin: "0 auto" }}>Consumer</h4>
+                <h4 style={{ color: "#28ca2f" }}>Consumer</h4>
                 <p style={{ color: "white" }}>
                   Why to visit Super Store and Pay High? Order all products and
                   get deliver at your doorstep.
