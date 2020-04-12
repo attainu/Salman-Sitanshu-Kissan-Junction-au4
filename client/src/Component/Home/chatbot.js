@@ -53,6 +53,7 @@ class Chatbot extends Component {
     return (
       <>
         <Launcher
+        className="mt-5"
           agentProfile={{
             teamName: "react-chat-window",
             imageUrl:

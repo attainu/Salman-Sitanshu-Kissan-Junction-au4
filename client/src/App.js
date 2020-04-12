@@ -56,7 +56,7 @@ class App extends Component {
 
             <Route path="/login" component={Login} />
             <Route exact path="/farmer" component={FarmerHomePage} />
-            <Route path="/farmer/:lend_machine" component={MachineList} />
+            {/* <Route path="/farmer/:lend_machine" component={MachineList} /> */}
             <Route path="/product_seed" component={ProductDisplay} />
             <Route path="/lend_machine" component={MachineList} />
 

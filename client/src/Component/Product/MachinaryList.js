@@ -41,11 +41,11 @@ class MachineList extends React.Component {
   render() {
     return (
       <>
-        <div className="container-fluid listbackground ">
+        <div className="container-fluid mt-3 listbackground ">
           <Row>
-            <Col lg={3} md={3} sm={12} className="border-right sticky-top">
+            <Col lg={3} md={3} sm={12} className="border-right">
               <Row>
-                <Col lg={12} md={12} sm={12} className="mt-3">
+                <Col lg={12} md={12} sm={12}>
                   <h3>
                     <span style={{ color: "#28ca2f" }}>Apply</span> Filter Here
                     <hr></hr>
@@ -54,14 +54,12 @@ class MachineList extends React.Component {
                     className="btn btn-warning"
                     onClick={() => {
                       this.clearFilter();
-                    }}
-                  >
+                    }}>
                     <FaFilter /> Clear Filter
                   </Button>
                   <Slider type={["Tractor", "Pesticider"]} />
                 </Col>
               </Row>
-
               <MyComponent type="machine" />
               <TargetCrop type="machine" />
             </Col>
@@ -72,7 +70,7 @@ class MachineList extends React.Component {
                     return (
                       <Col lg={4} md={4} sm={12} key={index}>
                         <div class="card rounded mt-5">
-                          <div class="card-image">
+                          <div class="card-image p-0">
                             <span class="card-notify-year">
                               {item.productSize}
                             </span>
@@ -80,8 +78,7 @@ class MachineList extends React.Component {
                               class="img-fluid"
                               src={item.imageurl}
                               alt="Alternate Text"
-                              style={{ width: "18.rem", height: "12rem" }}
-                            />
+                              style={{ width: "18.2rem", height: "12rem" }} />
                           </div>
                           <div class="card-image-overlay m-auto">
                             <span class="card-detail-badge mr-3">
@@ -95,15 +92,12 @@ class MachineList extends React.Component {
                             <div class="ad-title m-auto">
                               <h5>{item.productName}</h5>
                             </div>
-
                             <Link
                               to={{
                                 pathname: "/single-product",
                                 aboutProps: { item: item, type: "machine" },
-                              }}
-                            >
-                              {" "}
-                              <Button class="ad-btn">Preview Here</Button>
+                              }}>
+                              <Button className="text-white" variant={''} style={{ backgroundColor: "#28ca2f" }} >Preview Here</Button>
                             </Link>
                           </div>
                         </div>
