@@ -1,13 +1,37 @@
 import React, { Component } from "react";
-import { Row, Col, Button, Form } from "react-bootstrap";
+import { Row, Col, Button, Form, Table } from "react-bootstrap";
 import Paypal from "./integration";
 import { connect } from "react-redux";
+import GPayButton from "react-google-pay-button";
 import { Link } from "react-router-dom";
-
 class Billing extends React.Component {
+  state = {
+    totalPrice: 0,
+  };
+  componentDidMount = () => {
+    var total = 0;
+    for (var i = 0; i < this.props.cart.length; i++)
+      total += parseInt(this.props.cart[i].price);
+    this.setState({
+      totalPrice: total,
+    });
+  };
+
   render() {
     const { cart, user } = this.props;
-    console.log(user);
+    let paypal, googlepay;
+    if (this.state.totalPrice > 0) {
+      paypal = <Paypal price={this.state.totalPrice} />;
+      googlepay = (
+        <GPayButton
+          totalPriceStatus={"FINAL"}
+          totalPrice={"1100"}
+          currencyCode={"INR"}
+          countryCode={"IN"}
+          development={true}
+        />
+      );
+    }
     return (
       <div>
         <Row>
@@ -110,15 +134,6 @@ class Billing extends React.Component {
                       </Form.Group>
                     </Form.Row>
                   </div>
-                  <div class="text-center">
-                    <button
-                      type="button"
-                      class="btn btn-success"
-                      onClick={this.onSubmit}
-                    >
-                      Register
-                    </button>
-                  </div>
                 </Form>
               </div>
             </div>
@@ -129,14 +144,54 @@ class Billing extends React.Component {
                 <h4 className="text-center mb-3">
                   <span style={{ color: "#28ca2f" }}> Item Added</span>
                 </h4>
-                <Row></Row>
                 <Row>
-                  <Col>
-                    <Paypal />
-                  </Col>
+                  <Table
+                    striped
+                    borderless
+                    responsive
+                    hover
+                    size="sm"
+                    className="text-center"
+                  >
+                    <thead>
+                      <tr>
+                        <th>#</th>
+                        <th>Item Name</th>
+                        <th>Price</th>
+                      </tr>
+                    </thead>
+
+                    <tbody className="text-center">
+                      {cart &&
+                        cart.map((item, index) => {
+                          return (
+                            <>
+                              <tr>
+                                <td>{index + 1}</td>
+                                <td>{item.productName}</td>
+                                <td>₹ {item.price}</td>
+                              </tr>
+                            </>
+                          );
+                        })}
+                    </tbody>
+                  </Table>
+                  <h4 className="text-center mb-3">
+                    <span style={{ color: "#28ca2f" }}>
+                      Total Price- {this.state.totalPrice}
+                    </span>
+                  </h4>
+                </Row>
+                <Row>
+                  <Col>{paypal}</Col>
+                  <Col>{googlepay} </Col>
                 </Row>
               </div>
             </div>
+            <Link to="/thankyou">
+              {" "}
+              <Button variant="outline-success">Complete Order</Button>
+            </Link>
           </Col>
         </Row>
       </div>

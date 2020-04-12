@@ -4,7 +4,7 @@ import { Table, Button } from "react-bootstrap";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import Action from "../../ActionCreater/notification";
-
+import { Link } from "react-router-dom";
 const { notify } = Action;
 
 class Profile extends React.Component {
@@ -27,19 +27,22 @@ class Profile extends React.Component {
           <div class="d-flex flex-wrap justify-content-between flex-row m-5 cart-box">
             <h1 className=" d-inline flex-fill m-3 mb-2">Shopping Cart</h1>
             <div className="mx-auto m-3 mb-5">
-              <Button
-                className="ml-auto"
-                variant="success"
-                size="lg"
-                onClick={() =>
-                  notify({
-                    type: "success",
-                    msg: "Order Placed Successfully",
-                  })
-                }
-              >
-                Place Order
-              </Button>
+              <Link to="/checkout">
+                {" "}
+                <Button
+                  className="ml-auto"
+                  variant="success"
+                  size="lg"
+                  onClick={() =>
+                    notify({
+                      type: "success",
+                      msg: "About to Place Order",
+                    })
+                  }
+                >
+                  Checkout
+                </Button>
+              </Link>
             </div>
 
             <Table borderless responsive>

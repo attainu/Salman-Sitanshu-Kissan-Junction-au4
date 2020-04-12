@@ -45,18 +45,17 @@ function Product({ product }) {
   return (
     <div>
       {error && <div>Uh oh, an error occurred! {error.message}</div>}
-      <h1>
-        {product.description} for ${product.price}
-      </h1>
 
       <div ref={paypalRef} />
     </div>
   );
 }
 
-function Paypal() {
+function Paypal(props) {
+  console.log(props);
+
   const product = {
-    price: 777.77,
+    price: props.price,
   };
 
   return (
