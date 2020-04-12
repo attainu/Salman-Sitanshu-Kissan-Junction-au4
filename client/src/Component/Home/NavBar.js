@@ -24,7 +24,7 @@ function NavBar(props) {
 
             <Link to='/'><Nav.Link href="#home">Home</Nav.Link></Link>
             <Nav.Link href="#link">Services</Nav.Link>
-           <Link to='/app'> <Nav.Link href="#link">Blog</Nav.Link></Link>
+            <Link to='/app'> <Nav.Link href="#link">Blog</Nav.Link></Link>
           </Nav>
           <Nav className="ml-auto">
             <Nav.Link href="#home">About</Nav.Link>
@@ -39,18 +39,19 @@ function NavBar(props) {
             id={`dropdown-button-drop`}
           >
             {(!Authenticated) ? (<>
-              <NavDropdown.Item >
-                <Link to='/login'><Button className='mr-3' variant="outline-success">Signin</Button></Link>
+              <NavDropdown.Item className='text-center'>
+                <Link to='/login'><Button variant="outline-success">Signin</Button></Link>
+              </NavDropdown.Item>
+              <NavDropdown.Item className='text-center'>
                 <Link to='/signup'><Button variant="outline-success">Signup</Button></Link>
               </NavDropdown.Item>
-              <NavDropdown.Divider className="text-center" />
-              <NavDropdown.Item href="#action/3.1">
+              <NavDropdown.Divider />
+              <NavDropdown.Item className="text-center">
                 <Google />
               </NavDropdown.Item>
             </>
             ) : (
                 <>
-                  <NavDropdown.Divider />
                   <Link to='/profile'><NavDropdown.Item href='/profile' >Profile</NavDropdown.Item></Link>
                   <Link to='/profile/purchased'><NavDropdown.Item href='/' >Ordered Product</NavDropdown.Item></Link>
                   <Link to='/cart'><NavDropdown.Item href='/'>Cart</NavDropdown.Item></Link>

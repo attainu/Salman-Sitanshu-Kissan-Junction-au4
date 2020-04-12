@@ -42,3 +42,14 @@
     margin: 0 !important;
   }
 }
+
+.dropdown-menu a{
+  color: #111111 !important;
+ }
+ .dropdown-menu a:hover{
+  background: #FFFFFF!important;
+  color: #2bd11c !important;
+  /* -webkit-transition: all 0.2s ease-in-out;
+  -moz-transition: all 0.2s ease-in-out;
+  transition: all 0.2s ease-in-out;  */
+ }

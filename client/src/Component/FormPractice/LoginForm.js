@@ -1,6 +1,7 @@
 import React from "react";
+import Google from '../Google/login';
 import { Row, Col, Form, Container, Button } from "react-bootstrap";
-// import "../../Css/loginpage.css";
+import "../../Css/loginpage.css";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import Action from "../../ActionCreater/user";
@@ -52,9 +53,12 @@ class Login extends React.Component {
 
     return (
       <>
-        <div className="d-flex justify-content-center m-5 w-md-50">
+        <div className="loginfull d-flex justify-content-center p-5 w-md-50">
           <Form className='shadow p-5 bg-light rounded text-center'>
             <h2 className="text-center mb-2">Login</h2>
+            <div className="m-3">
+              <Google />
+            </div>
             <Form.Group controlId="formBasicEmail">
               <Form.Label>Email address</Form.Label>
               <Form.Control

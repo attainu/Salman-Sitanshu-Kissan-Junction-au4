@@ -1,12 +1,12 @@
 import React from "react";
 import { CardDeck, Card, Button } from "react-bootstrap";
-import icon1 from "../../Image/service1.jpg";
-import icon2 from "../../Image/service2.jpg";
-import icon3 from "../../Image/work2.jpg";
+// import icon1 from "../../Image/service1.jpg";
+// import icon2 from "../../Image/service2.jpg";
+// import icon3 from "../../Image/work2.jpg";
 import { Link } from "react-router-dom";
 import { connect } from "react-redux";
-import { bindActionCreators } from "redux";
-import Action from "../../ActionCreater/notification";
+// import { bindActionCreators } from "redux";
+// import Action from "../../ActionCreater/notification";
 class YourProduct extends React.Component {
   render() {
     console.log(this.props);
@@ -21,7 +21,47 @@ class YourProduct extends React.Component {
           />
         </Link>
         <CardDeck className="m-4 d-flex flex-wrap justify-content-center flex-row">
-          <Card className="box4 m-3 shadow">
+          {this.props.products && this.props.products.map((info, index) => {
+            let product = info.product
+            if (info.connectType === "myproduct") {
+              return (
+                <Card key={index} className="box4 m-3 shadow">
+                  <Card.Img variant="top" src={product.imageurl} />
+                  <Card.Body>
+                    <Card.Title>{product.productName}</Card.Title>
+                    <Card.Text>
+                      <table class="table table-sm table-borderless">
+                        <tbody>
+                          <tr>
+                            <th scope="row">Price:</th>
+                            <td>₹{product.price} per kg</td>
+                          </tr>
+                          <tr>
+                            <th scope="row">Quantiy: </th>
+                            <td>product size kg</td>
+                          </tr>
+                          <tr>
+                            <th scope="row">Min Order: </th>
+                            <td>{product.productDosage}kg</td>
+                          </tr>
+                        </tbody>
+                      </table>
+                    </Card.Text>
+                  </Card.Body>
+                  <Card.Footer className="d-flex flex-row justify-content-around">
+                    <Button className="btn-1" variant="secondary" size="sm">
+                      Edit
+              </Button>
+
+                    <Button className="btn-1" variant="danger" size="sm">
+                      Delete
+              </Button>
+                  </Card.Footer>
+                </Card>
+              )
+            }
+          })}
+          {/* <Card className="box4 m-3 shadow">
             <Card.Img variant="top" src={icon1} />
             <Card.Body>
               <Card.Title>Spices</Card.Title>
@@ -185,7 +225,7 @@ class YourProduct extends React.Component {
                 Delete
               </Button>
             </Card.Footer>
-          </Card>
+          </Card> */}
         </CardDeck>
       </>
     );
@@ -193,9 +233,8 @@ class YourProduct extends React.Component {
 }
 
 const mapStateToProps = (state) => {
-  console.log(state);
   return {
-    machine: state.productList.machineListCopy,
+    products: state.user.currentUser.connect_products
   };
 };
 
