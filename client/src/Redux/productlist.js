@@ -3,26 +3,7 @@ let productState = {
   machineList: [],
   machineListCopy: [],
   productListCopy: [],
-  cart: [
-    {
-      productType: "Seed",
-      productName: "Pocha Seed",
-      price: "90",
-      productSize: "250 gm",
-      productDosage: "1.3kg/Heac",
-      targetplant: "Maize",
-      description: "High Quality Seed , High Production",
-    },
-    {
-      productType: "Seed",
-      productName: "Pocha Seed",
-      price: "90",
-      productSize: "250 gm",
-      productDosage: "1.3kg/Heac",
-      targetplant: "Maize",
-      description: "High Quality Seed , High Production",
-    },
-  ],
+  cart: [],
 };
 
 function productList(state = productState, action) {
