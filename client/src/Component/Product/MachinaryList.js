@@ -7,6 +7,7 @@ import TargetCrop from "./TargetCropFilter";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
 import { FaFilter } from "react-icons/fa";
+
 class MachineList extends React.Component {
   state = {
     machine: [],

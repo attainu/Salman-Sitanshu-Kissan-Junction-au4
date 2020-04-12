@@ -5,7 +5,12 @@ import img2 from "../../Image/service2.jpg";
 import PageDescription from "../Home/PageDescription";
 import Blog from "../Home/Blog";
 import { Image, Button } from "react-bootstrap";
-
+import {
+  FacebookIcon,
+  FacebookShareButton,
+  WhatsappIcon,
+  WhatsappShareButton,
+} from "react-share";
 export default class Content extends React.Component {
   state = {
     type: this.props.location.aboutProps.type,
@@ -19,6 +24,7 @@ export default class Content extends React.Component {
       productSize = <p> Machine Power </p>;
     }
 
+    const shareUrl = window.location.href;
     return (
       <>
         <div className="d-flex flex-column">
@@ -71,6 +77,23 @@ export default class Content extends React.Component {
                   <tr>
                     <th>Product Description:</th>
                     <td>{this.state.item.description}</td>
+                  </tr>
+                  <tr>
+                    <th>Share Product:</th>
+                    <td>
+                      <WhatsappShareButton
+                        url={shareUrl}
+                        className="Demo__some-network__share-button"
+                      >
+                        <WhatsappIcon size={32} round />
+                      </WhatsappShareButton>
+                      <FacebookShareButton
+                        url={shareUrl}
+                        className="Demo__some-network__share-button ml-1"
+                      >
+                        <FacebookIcon size={32} round />
+                      </FacebookShareButton>
+                    </td>
                   </tr>
                 </tbody>
               </table>

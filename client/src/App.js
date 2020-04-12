@@ -26,7 +26,9 @@ import MachineList from "./Component/Product/MachinaryList";
 // import ProfileEdit from "./Component/Supplier/Profileedit";
 import Login from "./Component/Login/login";
 import Signup from "./Component/Login/siginup";
-
+import ForgetPasswordForm from "./Component/ForgetPassword/fogetform";
+import EmailsendMessage from "./Component/ForgetPassword/Acknolegment";
+import Paypal from "./Component/paymentGateway/integration";
 const { token } = Action;
 
 class App extends Component {
@@ -43,8 +45,9 @@ class App extends Component {
         <Router>
           <NavBar />
           <Notification />
+
           <Switch>
-            <Route exact path="/" component={Home} />
+            <Route exact path="/" component={ForgetPasswordForm} />
 
             <Route path="/login" component={Login} />
             <Route exact path="/farmer" component={FarmerHomePage} />
@@ -59,6 +62,7 @@ class App extends Component {
             <Auth path="/cart" component={Cart} />
             <Route path="/login" component={Login} />
             <Route path="/company-register" component={CompanyRegister} />
+            <Route path="/mailack" component={EmailsendMessage} />
             <Route path="*" component={NotFound} />
           </Switch>
           <Footer />
