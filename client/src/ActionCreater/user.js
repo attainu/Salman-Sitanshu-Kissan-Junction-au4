@@ -17,7 +17,7 @@ const notify = {
   type: "notify",
   payload: {
     type: "warn",
-    msg: "All Fields Are Required",
+    msg: "Some Error",
   },
 };
 
@@ -34,26 +34,59 @@ Action.join = (id) => {
 };
 
 Action.register = (data) => {
-  return async (dispatch) => {
-    let value = await axios.post(link.user, data);
-    if (value.data.email)
+  return (async (dispatch) => {
+    try {
+      let value = await axios.post(link.user, data);
+      console.log("Register", value)
+      if (value.data.email) {
+        dispatch({ type: "registered" });
+        dispatch({
+          type: "resetError",
+        })
+      }
+      else dispatch({
+        type: "notify",
+        payload: {
+          type: "warn",
+          msg: "Email or Mobile Already in Use",
+        }
+      })
+    }
+    catch (error) {
       dispatch({
-        type: "register",
+        type: "error",
+        payload: error.response.data,
       });
-    else dispatch(notify);
-  };
+    }
+  });
 };
 
 Action.login = (data) => {
   return async (dispatch) => {
-    let value = await axios.post(link.login, data);
-    localStorage.setItem("token", value.data.token);
-    if (value.data.data)
-      dispatch({
-        type: "login",
-        payload: value.data.data,
+    try {
+      let value = await axios.post(link.login, data);
+      localStorage.setItem("token", value.data.token);
+      if (value.data.data) {
+        dispatch({
+          type: "login",
+          payload: value.data.data,
+        });
+        dispatch({
+          type: "resetError",
+        })
+      }
+      else dispatch({
+        type: "warn",
+        msg: "Some Error",
       });
-    else dispatch(notify);
+    }
+    catch (error) {
+      console.log(error.response.data)
+      dispatch({
+        type: "error",
+        payload: error.response.data,
+      });
+    }
   };
 };
 

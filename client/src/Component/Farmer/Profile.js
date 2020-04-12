@@ -15,15 +15,19 @@ const { join } = User;
 
 class Profile extends Component {
   state = {
-    render: false,
-  };
-  componentDidMount() {
-    //console.log('Updatedd', this.props.id)
-    this.props.join(this.props.id);
+    rerender: false
   }
+
+  componentDidMount() {
+    console.log('ALso here', this.props.address)
+    this.props.join(this.props.id);
+    this.setState({
+      render: false
+    })
+  }
+
   render() {
-    console.log(this.props);
-    const { notify, name, email, mobile, img } = this.props;
+    const { notify, name, email, dob, mobile, img, type, address } = this.props;
 
     return (
       <>
@@ -59,10 +63,8 @@ class Profile extends Component {
               </div>
             </div>
             <div class="d-flex flex-column justify-content-start">
-              <h1 className="mb-0" style={{ "font-weight": "500" }}>
-                {name}
-              </h1>
-              <p className="pl-2">Farmer</p>
+              <h1 className='mb-0' style={{ 'font-weight': '500' }}>{name}</h1>
+              <p className='pl-2'>{type}</p>
               <table class="table table-borderless">
                 <tbody>
                   <tr>
@@ -71,15 +73,11 @@ class Profile extends Component {
                   </tr>
                   <tr>
                     <th scope="row">Phone: </th>
-                    <td>+91 {mobile}</td>
+                    <td>{mobile}</td>
                   </tr>
                   <tr>
                     <th scope="row">Address: </th>
-                    <td>
-                      175/D Arafat Mansion
-                      <br />
-                      Mumbai, Maharashtra, India
-                    </td>
+                    <td>{address.address}<br />{address.district} {address.city} {address.pincode}<br /> {address.state} {address.country}</td>
                   </tr>
                   <tr>
                     <th scope="row">Gender: </th>
@@ -87,7 +85,7 @@ class Profile extends Component {
                   </tr>
                   <tr>
                     <th scope="row">Birthday: </th>
-                    <td>April 1, 1997</td>
+                    <td>{dob}</td>
                   </tr>
                 </tbody>
               </table>
@@ -185,14 +183,24 @@ class Profile extends Component {
 }
 
 const take = (state) => {
-  console.log(state);
-  const { name, email, mobile, img, id } = state.user.currentUser;
+  const { name, email, mobile, img, dob, id, type, addressId } = state.user.currentUser
+  let address = {
+    address: "Not Filled",
+    district: "",
+    city: "",
+    state: "",
+    pincode: "",
+    country: "",
+  };
+  if (addressId && state.user.currentUser.address) {
+    address = state.user.currentUser.address
+    // console.log("herre", addressId, state.user.currentUser.address)
+    // return {
+    //   name, email, mobile, img, id, address, type, dob
+    // };
+  }
   return {
-    name,
-    email,
-    mobile,
-    img,
-    id,
+    name, email, mobile, img, id, address, type, dob
   };
 };
 
