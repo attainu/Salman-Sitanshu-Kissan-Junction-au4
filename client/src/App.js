@@ -24,12 +24,14 @@ import Productcategory from "./Component/Supplier/productcategory"; //product re
 import ProductDisplay from "./Component/Product/ProductListDisplay";
 import MachineList from "./Component/Product/MachinaryList";
 // import ProfileEdit from "./Component/Supplier/Profileedit";
-import Login from "./Component/Login/login";
+// import Login from "./Component/Login/login";
 import Signup from "./Component/Login/siginup";
-import ForgetPasswordForm from "./Component/ForgetPassword/fogetform";
-import EmailsendMessage from "./Component/ForgetPassword/Acknolegment";
-import Paypal from "./Component/paymentGateway/integration";
+// import ForgetPasswordForm from "./Component/ForgetPassword/fogetform";
+// import EmailsendMessage from "./Component/ForgetPassword/Acknolegment";
+// import Paypal from "./Component/paymentGateway/integration";
 import ProfileEdit from "./Component/Supplier/Profileedit";
+import Login from "./Component/FormPractice/LoginForm";
+import Register from "./Component/FormPractice/RegisterForm";
 
 const { token } = Action;
 
@@ -49,7 +51,7 @@ class App extends Component {
           <Notification />
 
           <Switch>
-            <Route exact path="/" component={ForgetPasswordForm} />
+            <Route exact path="/" component={Home} />
 
             <Route path="/login" component={Login} />
             <Route exact path="/farmer" component={FarmerHomePage} />
@@ -57,7 +59,7 @@ class App extends Component {
             <Route path="/product_seed" component={ProductDisplay} />
             <Route path="/lend_machine" component={MachineList} />
 
-            <Route path="/signup" component={Signup} />
+            <Route path="/signup" component={Register} />
             <Route path="/profile" component={Profile} />
             <Route path="/single-product" component={Content} />
             <Route path="/product-register" component={Productcategory} />

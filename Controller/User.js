@@ -7,8 +7,17 @@ const secret = "agricom";
 var async = require("async");
 var nodemailer = require("nodemailer");
 var crypto = require("crypto");
+
+const validateRegisterInput = require("../Validation/register");
+const validateLoginInput = require("../Validation/login");
+
 // route for create profile using bycrypt
 router.post("/", async (req, res) => {
+  const { errors, isValid } = validateRegisterInput(req.body);
+  console.log(isValid)
+  if (!isValid) {
+    return res.status(400).json(errors);
+  }
   try {
     const { body } = req;
 
@@ -21,6 +30,12 @@ router.post("/", async (req, res) => {
 
 //route for create profile using bycrypt
 router.post("/signupBycrpyt", async (req, res) => {
+  const { errors, isValid } = validateRegisterInput(req.body);
+  console.log(isValid)
+  if (!isValid) {
+    return res.status(400).json(errors);
+  }
+
   const { body } = req;
   try {
     await bcrypt.hash(body.password, 10, async function (err, hash) {
@@ -62,19 +77,34 @@ router.get("/", async (req, res) => {
 });
 
 router.post("/login", async (req, res) => {
+  const { errors, isValid } = validateLoginInput(req.body);
+
+
+  //Check Validation
+  if (!isValid) {
+    return res.status(400).json(errors);
+  }
+
+
   const { body } = req;
   try {
-    let user = await User.findAll({
+    let user = await User.findOne({
       where: {
         email: [body.email],
-        password: [body.password],
+        // password: [body.password],
       },
     });
-    const data = user[0].dataValues;
+    if (!user) {
+      return res.status(400).json({ email: "User not found" });
+    }
+    if (user.password !== body.password) {
+      return res.status(400).json({ password: "Incorrect Password" });
+    }
+    let data = user.dataValues;
     console.log("Login BE", data);
-    jwt.sign(data, secret, (err, token) => {
-      if (err) {
-        res.sendStatus(403);
+    jwt.sign(data, secret, (error, token) => {
+      if (error) {
+        res.sendStatus(403).json(error);
       } else {
         res.json({
           data,
@@ -83,7 +113,7 @@ router.post("/login", async (req, res) => {
       }
     });
   } catch (err) {
-    res.json(err);
+    res.status(400).json({ error: err });
   }
 });
 
