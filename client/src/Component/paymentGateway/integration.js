@@ -57,8 +57,6 @@ function Product({ product }) {
 function Paypal() {
   const product = {
     price: 777.77,
-    name: "comfy chair",
-    description: "fancy chair, like new",
   };
 
   return (

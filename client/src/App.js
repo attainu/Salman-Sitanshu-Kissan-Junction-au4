@@ -25,14 +25,15 @@ import ProductDisplay from "./Component/Product/ProductListDisplay";
 import MachineList from "./Component/Product/MachinaryList";
 // import ProfileEdit from "./Component/Supplier/Profileedit";
 // import Login from "./Component/Login/login";
-import Signup from "./Component/Login/siginup";
+// import Signup from "./Component/Login/siginup";
 // import ForgetPasswordForm from "./Component/ForgetPassword/fogetform";
 // import EmailsendMessage from "./Component/ForgetPassword/Acknolegment";
-// import Paypal from "./Component/paymentGateway/integration";
+
 import ProfileEdit from "./Component/Supplier/Profileedit";
 import Login from "./Component/FormPractice/LoginForm";
 import Register from "./Component/FormPractice/RegisterForm";
 
+// import Billing from "./Component/paymentGateway/Billing";
 const { token } = Action;
 
 class App extends Component {
@@ -63,7 +64,7 @@ class App extends Component {
             <Route path="/profile" component={Profile} />
             <Route path="/single-product" component={Content} />
             <Route path="/product-register" component={Productcategory} />
-            <Auth path="/cart" component={Cart} />
+            <Route path="/cart" component={Cart} />
             <Route path="/login" component={Login} />
             <Route path="/company-register" component={CompanyRegister} />
             <Route path="/profile-edit" component={ProfileEdit} />
