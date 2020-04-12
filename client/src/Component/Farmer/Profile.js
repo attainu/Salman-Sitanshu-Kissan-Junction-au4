@@ -1,31 +1,28 @@
-import React, { Component } from 'react';
-import '../../Css/profile.css';
-import { Image, Nav, Button } from 'react-bootstrap';
-import YourProduct from './YourProduct';
-import Purchased from './Purchased';
-import Sold from './Sold';
+import React, { Component } from "react";
+import "../../Css/profile.css";
+import { Image, Nav, Button } from "react-bootstrap";
+import YourProduct from "./YourProduct";
+import Purchased from "./Purchased";
+import Sold from "./Sold";
 import { Route, Link } from "react-router-dom";
 import { connect } from "react-redux";
-import { bindActionCreators } from 'redux'
-import Action from '../../ActionCreater/notification'
-import User from '../../ActionCreater/user'
+import { bindActionCreators } from "redux";
+import Action from "../../ActionCreater/notification";
+import User from "../../ActionCreater/user";
 
 const { notify } = Action;
 const { join } = User;
 
 class Profile extends Component {
-
   state = {
-    render: false
-  }
+    render: false,
+  };
   componentDidMount() {
-    console.log('Updatedd', this.props.id)
-    this.props.join(this.props.id)
-    // this.setState({
-    //   render: true
-    // })
+    //console.log('Updatedd', this.props.id)
+    this.props.join(this.props.id);
   }
   render() {
+    console.log(this.props);
     const { notify, name, email, mobile, img } = this.props;
 
     return (
@@ -33,27 +30,39 @@ class Profile extends Component {
         <div class="d-flex flex-column ">
           <div class="d-flex flex-fill justify-content-around flex-wrap m-5  flex-row">
             <div class="my-auto profile-img">
-              <Image className='shadow' src={img} width='300vh' rounded />
-              <div className='text-center'>
-                <Link to='/profile-edit'>
-                  <Button className='btn-1 mt-3 mr-1'
-                    onClick={() => notify({ type: 'success', msg: 'Edit Profile' })}
-                    variant="secondary" size="sm">
+              <Image className="shadow" src={img} width="300vh" rounded />
+              <div className="text-center">
+                <Link to="/profile-edit">
+                  <Button
+                    className="btn-1 mt-3 mr-1"
+                    onClick={() =>
+                      notify({ type: "success", msg: "Edit Profile" })
+                    }
+                    variant="secondary"
+                    size="sm"
+                  >
                     Edit Profile
-                    </Button>
+                  </Button>
                 </Link>
-                <Link to='/company-register'>
-                  <Button className='btn-1 mt-3 ml-1'
-                    onClick={() => notify({ type: 'success', msg: 'Edit Company' })}
-                    variant="secondary" size="sm">
+                <Link to="/company-register">
+                  <Button
+                    className="btn-1 mt-3 ml-1"
+                    onClick={() =>
+                      notify({ type: "success", msg: "Edit Company" })
+                    }
+                    variant="secondary"
+                    size="sm"
+                  >
                     Edit Company
                   </Button>
                 </Link>
               </div>
             </div>
             <div class="d-flex flex-column justify-content-start">
-              <h1 className='mb-0' style={{ 'font-weight': '500' }}>{name}</h1>
-              <p className='pl-2'>Farmer</p>
+              <h1 className="mb-0" style={{ "font-weight": "500" }}>
+                {name}
+              </h1>
+              <p className="pl-2">Farmer</p>
               <table class="table table-borderless">
                 <tbody>
                   <tr>
@@ -66,7 +75,11 @@ class Profile extends Component {
                   </tr>
                   <tr>
                     <th scope="row">Address: </th>
-                    <td>175/D Arafat Mansion<br />Mumbai, Maharashtra, India</td>
+                    <td>
+                      175/D Arafat Mansion
+                      <br />
+                      Mumbai, Maharashtra, India
+                    </td>
                   </tr>
                   <tr>
                     <th scope="row">Gender: </th>
@@ -88,7 +101,17 @@ class Profile extends Component {
                   </tr>
                   <tr>
                     <th scope="row">Types:</th>
-                    <td>Onion<br />Cucumber<br />Tomato<br />Spices<br />Brinjal</td>
+                    <td>
+                      Onion
+                      <br />
+                      Cucumber
+                      <br />
+                      Tomato
+                      <br />
+                      Spices
+                      <br />
+                      Brinjal
+                    </td>
                   </tr>
                   {/* <tr>
                   <th scope="row">Gender: </th>
@@ -96,33 +119,36 @@ class Profile extends Component {
                 </tr> */}
                 </tbody>
               </table>
-
             </div>
           </div>
-          <Nav variant="tabs" className="justify-content-center" defaultActiveKey="/profile">
-            <Link to='/profile'>
+          <Nav
+            variant="tabs"
+            className="justify-content-center"
+            defaultActiveKey="/profile"
+          >
+            <Link to="/profile">
               <Nav.Item>
                 <Nav.Link href="/profile">Your Products</Nav.Link>
               </Nav.Item>
             </Link>
-            <Link to='/profile/purchased'>
+            <Link to="/profile/purchased">
               <Nav.Item>
                 <Nav.Link href="/profile/purchased">Purchased</Nav.Link>
               </Nav.Item>
             </Link>
-            <Link to='/profile/sold'>
+            <Link to="/profile/sold">
               <Nav.Item>
                 <Nav.Link href="/profile/sold">Sold</Nav.Link>
               </Nav.Item>
             </Link>
           </Nav>
-          <Route exact path='/profile/'>
+          <Route exact path="/profile/">
             <YourProduct />
           </Route>
-          <Route path='/profile/purchased'>
+          <Route path="/profile/purchased">
             <Purchased />
           </Route>
-          <Route path='/profile/sold'>
+          <Route path="/profile/sold">
             <Sold />
           </Route>
 
@@ -153,22 +179,25 @@ class Profile extends Component {
           </div>
         </div>*/}
         </div>
-
       </>
-
     );
   }
 }
 
 const take = (state) => {
-  const { name, email, mobile, img, id } = state.user.currentUser
+  console.log(state);
+  const { name, email, mobile, img, id } = state.user.currentUser;
   return {
-    name, email, mobile, img, id
+    name,
+    email,
+    mobile,
+    img,
+    id,
   };
-}
+};
 
 const change = (dispatch) => {
-  return bindActionCreators({ notify, join }, dispatch)
-}
+  return bindActionCreators({ notify, join }, dispatch);
+};
 
 export default connect(take, change)(Profile);

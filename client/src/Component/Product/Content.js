@@ -4,6 +4,7 @@ import img1 from "../../Image/service1.jpg";
 import img2 from "../../Image/service2.jpg";
 import PageDescription from "../Home/PageDescription";
 import Blog from "../Home/Blog";
+import { connect } from "react-redux";
 import { Image, Button } from "react-bootstrap";
 import {
   FacebookIcon,
@@ -11,12 +12,24 @@ import {
   WhatsappIcon,
   WhatsappShareButton,
 } from "react-share";
-export default class Content extends React.Component {
+
+class Content extends React.Component {
+  //state to check if the proucts is seed or pesticides
   state = {
     type: this.props.location.aboutProps.type,
     item: this.props.location.aboutProps.item,
   };
+
+  addToCart = () => {
+    this.props.dispatch({
+      type: "addToCart",
+      payload: this.props.location.aboutProps.item,
+    });
+  };
+
   render() {
+    //product size for seed and machine power for all machines
+    console.log(this.props.machine);
     let productSize;
     if (this.state.type === "seed") {
       productSize = <p> Product Size </p>;
@@ -98,9 +111,16 @@ export default class Content extends React.Component {
                 </tbody>
               </table>
               <div className="d-flex justify-content-around">
-                <Button className="btn-2" variant="dark">
+                <Button
+                  className="btn-2"
+                  variant="dark"
+                  onClick={() => {
+                    this.addToCart();
+                  }}
+                >
                   Add To Cart
                 </Button>
+
                 <Button className="btn-2" variant="success">
                   Buy Now
                 </Button>
@@ -169,3 +189,17 @@ export default class Content extends React.Component {
     );
   }
 }
+
+const mapStateToProps = (state) => {
+  return {
+    machine: state.productList,
+  };
+};
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    dispatch: dispatch,
+  };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(Content);

@@ -3,6 +3,26 @@ let productState = {
   machineList: [],
   machineListCopy: [],
   productListCopy: [],
+  cart: [
+    {
+      productType: "Seed",
+      productName: "Pocha Seed",
+      price: "90",
+      productSize: "250 gm",
+      productDosage: "1.3kg/Heac",
+      targetplant: "Maize",
+      description: "High Quality Seed , High Production",
+    },
+    {
+      productType: "Seed",
+      productName: "Pocha Seed",
+      price: "90",
+      productSize: "250 gm",
+      productDosage: "1.3kg/Heac",
+      targetplant: "Maize",
+      description: "High Quality Seed , High Production",
+    },
+  ],
 };
 
 function productList(state = productState, action) {
@@ -78,6 +98,17 @@ function productList(state = productState, action) {
         stateCopy.productListCopy = [...stateCopy.productList];
       else if (action.payload === "machine")
         stateCopy.machineListCopy = [...stateCopy.machineList];
+      return stateCopy;
+
+    case "addToCart":
+      stateCopy.cart.push(action.payload);
+      console.log(stateCopy.cart);
+      return stateCopy;
+
+    case "notify":
+      if (action.payload.msg == "Item Removed")
+        var value = action.payload.item.id;
+      stateCopy.cart = stateCopy.cart.filter((item) => item.id !== value);
       return stateCopy;
     default:
       return state;

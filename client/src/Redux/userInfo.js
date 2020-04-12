@@ -1,6 +1,5 @@
 let initialState = {
-  currentUser: {
-  },
+  currentUser: {},
   Authenticated: undefined,
 };
 
@@ -15,7 +14,7 @@ export default function user(state = initialState, action) {
     case "login":
       stateCopy.currentUser = payload;
       stateCopy.Authenticated = true;
-      console.log("State", stateCopy);
+
       return stateCopy;
 
     case "logout":
