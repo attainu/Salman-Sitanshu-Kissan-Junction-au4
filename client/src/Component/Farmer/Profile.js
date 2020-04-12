@@ -35,11 +35,20 @@ class Profile extends Component {
             <div class="my-auto profile-img">
               <Image className='shadow' src={img} width='300vh' rounded />
               <div className='text-center'>
-                <Button className='btn-1 mt-3'
-                  onClick={() => notify({ type: 'success', msg: 'Edit Profile' })}
-                  variant="secondary" size="sm">
-                  Edit Profile
-          </Button>
+                <Link to='/profile-edit'>
+                  <Button className='btn-1 mt-3 mr-1'
+                    onClick={() => notify({ type: 'success', msg: 'Edit Profile' })}
+                    variant="secondary" size="sm">
+                    Edit Profile
+                    </Button>
+                </Link>
+                <Link to='/company-register'>
+                  <Button className='btn-1 mt-3 ml-1'
+                    onClick={() => notify({ type: 'success', msg: 'Edit Company' })}
+                    variant="secondary" size="sm">
+                    Edit Company
+                  </Button>
+                </Link>
               </div>
             </div>
             <div class="d-flex flex-column justify-content-start">

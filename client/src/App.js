@@ -29,6 +29,8 @@ import Signup from "./Component/Login/siginup";
 import ForgetPasswordForm from "./Component/ForgetPassword/fogetform";
 import EmailsendMessage from "./Component/ForgetPassword/Acknolegment";
 import Paypal from "./Component/paymentGateway/integration";
+import ProfileEdit from "./Component/Supplier/Profileedit";
+
 const { token } = Action;
 
 class App extends Component {
@@ -56,13 +58,13 @@ class App extends Component {
             <Route path="/lend_machine" component={MachineList} />
 
             <Route path="/signup" component={Signup} />
-            <Auth path="/profile" component={Profile} />
+            <Route path="/profile" component={Profile} />
             <Route path="/single-product" component={Content} />
             <Route path="/product-register" component={Productcategory} />
             <Auth path="/cart" component={Cart} />
             <Route path="/login" component={Login} />
             <Route path="/company-register" component={CompanyRegister} />
-            <Route path="/mailack" component={EmailsendMessage} />
+            <Route path="/profile-edit" component={ProfileEdit} />
             <Route path="*" component={NotFound} />
           </Switch>
           <Footer />

@@ -5,7 +5,7 @@ import { Redirect } from "react-router";
 import Action from "../../ActionCreater/user";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
-import axios from "axios";
+// import axios from "axios";
 const { productregister } = Action;
 
 class ProductRegister extends React.Component {
@@ -24,6 +24,7 @@ class ProductRegister extends React.Component {
     };
     this.handleChange = this.handleChange.bind();
     this.onSubmit = this.onSubmit.bind();
+    this.uploadImage = this.uploadImage.bind();
   }
 
   handleChange = (e) => {
@@ -93,14 +94,14 @@ class ProductRegister extends React.Component {
     //   console.log(response);
     // });
 
-    // setTimeout(() => {
-    //   this.setState(() => ({ todashboardredirect: true }));
-    // }, 1000);
+    setTimeout(() => {
+      this.setState(() => ({ todashboardredirect: true }));
+    }, 1000);
   };
 
   render() {
     if (this.state.todashboardredirect) {
-      return <Redirect to="/login" />;
+      return <Redirect to="/profile" />;
     }
 
     return (
@@ -205,6 +206,7 @@ class ProductRegister extends React.Component {
                           />
                         </div>
                         <div class="form-group">
+
                           <Form.File
                             type="file"
                             name="file"
