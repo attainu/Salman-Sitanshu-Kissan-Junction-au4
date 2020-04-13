@@ -33,6 +33,16 @@
   width: 100%;
 }
 
+.content1{
+  max-width: 650px;
+  width: 100%;
+}
+
+.profile-type-btn{
+  max-width: 227px;
+  width: 100%;
+}
+
 .cart-btn{
   min-width: 133px;
 }
