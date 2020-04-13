@@ -38,10 +38,15 @@ class Login extends React.Component {
     });
   };
 
+  componentDidMount() {
+    if (this.props.Auth) {
+      this.props.history.push("/");
+    }
+  }
   componentWillReceiveProps(nextProps) {
     if (nextProps.Auth) {
       this.props.notify({ type: 'success', msg: 'Login Succefully' })
-      this.props.history.push("/profile");
+      this.props.history.push("/");
     }
   }
   render() {
