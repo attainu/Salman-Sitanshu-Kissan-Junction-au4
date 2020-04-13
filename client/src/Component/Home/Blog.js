@@ -18,7 +18,7 @@ class Blog extends Component {
         name: "Mustard Cultivation Income",
         url: image2,
         subject:
-          " Musturd is very popular oil seed crop, higly cultivated seeds crop among all the crops in india. Due to easy management practice and  contestant price ......."
+          " Musturd is very popular oil seed crop, higly cultivated seeds crop among all the crops in india. Due to easy management practice and contestant price goverment is issuing ......."
       },
       {
         name: "Farm Mechnization",
@@ -59,8 +59,8 @@ class Blog extends Component {
                     <Card.Body>
                       <Card.Title>{item.name}</Card.Title>
                       <Card.Text>{item.subject}</Card.Text>
-                      <Button className="btn-second btn-success">
-                        Read
+                      <Button className="btn-success">
+                        Read More
                       </Button>{" "}
                     </Card.Body>
                   </Card>

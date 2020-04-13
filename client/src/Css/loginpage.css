@@ -6,11 +6,9 @@
     background-size: cover;
     background-size: cover;
     background-blend-mode: overlay;
-    width: 100vw;
     position: relative;
-    height: 40vw;
 }
-
+/* 
 .card {
     height: 370px;
     margin-top: auto;
@@ -69,4 +67,4 @@ input:focus {
 
 .links a {
     margin-left: 4px;
-}
+} */

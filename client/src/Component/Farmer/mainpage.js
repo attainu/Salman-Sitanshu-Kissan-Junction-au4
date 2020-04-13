@@ -17,7 +17,7 @@ class FarmerHomePage extends React.Component {
         category: "product_seed",
       },
       {
-        name: "Sell Your Grains through Us",
+        name: "Sell Your Producing Material through Us",
         url: image4,
         category: "sell_grain",
       },
@@ -39,7 +39,7 @@ class FarmerHomePage extends React.Component {
       <>
         <div className="background">
           <Container>
-            <Row className="boxhome">
+            <Row className="boxhome1">
               {this.state.topic &&
                 this.state.topic.map((item, index) => {
                   return (
@@ -51,7 +51,7 @@ class FarmerHomePage extends React.Component {
                         class="styl_box1"
                         style={{ backgroundImage: `url(${item.url})` }}
                       >
-                        <div class="single_analize__block text-center ">
+                        <div class="single_analize__block1 text-center ">
                           <h2>{item.name}</h2>
                           <Link to={`/${item.category}`}>
                             {" "}
