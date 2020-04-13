@@ -51,6 +51,21 @@ router.get("/selectmachine", async (req, res) => {
     res.json(err);
   }
 });
+
+//Read operation for seed and pestisides
+router.get("/grain", async (req, res) => {
+  try {
+    let product = await Product.findAll({
+      where: {
+        productType: ["grain"],
+      },
+    });
+
+    res.json(product);
+  } catch (err) {
+    res.json(err);
+  }
+});
 // Read One Operation
 router.get("/:id", async (req, res) => {
   try {

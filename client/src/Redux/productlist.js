@@ -3,6 +3,8 @@ let productState = {
   machineList: [],
   machineListCopy: [],
   productListCopy: [],
+  grainList: [],
+  grainListCopy: [],
   cart: [],
 };
 
@@ -23,6 +25,21 @@ function productList(state = productState, action) {
       stateCopy.productListCopy = [...action.payload];
       return stateCopy;
 
+    // to add product
+    case "add_grain":
+      stateCopy.grainList = [...action.payload];
+      stateCopy.grainListCopy = [...action.payload];
+      return stateCopy;
+
+    //to filter grain on price
+    case "filter_grain_price":
+      var price = parseInt(action.payload);
+      var priceFiltered = stateCopy.grainList.filter((value) => {
+        return value.price <= price;
+      });
+      stateCopy.grainListCopy = [...priceFiltered];
+      return stateCopy;
+
     //to filter machine on price
     case "filter_machine_price":
       var price = parseInt(action.payload);
@@ -40,6 +57,14 @@ function productList(state = productState, action) {
         return value.price <= price;
       });
       stateCopy.productListCopy = [...priceFiltered];
+      return stateCopy;
+
+    //filter based upon targetplant for grain and fruits
+    case "filter_grain_targetplant":
+      var targetCropFiltered = stateCopy.grainList.filter((value) => {
+        return value.productName.toLowerCase() === action.payload.toLowerCase();
+      });
+      stateCopy.grainListCopy = [...targetCropFiltered];
       return stateCopy;
 
     //filter based upon targetplant for machine
@@ -74,11 +99,21 @@ function productList(state = productState, action) {
       stateCopy.productListCopy = [...categoryCropFiltered];
       return stateCopy;
 
+    //filter based upon category for grain and fruits
+    case "filter_grain_category":
+      var categoryCropFiltered = stateCopy.grainList.filter((value) => {
+        return value.productType.toLowerCase() === action.payload.toLowerCase();
+      });
+      stateCopy.grainListCopy = [...categoryCropFiltered];
+      return stateCopy;
+
     case "clearFilter":
       if (action.payload === "product")
         stateCopy.productListCopy = [...stateCopy.productList];
       else if (action.payload === "machine")
         stateCopy.machineListCopy = [...stateCopy.machineList];
+      else if (action.payload === "grain")
+        stateCopy.grainListCopy = [...stateCopy.grainList];
       return stateCopy;
 
     case "addToCart":

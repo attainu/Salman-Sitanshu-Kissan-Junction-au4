@@ -29,6 +29,13 @@ class MyComponent extends React.Component {
         payload: this.state.value,
       });
     }
+    //filter if fruits and grain
+    else if (this.props.type === "grain") {
+      this.props.dispatch({
+        type: "filter_grain_price",
+        payload: this.state.value,
+      });
+    }
   };
   render() {
     return (

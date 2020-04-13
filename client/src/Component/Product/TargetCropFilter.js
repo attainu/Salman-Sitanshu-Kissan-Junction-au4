@@ -18,6 +18,13 @@ class TargetCrop extends React.Component {
         payload: value,
       });
     }
+    //filter if seed and pesticides
+    else if (this.props.type === "grain") {
+      this.props.dispatch({
+        type: "filter_grain_targetplant",
+        payload: value,
+      });
+    }
   };
   render() {
     console.log(this.props.type);
@@ -25,7 +32,7 @@ class TargetCrop extends React.Component {
       <>
         <Row>
           <Col lg={8} md={8} sm={12}>
-            <h6 className="mt-5 border-bottom">Target Filter</h6>
+            <h6 className="mt-5 border-bottom">CropWise Filter</h6>
           </Col>
         </Row>
         <Row className="mt-3">

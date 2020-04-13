@@ -100,7 +100,13 @@ class ProductDisplay extends React.Component {
                               }}
                             >
                               {" "}
-                              <button>Preview Here</button>
+                              <Button
+                                className="text-white"
+                                variant={""}
+                                style={{ backgroundColor: "#28ca2f" }}
+                              >
+                                Preview Here
+                              </Button>
                             </Link>
                           </p>
                         </div>
