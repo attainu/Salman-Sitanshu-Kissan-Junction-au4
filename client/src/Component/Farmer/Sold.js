@@ -1,9 +1,13 @@
 import React from 'react';
 import {
-    Table
+  Table
 } from 'react-bootstrap';
+import { connect } from "react-redux";
+// import { bindActionCreators } from "redux";
+// import Action from "../../ActionCreater/notification";
+// import { Link } from "react-router-dom";
 
-export default function Buyer() {
+function Buyer(props) {
   return (
     <>
       <Table responsive>
@@ -19,6 +23,20 @@ export default function Buyer() {
           </tr>
         </thead>
         <tbody>
+          {props.products && props.products.map((item, index) => {
+            if (item.connectType === "sold") {
+              let product = item.product
+              return (<tr key={index}>
+                <td>{index + 1}</td>
+                <td>{product.productName}</td>
+                <td>50 kg</td>
+                <td>Ramprasad</td>
+                <td>₹15 per kg</td>
+                <td>Jan 14, 2019</td>
+                <td>₹750</td>
+              </tr>)
+            }
+          })}
           <tr>
             <td>1</td>
             <td>Onion</td>
@@ -29,7 +47,7 @@ export default function Buyer() {
             <td>₹750</td>
           </tr>
           <tr>
-          <td>2</td>
+            <td>2</td>
             <td>Onion</td>
             <td>50 kg</td>
             <td>Ramprasad</td>
@@ -38,7 +56,7 @@ export default function Buyer() {
             <td>₹750</td>
           </tr>
           <tr>
-          <td>2</td>
+            <td>2</td>
             <td>Onion</td>
             <td>50 kg</td>
             <td>Ramprasad</td>
@@ -54,7 +72,19 @@ export default function Buyer() {
         </tbody>
       </Table>
     </>
-
-    );
-
+  );
 }
+
+const mapStateToProps = (state) => {
+  return {
+    products: state.user.currentUser.connect_products
+  };
+};
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    dispatch: dispatch,
+  };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(Buyer);

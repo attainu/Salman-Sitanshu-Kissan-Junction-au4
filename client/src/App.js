@@ -67,15 +67,15 @@ class App extends Component {
               <Route path="/lend_machine" component={MachineList} />
 
               <Route path="/signup" component={Register} />
-              <Auth path="/profile" component={Profile} />
+              <Route path="/profile" component={Profile} />
               <Route path="/single-product" component={Content} />
-              <Auth path="/product-register" component={Productcategory} />
-              <Auth path="/cart" component={Cart} />
+              <Route path="/product-register" component={Productcategory} />
+              <Route path="/cart" component={Cart} />
               <Route path="/login" component={Login} />
-              <Auth path="/company-register" component={CompanyRegister} />
-              <Auth path="/profile-edit" component={ProfileEdit} />
-              <Auth path="/checkout" component={Billing} />
-              <Auth path="/thankyou" component={Thankyou} />
+              <Route path="/company-register" component={CompanyRegister} />
+              <Route path="/profile-edit" component={ProfileEdit} />
+              <Route path="/checkout" component={Billing} />
+              <Route path="/thankyou" component={Thankyou} />
               <Route path="*" component={NotFound} />
             </Switch>
           </ScrollToTop>

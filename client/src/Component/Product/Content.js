@@ -12,19 +12,33 @@ import {
   WhatsappIcon,
   WhatsappShareButton,
 } from "react-share";
+import { bindActionCreators } from "redux";
+import Action from "../../ActionCreater/user";
+import Notify from "../../ActionCreater/notification";
+
+const { addCart } = Action;
+const { notify } = Notify;
 
 class Content extends React.Component {
   //state to check if the proucts is seed or pesticides
-  state = {
-    type: this.props.location.aboutProps.type,
-    item: this.props.location.aboutProps.item,
-  };
+  constructor(props) {
+    super(props);
+    this.state = {
+      type: this.props.location.aboutProps.type,
+      item: this.props.location.aboutProps.item,
+    };
+    this.addToCart = this.addToCart.bind();
+
+  }
 
   addToCart = () => {
-    this.props.dispatch({
-      type: "addToCart",
-      payload: this.props.location.aboutProps.item,
-    });
+    if (this.props.userInfo.id)
+      this.props.addCart(this.props.userInfo.id, this.props.location.aboutProps.item.id)
+    else
+      this.props.dispatch({
+        type: "addToCart",
+        payload: this.props.location.aboutProps.item,
+      });
   };
 
   render() {
@@ -114,9 +128,7 @@ class Content extends React.Component {
                 <Button
                   className="btn-2"
                   variant="dark"
-                  onClick={() => {
-                    this.addToCart();
-                  }}
+                  onClick={this.addToCart}
                 >
                   Add To Cart
                 </Button>
@@ -192,14 +204,12 @@ class Content extends React.Component {
 
 const mapStateToProps = (state) => {
   return {
-    machine: state.productList,
+    machine: state.productList, userInfo: state.user.currentUser
   };
 };
 
 const mapDispatchToProps = (dispatch) => {
-  return {
-    dispatch: dispatch,
-  };
+  return bindActionCreators({ addCart, notify }, dispatch);
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Content);

@@ -1,4 +1,5 @@
 import axios from "axios";
+import { useEffect } from "react";
 
 let Action = {};
 const link = {
@@ -11,6 +12,7 @@ const link = {
   userProduct: "/conprd/",
   join: "/join/",
   address: "/address/",
+
 };
 
 const notify = {
@@ -37,7 +39,6 @@ Action.register = (data) => {
   return (async (dispatch) => {
     try {
       let value = await axios.post(link.user, data);
-      console.log("Register", value)
       if (value.data.email) {
         dispatch({ type: "registered" });
         dispatch({
@@ -81,7 +82,6 @@ Action.login = (data) => {
       });
     }
     catch (error) {
-      console.log(error.response.data)
       dispatch({
         type: "error",
         payload: error.response.data,
@@ -161,13 +161,48 @@ Action.profileEdit = (user, address, id, addressId) => {
         addressId: res.data.id,
       });
       dispatch(notify);
-      console.log("Updated user with address", value);
     } else {
       let res = await axios.put(`${link.address}${addressId}`, address);
       dispatch(notify);
-      console.log("Updated address", res);
     }
   };
 };
+
+Action.addCart = (userId, productId) => {
+  return async (dispatch) => {
+    console.log("Cart Adding", userId, productId)
+    let value = await axios.post(link.userProduct, {
+      connectType: "cart",
+      userId: userId,
+      productId: productId,
+    });
+    console.log("Cart Added", value)
+    // if ((value.data[0] = 1)) dispatch({ type: "register" });
+    // else dispatch(notify);
+    // let product = await axios.post(link.productR, data);
+    // let value = await axios.post(link.userProduct, {
+    //   connectType: "myproduct",
+    //   userId: id,
+    //   productId: product.data.id,
+    // });
+    // if ((value.data[0] = 1)) dispatch({ type: "register" });
+    // else 
+    dispatch(notify);
+  };
+};
+
+Action.placeOrder = (userId, productIds) => {
+  return async (dispatch) => {
+    console.log("Order Adding", userId, productIds)
+    let res = await Promise.all(productIds.map(async (id) => {
+      await axios.put(`${link.userProduct}${id}`, {
+        connectType: "booked",
+      });
+    }))
+
+    console.log("Cart Updated", res)
+    dispatch(notify);
+  }
+}
 
 export default Action;

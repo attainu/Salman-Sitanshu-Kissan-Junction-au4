@@ -18,9 +18,10 @@ class Profile extends React.Component {
     });
   };
   render() {
-    const { notify, Authenticated, cart } = this.props;
-    var flag = false;
-    if (cart.length > 0) flag = true;
+    const { notify, Authenticated, products } = this.props;
+    let flag = false
+    products.forEach((item) => {  if(item.connectType === "cart") flag = true })
+    console.log(flag)
     return (
       <>
         {flag && (
@@ -47,21 +48,22 @@ class Profile extends React.Component {
 
             <Table borderless responsive>
               <tbody className="text-center">
-                {cart &&
-                  cart.map((item, index) => {
+                {products.map((item, index) => {
+                  if (item.connectType === "cart") {
+                    let product = item.product
                     return (
                       <>
-                        <tr>
+                        <tr key={index}>
                           <td scope="row">
                             <img
                               className="m-0 rounded-circle p-0 "
                               width="100px"
-                              src={item.imageurl}
+                              src={product.imageurl}
                               alt="user pic"
                             />
                           </td>
                           <td>
-                            <h4 className="m-0 p-0">{item.productName}</h4>
+                            <h4 className="m-0 p-0">{product.productName}</h4>
                             <br />
                             Seller Amitabh Kumar
                           </td>
@@ -81,7 +83,7 @@ class Profile extends React.Component {
                               variant="secondary"
                               onClick={
                                 (() => notify({ type: "warn", msg: "Added 1" }),
-                                this.increaseProduct)
+                                  this.increaseProduct)
                               }
                             >
                               +
@@ -90,7 +92,7 @@ class Profile extends React.Component {
                           <td>
                             <h4>
                               <sup>₹</sup>
-                              {item.price}
+                              {product.price}
                             </h4>
                           </td>
                           <td>
@@ -100,7 +102,7 @@ class Profile extends React.Component {
                                 notify({
                                   type: "error",
                                   msg: "Item Removed",
-                                  item: item,
+                                  item: product,
                                 })
                               }
                             ></i>
@@ -111,7 +113,8 @@ class Profile extends React.Component {
                         </td>
                       </>
                     );
-                  })}
+                  }
+                })}
               </tbody>
             </Table>
           </div>
@@ -132,11 +135,12 @@ class Profile extends React.Component {
 }
 
 const take = (state) => {
-  const cart = state.productList.cart;
+  // const cart = state.productList.cart;
   const { Authenticated } = state.user;
   return {
     Authenticated,
-    cart,
+    products: state.user.currentUser.connect_products
+    // cart,
   };
 };
 
