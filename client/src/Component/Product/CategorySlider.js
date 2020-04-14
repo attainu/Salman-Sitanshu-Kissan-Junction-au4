@@ -18,6 +18,11 @@ class Slider extends React.Component {
         type: "filter_product_category",
         payload: value,
       });
+    } else if (this.props.type[0] === "Grain") {
+      this.props.dispatch({
+        type: "filter_grain_category",
+        payload: value,
+      });
     }
   };
 

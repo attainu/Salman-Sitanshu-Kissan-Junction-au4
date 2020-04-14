@@ -21,7 +21,6 @@ class Home extends Component {
         <Service />
         <Progress />
         <Blog />
-        <Chatbot />
       </>
     );
   }

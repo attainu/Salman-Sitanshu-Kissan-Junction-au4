@@ -7,7 +7,7 @@ import Footer from "./Component/Home/Footer";
 import Content from "./Component/Product/Content";
 import Cart from "./Component/Farmer/Cart";
 import Notification from "./Component/Notification/Notification";
-import ScrollToTop from './Component/Authentication/ScrollToTop'
+import ScrollToTop from "./Component/Authentication/ScrollToTop";
 // import Google from './Component/Google/login';
 import Auth from "./Component/Authentication/RouteProtecting";
 import NotFound from "./Component/Authentication/NotFound";
@@ -35,7 +35,9 @@ import Login from "./Component/FormPractice/LoginForm";
 import Register from "./Component/FormPractice/RegisterForm";
 import Billing from "./Component/paymentGateway/Billing";
 import Thankyou from "./Component/paymentGateway/thankyou";
-
+import Addgrain from "./Component/Farmer/addgrain";
+import FarmerGrain from "./Component/Farmer/farmergrain";
+import Grainpage from "./Component/Farmer/graincart";
 const { token } = Action;
 
 class App extends Component {
@@ -45,7 +47,6 @@ class App extends Component {
       this.props.token(Token);
     }
     window.scrollTo(0, 0);
-
   };
 
   render() {
@@ -65,7 +66,8 @@ class App extends Component {
               {/* <Route path="/farmer/:lend_machine" component={MachineList} /> */}
               <Route path="/product_seed" component={ProductDisplay} />
               <Route path="/lend_machine" component={MachineList} />
-
+              <Route path="/sell_grain" component={Addgrain} />
+              <Route path="/consumer" component={FarmerGrain} />
               <Route path="/signup" component={Register} />
               <Route path="/profile" component={Profile} />
               <Route path="/single-product" component={Content} />
@@ -75,6 +77,8 @@ class App extends Component {
               <Route path="/company-register" component={CompanyRegister} />
               <Route path="/profile-edit" component={ProfileEdit} />
               <Route path="/checkout" component={Billing} />
+              <Route path="/single_grain" component={Grainpage} />
+
               <Route path="/thankyou" component={Thankyou} />
               <Route path="*" component={NotFound} />
             </Switch>
