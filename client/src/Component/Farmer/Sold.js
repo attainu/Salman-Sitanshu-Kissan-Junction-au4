@@ -38,33 +38,6 @@ function Buyer(props) {
             }
           })}
           <tr>
-            <td>1</td>
-            <td>Onion</td>
-            <td>50 kg</td>
-            <td>Ramprasad</td>
-            <td>₹15 per kg</td>
-            <td>Jan 14, 2019</td>
-            <td>₹750</td>
-          </tr>
-          <tr>
-            <td>2</td>
-            <td>Onion</td>
-            <td>50 kg</td>
-            <td>Ramprasad</td>
-            <td>₹15 per kg</td>
-            <td>Jan 14, 2019</td>
-            <td>₹750</td>
-          </tr>
-          <tr>
-            <td>2</td>
-            <td>Onion</td>
-            <td>50 kg</td>
-            <td>Ramprasad</td>
-            <td>₹15 per kg</td>
-            <td>Jan 14, 2019</td>
-            <td>₹750</td>
-          </tr>
-          <tr>
             <td colSpan="5"></td>
             <th>Total Revenue:</th>
             <td>₹60000</td>

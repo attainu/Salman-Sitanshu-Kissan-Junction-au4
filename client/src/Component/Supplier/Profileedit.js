@@ -222,7 +222,7 @@ class ProfileEdit extends Component {
                           onChange={this.handleChange}>
                           <option value="Farmer" selected>Farmer</option>
                           <option value="Seller">Seller</option>
-                          <option value="Customer">Customer</option>
+                          <option value="Consumer">Consumer</option>
                         </Form.Control>
                       </Col>
                     </Form.Group>

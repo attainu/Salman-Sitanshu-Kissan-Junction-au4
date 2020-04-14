@@ -5,12 +5,22 @@ import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import Action from "../../ActionCreater/notification";
 import { Link } from "react-router-dom";
+import User from "../../ActionCreater/user";
+
 const { notify } = Action;
+const { join } = User;
 
 class Profile extends React.Component {
   state = {
     productCount: 1,
   };
+
+  componentDidMount() {
+    this.props.join(this.props.id);
+    this.setState({
+      render: false
+    })
+  }
 
   increaseProduct = () => {
     this.setState({
@@ -20,7 +30,7 @@ class Profile extends React.Component {
   render() {
     const { notify, Authenticated, products } = this.props;
     let flag = false
-    products.forEach((item) => {  if(item.connectType === "booked" && (item.status === false && item.count > 0) ) flag = true })
+    products.forEach((item) => { if (item.connectType === "booked" && (item.status === false && item.count > 0)) flag = true })
     console.log(flag)
     return (
       <>
@@ -137,15 +147,21 @@ class Profile extends React.Component {
 const take = (state) => {
   // const cart = state.productList.cart;
   const { Authenticated } = state.user;
+  const { connect_products } = state.user.currentUser
+  let products = [];
+  if (connect_products) {
+    products = connect_products
+  }
   return {
     Authenticated,
-    products: state.user.currentUser.connect_products
+    products,
+    id: state.user.currentUser.id
     // cart,
   };
 };
 
 const change = (dispatch) => {
-  return bindActionCreators({ notify }, dispatch);
+  return bindActionCreators({ notify, join }, dispatch);
 };
 
 export default connect(take, change)(Profile);

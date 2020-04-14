@@ -14,16 +14,11 @@ const { notify } = Action;
 const { join } = User;
 
 class Profile extends Component {
-  state = {
-    rerender: false
-  }
+
 
   componentDidMount() {
     console.log('ALso here', this.props.address)
     this.props.join(this.props.id);
-    this.setState({
-      render: false
-    })
   }
 
   render() {
@@ -43,23 +38,24 @@ class Profile extends Component {
                       notify({ type: "success", msg: "Edit Profile" })
                     }
                     variant="secondary"
-                    size="sm"
-                  >
+                    size="sm">
                     Edit Profile
                   </Button>
                 </Link>
-                <Link to="/company-register">
-                  <Button
-                    className="btn-1 mt-3 ml-1"
-                    onClick={() =>
-                      notify({ type: "success", msg: "Edit Company" })
-                    }
-                    variant="secondary"
-                    size="sm"
-                  >
-                    Edit Company
-                  </Button>
-                </Link>
+                {(type === "Seller") ?
+                  <Link to="/company-register">
+                    <Button
+                      className="btn-1 mt-3 ml-1"
+                      onClick={() =>
+                        notify({ type: "success", msg: "Edit Company" })
+                      }
+                      variant="secondary"
+                      size="sm">
+                      Edit Company
+                </Button>
+                  </Link>
+                  : ""}
+
               </div>
             </div>
             <div class="d-flex flex-column justify-content-start">
@@ -111,36 +107,33 @@ class Profile extends Component {
                       Brinjal
                     </td>
                   </tr>
-                  {/* <tr>
-                  <th scope="row">Gender: </th>
-                  <td>Male</td>
-                </tr> */}
                 </tbody>
               </table>
             </div>
           </div>
           <Nav
             variant="tabs"
-            className="justify-content-center"
-            defaultActiveKey="/profile"
-          >
-            <Link to="/profile">
-              <Nav.Item>
-                <Nav.Link href="/profile">Your Products</Nav.Link>
-              </Nav.Item>
-            </Link>
-            <Link to="/profile/purchased">
-              <Nav.Item>
-                <Nav.Link href="/profile/purchased">Purchased</Nav.Link>
-              </Nav.Item>
-            </Link>
-            <Link to="/profile/sold">
-              <Nav.Item>
-                <Nav.Link href="/profile/sold">Sold</Nav.Link>
-              </Nav.Item>
-            </Link>
+            className="justify-content-center">
+            {(type === "Seller" || type === "Farmer") ?
+              <Link to="/profile/product">
+                <Nav.Item>
+                  <Nav.Link href="/profile">Your Products</Nav.Link>
+                </Nav.Item>
+              </Link> : ""}
+            {(type === "Consumer" || type === "Farmer") ?
+              <Link to="/profile/purchased">
+                <Nav.Item>
+                  <Nav.Link href="/profile/purchased">Purchased</Nav.Link>
+                </Nav.Item>
+              </Link> : ""}
+            {(type === "Seller" || type === "Farmer") ?
+              <Link to="/profile/sold">
+                <Nav.Item>
+                  <Nav.Link href="/profile/sold">Sold</Nav.Link>
+                </Nav.Item>
+              </Link> : ""}
           </Nav>
-          <Route exact path="/profile/">
+          <Route exact path="/profile/product">
             <YourProduct />
           </Route>
           <Route path="/profile/purchased">
@@ -149,33 +142,6 @@ class Profile extends Component {
           <Route path="/profile/sold">
             <Sold />
           </Route>
-
-          {/* <div class="d-flex flex-fill flex-row m-5 black">
-          <div class="green flex-fill">
-            Flex2
-            </div>
-          <div class="green flex-fill">
-            Flex1
-          </div>
-          <div class="green flex-fill">
-            Flex1
-          </div>
-          <div class="green flex-fill">
-            Flex1
-          </div>
-
-        </div>
-        <div class="d-flex flex-fill flex-row m-5 black">
-          <div class="green flex-fill">
-            Flex3
-            </div>
-          <div class="green flex-fill">
-            Flex1
-          </div>
-          <div class="green flex-fill">
-            Flex1
-          </div>
-        </div>*/}
         </div>
       </>
     );
@@ -192,13 +158,8 @@ const take = (state) => {
     pincode: "",
     country: "",
   };
-  if (addressId && state.user.currentUser.address) {
+  if (addressId && state.user.currentUser.address)
     address = state.user.currentUser.address
-    // console.log("herre", addressId, state.user.currentUser.address)
-    // return {
-    //   name, email, mobile, img, id, address, type, dob
-    // };
-  }
   return {
     name, email, mobile, img, id, address, type, dob
   };
