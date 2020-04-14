@@ -20,7 +20,7 @@ class Profile extends React.Component {
   render() {
     const { notify, Authenticated, products } = this.props;
     let flag = false
-    products.forEach((item) => {  if(item.connectType === "cart") flag = true })
+    products.forEach((item) => {  if(item.connectType === "booked" && (item.status === false && item.count > 0) ) flag = true })
     console.log(flag)
     return (
       <>
@@ -49,7 +49,7 @@ class Profile extends React.Component {
             <Table borderless responsive>
               <tbody className="text-center">
                 {products.map((item, index) => {
-                  if (item.connectType === "cart") {
+                  if (item.connectType === "booked" && (item.status === false && item.count > 0)) {
                     let product = item.product
                     return (
                       <>

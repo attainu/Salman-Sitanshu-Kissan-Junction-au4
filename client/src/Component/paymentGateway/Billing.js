@@ -18,7 +18,7 @@ class Billing extends React.Component {
     var total = 0;
     for (var i = 0; i < this.props.products.length; i++) {
       console.log("Price", this.props.products[i])
-      if (this.props.products[i].connectType === "cart") {
+      if (this.props.products[i].connectType === "booked" && (this.props.products[i].status === false && this.props.products[i].count > 0)) {
         total += parseInt(this.props.products[i].product.price);
         console.log("Price", this.props.products[i].product.price)
       }
@@ -31,7 +31,7 @@ class Billing extends React.Component {
   submitForm = () => {
     let idies = []
     for (var i = 0; i < this.props.products.length; i++)
-      if (this.props.products[i].connectType === "cart")
+      if (this.props.products[i].connectType === "booked" && (this.props.products[i].status === false && this.props.products[i].count > 0))
         idies.push(this.props.products[i].id);
     this.props.placeOrder(this.props.user.id, idies)
   }
@@ -183,7 +183,7 @@ class Billing extends React.Component {
                     <tbody className="text-center">
                       {this.props.products &&
                         this.props.products.map((item, index) => {
-                          if (item.connectType === "cart") {
+                          if (item.connectType === "booked" && (item.status === false && item.count > 0)) {
                             let product = item.product
                             return (
                               <>

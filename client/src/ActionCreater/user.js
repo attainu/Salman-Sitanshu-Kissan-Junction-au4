@@ -1,5 +1,4 @@
 import axios from "axios";
-import { useEffect } from "react";
 
 let Action = {};
 const link = {
@@ -12,7 +11,7 @@ const link = {
   userProduct: "/conprd/",
   join: "/join/",
   address: "/address/",
-
+  seller: "/join/product/"
 };
 
 const notify = {
@@ -171,12 +170,24 @@ Action.profileEdit = (user, address, id, addressId) => {
 Action.addCart = (userId, productId) => {
   return async (dispatch) => {
     console.log("Cart Adding", userId, productId)
-    let value = await axios.post(link.userProduct, {
-      connectType: "cart",
-      userId: userId,
-      productId: productId,
-    });
-    console.log("Cart Added", value)
+    let middleT = await axios(`${link.userProduct}user/${userId}/${productId}`)
+    console.log("Working", middleT)
+    if (middleT.data) {
+      let userProduct = await axios.put(`${link.userProduct}${middleT.data.id}`, {
+        status: false,
+        count: parseInt(middleT.data.count) + 1
+      });
+      console.log(userProduct)
+    }
+    else {
+      let value = await axios.post(link.userProduct, {
+        connectType: "booked",
+        userId: userId,
+        productId: productId,
+        count: 1
+      });
+      console.log("Cart Added", value)
+    }
     // if ((value.data[0] = 1)) dispatch({ type: "register" });
     // else dispatch(notify);
     // let product = await axios.post(link.productR, data);
@@ -193,14 +204,30 @@ Action.addCart = (userId, productId) => {
 
 Action.placeOrder = (userId, productIds) => {
   return async (dispatch) => {
-    console.log("Order Adding", userId, productIds)
-    let res = await Promise.all(productIds.map(async (id) => {
-      await axios.put(`${link.userProduct}${id}`, {
+    await Promise.all(productIds.map(async (id) => {
+      let userProduct = await axios.put(`${link.userProduct}${id}`, {
         connectType: "booked",
+        status: true
       });
-    }))
+      console.log("0", id, userProduct)
+      if (userProduct.data) {
+        let product = await axios(`${link.userProduct}product/${userId}/${id}`)
+        console.log("1", product)
+        let seller = await axios(`${link.seller}${product.data.product.id}`);
+        console.log("2", seller)
+        let connectedP = await axios(`${link.userProduct}${seller.data.connect_products[0].id}`);
+        console.log("3", connectedP)
+        let sellerProduct = await axios.put(`${link.userProduct}${seller.data.connect_products[0].id}`, {
+          status: true,
+          count: parseInt(connectedP.data.count) + 1
+        });
+        console.log("Trueee", sellerProduct)
 
-    console.log("Cart Updated", res)
+      }
+      // await axios.put(`${link.userProduct}${seller.connect_products.user.id}`, {
+      //   status: true,
+      // });
+    }))
     dispatch(notify);
   }
 }

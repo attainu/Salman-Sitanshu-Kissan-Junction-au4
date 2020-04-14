@@ -24,13 +24,13 @@ function Buyer(props) {
         </thead>
         <tbody>
           {props.products && props.products.map((item, index) => {
-            if (item.connectType === "sold") {
+            if (item.connectType === "myproduct" && item.count > 0) {
               let product = item.product
               return (<tr key={index}>
                 <td>{index + 1}</td>
                 <td>{product.productName}</td>
                 <td>50 kg</td>
-                <td>Ramprasad</td>
+                <td>{item.count}</td>
                 <td>₹15 per kg</td>
                 <td>Jan 14, 2019</td>
                 <td>₹750</td>

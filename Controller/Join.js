@@ -47,7 +47,7 @@ router.get('/:id', async (req, res) => {
           model: Product
         }]
       }
-    ]
+      ]
     })
     res.json(user)
   }
@@ -55,5 +55,32 @@ router.get('/:id', async (req, res) => {
     res.json(error)
   }
 })
+
+router.get('/product/:id', async (req, res) => {
+  const { id } = req.params
+
+  try {
+    let product = await Product.findOne({
+      where: {
+        id,
+        // connectType: "myproduct"
+      },
+      include: [{
+        model: ConnectProduct,
+        where: {
+          connectType: "myproduct"
+        },
+        include: [{
+          model: User
+        }]
+      }]
+    })
+    res.json(product)
+  }
+  catch (error) {
+    res.json(error)
+  }
+})
+
 
 module.exports = router;
