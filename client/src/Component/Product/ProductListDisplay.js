@@ -15,8 +15,7 @@ class ProductDisplay extends React.Component {
 
   //product data fetch for seed and pestisides
   componentDidMount = () => {
-    var data = fetch("http://localhost:5000/product/selectseed");
-    data.then((res) => {
+    fetch("http://localhost:5000/product/selectseed").then((res) => {
       res.json().then((data) => {
         this.setState({
           seedPestiside: data,

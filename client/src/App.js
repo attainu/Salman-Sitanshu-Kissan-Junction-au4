@@ -38,6 +38,7 @@ import Thankyou from "./Component/paymentGateway/thankyou";
 import Addgrain from "./Component/Farmer/addgrain";
 import FarmerGrain from "./Component/Farmer/farmergrain";
 import Grainpage from "./Component/Farmer/graincart";
+import Bloglist from "./Component/Adminblog/bloglist";
 const { token } = Action;
 
 class App extends Component {
@@ -78,6 +79,7 @@ class App extends Component {
               <Route path="/profile-edit" component={ProfileEdit} />
               <Route path="/checkout" component={Billing} />
               <Route path="/single_grain" component={Grainpage} />
+              <Route path="/blog" component={Bloglist} />
 
               <Route path="/thankyou" component={Thankyou} />
               <Route path="*" component={NotFound} />

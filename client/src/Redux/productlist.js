@@ -52,7 +52,7 @@ function productList(state = productState, action) {
     //to filter productlist on price
     case "filter_product_price":
       var price = parseInt(action.payload);
-      console.log(price);
+
       var priceFiltered = stateCopy.productList.filter((value) => {
         return value.price <= price;
       });
