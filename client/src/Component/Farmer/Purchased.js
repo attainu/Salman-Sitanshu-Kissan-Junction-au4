@@ -13,10 +13,9 @@ function Purchase(props) {
           <tr>
             <th>Sr. No</th>
             <th>Product Name</th>
-            <th>Qunatity</th>
-            <th>Seller Name</th>
+            <th>Product Type</th>
             <th>Price</th>
-            <th>Date</th>
+            <th>No. of time purchased</th>
             <th>Total</th>
           </tr>
         </thead>
@@ -27,18 +26,24 @@ function Purchase(props) {
               return (<tr key={index}>
                 <td>{index + 1}</td>
                 <td>{product.productName}</td>
-                <td>50 kg</td>
-                <td>Ramprasad</td>
-                <td>₹15 per kg</td>
-                <td>Jan 14, 2019</td>
-                <td>₹750</td>
+                <td>{product.productType}</td>
+                <td>₹{product.price}</td>
+                <td>{item.count}</td>
+                <td>₹{parseInt(product.price) * parseInt(item.count)}</td>
               </tr>)
             }
           })}
           <tr>
-            <td colSpan="5"></td>
-            <th>Total Expenditure:</th>
-            <td>₹60000</td>
+            <td colSpan="4"></td>
+            <th>Total Revenue:</th>
+            <td>₹{props.products && props.products.reduce((total, item) => {
+              if (item.connectType === "booked")
+                return (
+                  total += parseInt(item.product.price) * parseInt(item.count)
+                )
+              else return total
+            }, 0)}
+            </td>
           </tr>
         </tbody>
       </Table>

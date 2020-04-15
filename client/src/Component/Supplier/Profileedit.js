@@ -136,6 +136,11 @@ class ProfileEdit extends Component {
       dob: this.props.dob,
       type: this.props.type,
       img: this.props.img,
+      address: this.props.address.address,
+      state: this.props.address.state,
+      city: this.props.address.city,
+      district: this.props.address.district,
+      pincode: this.props.address.pincode
     })
   }
 
@@ -371,8 +376,17 @@ class ProfileEdit extends Component {
 
 const take = (state) => {
   const { id, name, email, password, dob, mobile, type, img, addressId } = state.user.currentUser
+  let address = {
+    address: "",
+    district: "",
+    city: "",
+    state: "",
+    pincode: "",
+  };
+  if (addressId && state.user.currentUser.address)
+    address = state.user.currentUser.address
   return {
-    id, name, email, password, dob, mobile, type, img, addressId
+    id, name, email, password, dob, mobile, type, img, address
   };
 };
 

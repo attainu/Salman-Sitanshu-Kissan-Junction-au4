@@ -27,8 +27,8 @@ class Profile extends Component {
     return (
       <>
         <div class="d-flex flex-column ">
-          <div class="d-flex flex-fill justify-content-around flex-wrap m-5  flex-row">
-            <div class="my-auto profile-img">
+          <div class="d-flex flex-fill justify-content-center flex-wrap m-5 flex-row">
+            <div class="my-auto profile-img mr-md-5">
               <Image className="shadow" src={img} width="300vh" rounded />
               <div className="text-center">
                 <Link to="/profile-edit">
@@ -58,7 +58,7 @@ class Profile extends Component {
 
               </div>
             </div>
-            <div class="d-flex flex-column justify-content-start">
+            <div class="d-flex flex-column justify-content-start ml-md-5">
               <h1 className='mb-0' style={{ 'font-weight': '500' }}>{name}</h1>
               <p className='pl-2'>{type}</p>
               <table class="table table-borderless">
@@ -75,10 +75,10 @@ class Profile extends Component {
                     <th scope="row">Address: </th>
                     <td>{address.address}<br />{address.district} {address.city} {address.pincode}<br /> {address.state} {address.country}</td>
                   </tr>
-                  <tr>
+                  {/* <tr>
                     <th scope="row">Gender: </th>
                     <td>Male</td>
-                  </tr>
+                  </tr> */}
                   <tr>
                     <th scope="row">Birthday: </th>
                     <td>{dob}</td>
@@ -86,12 +86,12 @@ class Profile extends Component {
                 </tbody>
               </table>
             </div>
-            <div class="d-flex flex-column box4 justify-content-end">
+            {/* <div class="d-flex flex-column box4 justify-content-end">
               <table class="table table-borderless">
                 <tbody>
                   <tr>
                     <th scope="row">Occupation: </th>
-                    <td>Farming</td>
+                    <td>{type}</td>
                   </tr>
                   <tr>
                     <th scope="row">Types:</th>
@@ -109,7 +109,7 @@ class Profile extends Component {
                   </tr>
                 </tbody>
               </table>
-            </div>
+            </div> */}
           </div>
           <Nav
             variant="tabs"

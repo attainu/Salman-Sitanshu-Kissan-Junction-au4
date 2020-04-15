@@ -86,7 +86,7 @@ function NavBar(props) {
                       <Link to='/cart'><NavDropdown.Item href='/'>Cart</NavDropdown.Item></Link> </> : ""}
                   {(type === "Seller" || type === "Farmer") ?
                     <>
-                      <Link to='/product-register'><NavDropdown.Item href='/' >Add Product</NavDropdown.Item></Link>
+                      <Link to='/profile/product'><NavDropdown.Item href='/' >Add Product</NavDropdown.Item></Link>
                       <Link to='/profile/sold'><NavDropdown.Item href='/'>Sold</NavDropdown.Item></Link> </> : ""}
                   {(type === "Farmer") ?
                     <>
