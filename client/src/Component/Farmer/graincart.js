@@ -1,6 +1,5 @@
 import React from "react";
 import "../../Css/profile.css";
-
 import PageDescription from "../Home/PageDescription";
 import { connect } from "react-redux";
 import { Image, Button } from "react-bootstrap";
@@ -10,16 +9,30 @@ import {
   WhatsappIcon,
   WhatsappShareButton,
 } from "react-share";
+import { bindActionCreators } from "redux";
+import Action from "../../ActionCreater/user";
+import Notify from "../../ActionCreater/notification";
+
+const { addCart } = Action;
+const { notify } = Notify;
 
 class Grainpage extends React.Component {
-  state = {
-    item: this.props.location.aboutProps.item,
-  };
+  constructor(props) {
+    super(props);
+    this.state = {
+      item: this.props.location.aboutProps.item,
+    };
+    this.addToCart = this.addToCart.bind();
+  }
+
   addToCart = () => {
-    this.props.dispatch({
-      type: "addToCart",
-      payload: this.props.location.aboutProps.item,
-    });
+    if (this.props.userInfo.id)
+      this.props.addCart(this.props.userInfo.id, this.props.location.aboutProps.item.id)
+    else
+      this.props.dispatch({
+        type: "addToCart",
+        payload: this.props.location.aboutProps.item,
+      });
   };
 
   render() {
@@ -37,7 +50,6 @@ class Grainpage extends React.Component {
             <div className="d-flex flex-column justify-content-start">
               <h1 className="mb-0" style={{ "font-weight": "500" }}>
                 <span style={{ color: "#28ca2f" }}>
-                  {" "}
                   {this.state.item.productName}
                 </span>
               </h1>
@@ -96,9 +108,7 @@ class Grainpage extends React.Component {
                 <Button
                   className="btn-2"
                   variant="dark"
-                  onClick={() => {
-                    this.addToCart();
-                  }}
+                  onClick={this.addToCart}
                 >
                   Add To Cart
                 </Button>
@@ -118,14 +128,12 @@ class Grainpage extends React.Component {
 
 const mapStateToProps = (state) => {
   return {
-    machine: state.productList,
+    machine: state.productList, userInfo: state.user.currentUser
   };
 };
 
 const mapDispatchToProps = (dispatch) => {
-  return {
-    dispatch: dispatch,
-  };
+  return bindActionCreators({ addCart, notify }, dispatch);
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Grainpage);
