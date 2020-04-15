@@ -14,6 +14,26 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, "public")));
 app.use(passport.initialize());
 app.use(cors());
+const blogControllers = require("./Controller/Blog");
+const mongoose = require("mongoose");
+
+mongoose.connect(
+  "mongodb+srv://eagle-ecommerce-app:eagle-ecommerce-app@ecommerce-app-ll9yl.mongodb.net/ecommerce-app?retryWrites=true&w=majority",
+  {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+    useCreateIndex: true,
+    useFindAndModify: false,
+  }
+);
+let db = mongoose.connection;
+db.once("open", function () {
+  console.log("connected to mongodb");
+});
+//check for DB errors
+db.on("error", function (err) {
+  console.log(err);
+});
 
 // Auth Router
 app.use("/oauth", require("./Controller/Outh"));
@@ -25,7 +45,11 @@ app.use("/product", require("./Controller/Product"));
 app.use("/conprd", require("./Controller/ConnectProduct"));
 app.use("/join", require("./Controller/Join"));
 app.use("/company", require("./Controller/Company"));
-
+app.post("/blog_create", blogControllers.create);
+app.get("/blog_get", blogControllers.get);
+app.post("/blog_update", blogControllers.update);
+app.post("/adminlogin", blogControllers.login);
+app.post("/blog_delete", blogControllers.delete);
 //Heroku Config
 if (process.env.NODE_ENV === "production") {
   // Serve any static files
