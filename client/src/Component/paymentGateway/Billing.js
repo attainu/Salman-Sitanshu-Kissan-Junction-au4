@@ -3,19 +3,38 @@ import { Row, Col, Button, Form, Table } from "react-bootstrap";
 import Paypal from "./integration";
 import { connect } from "react-redux";
 import GPayButton from "react-google-pay-button";
+import { bindActionCreators } from "redux";
+import Action from "../../ActionCreater/user";
 import { Link } from "react-router-dom";
+
+const { placeOrder } = Action;
+
 class Billing extends React.Component {
   state = {
     totalPrice: 0,
   };
   componentDidMount = () => {
+    console.log("CDM", this.props.products)
     var total = 0;
-    for (var i = 0; i < this.props.cart.length; i++)
-      total += parseInt(this.props.cart[i].price);
+    for (var i = 0; i < this.props.products.length; i++) {
+      console.log("Price", this.props.products[i])
+      if (this.props.products[i].connectType === "booked" && (this.props.products[i].status === false && this.props.products[i].count > 0)) {
+        total += parseInt(this.props.products[i].product.price);
+        console.log("Price", this.props.products[i].product.price)
+      }
+    }
     this.setState({
       totalPrice: total,
     });
   };
+
+  submitForm = () => {
+    let idies = []
+    for (var i = 0; i < this.props.products.length; i++)
+      if (this.props.products[i].connectType === "booked" && (this.props.products[i].status === false && this.props.products[i].count > 0))
+        idies.push(this.props.products[i].id);
+    this.props.placeOrder(this.props.user.id, idies)
+  }
 
   render() {
     const { cart, user } = this.props;
@@ -155,24 +174,27 @@ class Billing extends React.Component {
                   >
                     <thead>
                       <tr>
-                        <th>#</th>
+                        <th>Sr. No</th>
                         <th>Item Name</th>
                         <th>Price</th>
                       </tr>
                     </thead>
 
                     <tbody className="text-center">
-                      {cart &&
-                        cart.map((item, index) => {
-                          return (
-                            <>
-                              <tr>
-                                <td>{index + 1}</td>
-                                <td>{item.productName}</td>
-                                <td>₹ {item.price}</td>
-                              </tr>
-                            </>
-                          );
+                      {this.props.products &&
+                        this.props.products.map((item, index) => {
+                          if (item.connectType === "booked" && (item.status === false && item.count > 0)) {
+                            let product = item.product
+                            return (
+                              <>
+                                <tr key={index}>
+                                  <td>{index + 1}</td>
+                                  <td>{product.productName}</td>
+                                  <td>₹ {product.price}</td>
+                                </tr>
+                              </>
+                            );
+                          }
                         })}
                     </tbody>
                   </Table>
@@ -190,7 +212,7 @@ class Billing extends React.Component {
             </div>
             <Link to="/thankyou">
               {" "}
-              <Button variant="outline-success">Complete Order</Button>
+              <Button variant="outline-success" onClick={this.submitForm}>Complete Order</Button>
             </Link>
           </Col>
         </Row>
@@ -202,15 +224,14 @@ class Billing extends React.Component {
 const mapStateToProps = (state) => {
   console.log(state);
   return {
-    cart: state.productList.cart,
+    // cart: state.productList.cart,
+    products: state.user.currentUser.connect_products,
     user: state.user.currentUser,
   };
 };
 
 const mapDispatchToProps = (dispatch) => {
-  return {
-    dispatch: dispatch,
-  };
+  return bindActionCreators({ placeOrder }, dispatch);
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Billing);

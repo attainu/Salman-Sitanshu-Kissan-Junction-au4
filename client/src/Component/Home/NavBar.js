@@ -17,7 +17,7 @@ import Action from "../../ActionCreater/user";
 const { logout } = Action;
 
 function NavBar(props) {
-  const { Authenticated, logout } = props;
+  const { Authenticated, logout, type } = props;
   return (
     <>
       <Navbar className="shadow" bg="light" expand="lg" sticky="top">
@@ -78,24 +78,26 @@ function NavBar(props) {
                 </NavDropdown.Item>
               </>
             ) : (
-              <>
-                <Link to="/profile">
-                  <NavDropdown.Item href="/profile">Profile</NavDropdown.Item>
-                </Link>
-                <Link to="/profile/purchased">
-                  <NavDropdown.Item href="/">Ordered Product</NavDropdown.Item>
-                </Link>
-                <Link to="/cart">
-                  <NavDropdown.Item href="/">Cart</NavDropdown.Item>
-                </Link>
-                <NavDropdown.Divider />
-                <Link to="/">
-                  <NavDropdown.Item href="/" onClick={() => logout()}>
-                    Logout
-                  </NavDropdown.Item>
-                </Link>
-              </>
-            )}
+                <>
+                  <Link to='/profile'><NavDropdown.Item href='/profile' >Profile</NavDropdown.Item></Link>
+                  {(type === "Consumer" || type === "Farmer") ?
+                    <>
+                      <Link to='/profile/purchased'><NavDropdown.Item href='/' >Ordered Product</NavDropdown.Item></Link>
+                      <Link to='/cart'><NavDropdown.Item href='/'>Cart</NavDropdown.Item></Link> </> : ""}
+                  {(type === "Seller" || type === "Farmer") ?
+                    <>
+                      <Link to='/profile/product'><NavDropdown.Item href='/' >Add Product</NavDropdown.Item></Link>
+                      <Link to='/profile/sold'><NavDropdown.Item href='/'>Sold</NavDropdown.Item></Link> </> : ""}
+                  {(type === "Farmer") ?
+                    <>
+                      <Link to='/sell_grain'><NavDropdown.Item href='/'>Sell Grain</NavDropdown.Item></Link> </> : ""}
+
+                  <NavDropdown.Divider />
+                  <Link to='/'><NavDropdown.Item href="/" onClick={() => logout()}>Logout</NavDropdown.Item></Link>
+                </>
+              )}
+
+
           </NavDropdown>
           <Form inline>
             <FormControl
@@ -115,7 +117,7 @@ function NavBar(props) {
 const take = (state) => {
   const { Authenticated } = state.user;
   return {
-    Authenticated,
+    Authenticated, type: state.user.currentUser.type
   };
 };
 

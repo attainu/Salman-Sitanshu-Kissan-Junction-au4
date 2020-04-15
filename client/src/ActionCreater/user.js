@@ -11,6 +11,7 @@ const link = {
   userProduct: "/conprd/",
   join: "/join/",
   address: "/address/",
+  seller: "/join/product/"
 };
 
 const notify = {
@@ -37,7 +38,6 @@ Action.register = (data) => {
   return (async (dispatch) => {
     try {
       let value = await axios.post(link.user, data);
-      console.log("Register", value)
       if (value.data.email) {
         dispatch({ type: "registered" });
         dispatch({
@@ -81,7 +81,6 @@ Action.login = (data) => {
       });
     }
     catch (error) {
-      console.log(error.response.data)
       dispatch({
         type: "error",
         payload: error.response.data,
@@ -161,13 +160,98 @@ Action.profileEdit = (user, address, id, addressId) => {
         addressId: res.data.id,
       });
       dispatch(notify);
-      console.log("Updated user with address", value);
     } else {
       let res = await axios.put(`${link.address}${addressId}`, address);
       dispatch(notify);
-      console.log("Updated address", res);
     }
   };
 };
+
+Action.addCart = (userId, productId) => {
+  return async (dispatch) => {
+    try {
+      console.log("Cart Adding", userId, productId)
+      let middleT = await axios(`${link.userProduct}user/${userId}/${productId}`)
+      console.log("Working", middleT)
+      if (middleT.data) {
+        let userProduct = await axios.put(`${link.userProduct}${middleT.data.id}`, {
+          status: false,
+          count: parseInt(middleT.data.count) + 1
+        });
+        console.log(userProduct)
+      }
+      else {
+        let value = await axios.post(link.userProduct, {
+          connectType: "booked",
+          userId: userId,
+          productId: productId,
+          count: 1
+        });
+        console.log("Cart Added", value)
+      }
+      // if ((value.data[0] = 1)) dispatch({ type: "register" });
+      // else dispatch(notify);
+      // let product = await axios.post(link.productR, data);
+      // let value = await axios.post(link.userProduct, {
+      //   connectType: "myproduct",
+      //   userId: id,
+      //   productId: product.data.id,
+      // });
+      // if ((value.data[0] = 1)) dispatch({ type: "register" });
+      // else 
+      dispatch({
+        type: "notify",
+        payload: {
+          type: "success",
+          msg: "Added To Cart",
+        }
+      });
+    }
+    catch (err) {
+      dispatch(notify);
+    }
+  };
+};
+
+Action.placeOrder = (userId, productIds) => {
+  return async (dispatch) => {
+    try {
+      await Promise.all(productIds.map(async (id) => {
+        let userProduct = await axios.put(`${link.userProduct}${id}`, {
+          connectType: "booked",
+          status: true
+        });
+        console.log("0", id, userProduct)
+        if (userProduct.data) {
+          let product = await axios(`${link.userProduct}product/${userId}/${id}`)
+          console.log("1", product)
+          let seller = await axios(`${link.seller}${product.data.product.id}`);
+          console.log("2", seller)
+          let connectedP = await axios(`${link.userProduct}${seller.data.connect_products[0].id}`);
+          console.log("3", connectedP)
+          let sellerProduct = await axios.put(`${link.userProduct}${seller.data.connect_products[0].id}`, {
+            status: true,
+            count: parseInt(connectedP.data.count) + 1
+          });
+          console.log("Trueee", sellerProduct)
+
+        }
+        // await axios.put(`${link.userProduct}${seller.connect_products.user.id}`, {
+        //   status: true,
+        // });
+      }))
+      dispatch({
+        type: "notify",
+        payload: {
+          type: "success",
+          msg: "Placed Succefully",
+        }
+      });
+    }
+    catch (err) {
+      dispatch(notify);
+    }
+  }
+}
 
 export default Action;
