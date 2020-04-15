@@ -1,13 +1,12 @@
 import React, { Component } from "react";
 import { Spinner, Row, Col, Image, Form, Button } from "react-bootstrap";
-import { AiFillLike, AiFillDislike } from "react-icons/ai";
-import { NewsHeaderCard, RecipeCard } from "react-ui-cards";
+
 import BlogForm from "./blogform";
 import { connect } from "react-redux";
 import ClapButton from "react-clap-button";
 import axios from "axios";
 import Adminlogin from "./adminlogin";
-import { FaTrashAlt } from "react-icons/fa";
+
 class Bloglist extends Component {
   state = {
     loading: false,

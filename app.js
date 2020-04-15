@@ -50,6 +50,7 @@ app.get("/blog_get", blogControllers.get);
 app.post("/blog_update", blogControllers.update);
 app.post("/adminlogin", blogControllers.login);
 app.post("/blog_delete", blogControllers.delete);
+
 //Heroku Config
 if (process.env.NODE_ENV === "production") {
   // Serve any static files

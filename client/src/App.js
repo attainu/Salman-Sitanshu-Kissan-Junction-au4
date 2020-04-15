@@ -39,6 +39,7 @@ import Addgrain from "./Component/Farmer/addgrain";
 import FarmerGrain from "./Component/Farmer/farmergrain";
 import Grainpage from "./Component/Farmer/graincart";
 import Bloglist from "./Component/Adminblog/bloglist";
+import ComodityData from "./Component/ComodityRate/comodity";
 const { token } = Action;
 
 class App extends Component {
@@ -72,7 +73,12 @@ class App extends Component {
               <Route path="/signup" component={Register} />
               <Route path="/profile" component={Profile} />
               <Route path="/single-product" component={Content} />
-              <Route path="/machine-register" render={(props) => <Productcategory {...props} machine={true} />} />
+              <Route
+                path="/machine-register"
+                render={(props) => (
+                  <Productcategory {...props} machine={true} />
+                )}
+              />
               <Route path="/seed-register" component={Productcategory} />
               <Route path="/cart" component={Cart} />
               <Route path="/login" component={Login} />
@@ -81,7 +87,7 @@ class App extends Component {
               <Route path="/checkout" component={Billing} />
               <Route path="/single_grain" component={Grainpage} />
               <Route path="/blog" component={Bloglist} />
-
+              <Route path="/comodity" component={ComodityData} />
               <Route path="/thankyou" component={Thankyou} />
               <Route path="*" component={NotFound} />
             </Switch>
