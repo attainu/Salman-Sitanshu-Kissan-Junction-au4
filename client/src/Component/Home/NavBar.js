@@ -84,10 +84,12 @@ function NavBar(props) {
                     <>
                       <Link to='/profile/purchased'><NavDropdown.Item href='/' >Ordered Product</NavDropdown.Item></Link>
                       <Link to='/cart'><NavDropdown.Item href='/'>Cart</NavDropdown.Item></Link> </> : ""}
+
                   {(type === "Seller" || type === "Farmer") ?
                     <>
                       <Link to='/profile/product'><NavDropdown.Item href='/' >Add Product</NavDropdown.Item></Link>
                       <Link to='/profile/sold'><NavDropdown.Item href='/'>Sold</NavDropdown.Item></Link> </> : ""}
+                      
                   {(type === "Farmer") ?
                     <>
                       <Link to='/sell_grain'><NavDropdown.Item href='/'>Sell Grain</NavDropdown.Item></Link> </> : ""}

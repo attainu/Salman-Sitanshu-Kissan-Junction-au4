@@ -15,7 +15,6 @@ const { join } = User;
 
 class Profile extends Component {
 
-
   componentDidMount() {
     console.log('ALso here', this.props.address)
     this.props.join(this.props.id);

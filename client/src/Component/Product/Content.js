@@ -1,7 +1,5 @@
 import React from "react";
 import "../../Css/profile.css";
-import img1 from "../../Image/service1.jpg";
-import img2 from "../../Image/service2.jpg";
 import PageDescription from "../Home/PageDescription";
 import Blog from "../Home/Blog";
 import { connect } from "react-redux";
