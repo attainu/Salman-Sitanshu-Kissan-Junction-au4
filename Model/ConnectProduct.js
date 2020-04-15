@@ -11,6 +11,10 @@ const ConnectProduct = db.define('connect_product', {
     type: Sequelize.INTEGER,
     defaultValue: 0
   },
+  cart: {
+    type: Sequelize.INTEGER,
+    defaultValue: 0
+  },
   status: {
     type: Sequelize.BOOLEAN,
     defaultValue: false

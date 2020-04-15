@@ -8,29 +8,23 @@ import { Link } from "react-router-dom";
 import User from "../../ActionCreater/user";
 
 const { notify } = Action;
-const { join } = User;
+const { join, addCart, minusCount } = User;
 
 class Profile extends React.Component {
-  state = {
-    productCount: 1,
-  };
 
   componentDidMount() {
     this.props.join(this.props.id);
-    this.setState({
-      render: false
-    })
   }
 
-  increaseProduct = () => {
-    this.setState({
-      productCount: this.state.productCount + 1,
-    });
-  };
+  // increaseProduct = () => {
+  //   this.setState({
+  //     productCount: this.state.productCount + 1,
+  //   });
+  // };
   render() {
     const { notify, Authenticated, products } = this.props;
     let flag = false
-    products.forEach((item) => { if (item.connectType === "booked" && (item.status === false && item.count > 0)) flag = true })
+    products.forEach((item) => { if (item.connectType === "booked" && (item.status === false && item.cart > 0)) flag = true })
     console.log(flag)
     return (
       <>
@@ -59,7 +53,7 @@ class Profile extends React.Component {
             <Table borderless responsive>
               <tbody className="text-center">
                 {products.map((item, index) => {
-                  if (item.connectType === "booked" && (item.status === false && item.count > 0)) {
+                  if (item.connectType === "booked" && (item.status === false && item.cart > 0)) {
                     let product = item.product
                     return (
                       <>
@@ -78,31 +72,26 @@ class Profile extends React.Component {
                             Seller Amitabh Kumar
                           </td>
                           <td className="cart-btn">
-                            <Button
+                            {/* <Button
                               variant="secondary"
-                              onClick={() =>
-                                notify({ type: "warn", msg: "Removed 1" })
-                              }
+                              onClick={this.countMinus}
                             >
                               -
-                            </Button>
+                            </Button> */}
                             <span className="mr-3 ml-3">
-                              {this.state.productCount}
+                              {item.cart} Quantity
                             </span>
-                            <Button
+                            {/* <Button
                               variant="secondary"
-                              onClick={
-                                (() => notify({ type: "warn", msg: "Added 1" }),
-                                  this.increaseProduct)
-                              }
+                              onClick={this.addToCart}
                             >
                               +
-                            </Button>
+                            </Button> */}
                           </td>
                           <td>
                             <h4>
                               <sup>₹</sup>
-                              {product.price}
+                              {parseInt(product.price) * item.cart}
                             </h4>
                           </td>
                           <td>
@@ -161,7 +150,7 @@ const take = (state) => {
 };
 
 const change = (dispatch) => {
-  return bindActionCreators({ notify, join }, dispatch);
+  return bindActionCreators({ notify, join, addCart, minusCount }, dispatch);
 };
 
 export default connect(take, change)(Profile);

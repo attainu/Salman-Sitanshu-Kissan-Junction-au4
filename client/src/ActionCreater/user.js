@@ -176,7 +176,7 @@ Action.addCart = (userId, productId) => {
       if (middleT.data) {
         let userProduct = await axios.put(`${link.userProduct}${middleT.data.id}`, {
           status: false,
-          count: parseInt(middleT.data.count) + 1
+          cart: parseInt(middleT.data.cart) + 1
         });
         console.log(userProduct)
       }
@@ -185,20 +185,16 @@ Action.addCart = (userId, productId) => {
           connectType: "booked",
           userId: userId,
           productId: productId,
-          count: 1
+          cart: 1
         });
         console.log("Cart Added", value)
       }
-      // if ((value.data[0] = 1)) dispatch({ type: "register" });
-      // else dispatch(notify);
-      // let product = await axios.post(link.productR, data);
-      // let value = await axios.post(link.userProduct, {
-      //   connectType: "myproduct",
-      //   userId: id,
-      //   productId: product.data.id,
-      // });
-      // if ((value.data[0] = 1)) dispatch({ type: "register" });
-      // else 
+      let data = await axios(`${link.join}${userId}`);
+      if (data.data.id)
+        dispatch({
+          type: "login",
+          payload: data.data,
+        });
       dispatch({
         type: "notify",
         payload: {
@@ -213,25 +209,58 @@ Action.addCart = (userId, productId) => {
   };
 };
 
+Action.minusCount = (userId, productId) => {
+  return async (dispatch) => {
+    try {
+      console.log("Cart Adding", userId, productId)
+      let middleT = await axios(`${link.userProduct}user/${userId}/${productId}`)
+      console.log("Working", middleT)
+      let userProduct = await axios.put(`${link.userProduct}${middleT.data.id}`, {
+        status: false,
+        cart: parseInt(middleT.data.cart) - 1
+      });
+
+      let data = await axios(`${link.join}${userId}`);
+      if (data.data.id)
+        dispatch({
+          type: "login",
+          payload: data.data,
+        });
+      dispatch({
+        type: "notify",
+        payload: {
+          type: "warn",
+          msg: "Removed 1 Quantity",
+        }
+      });
+    }
+    catch (err) {
+      dispatch(notify);
+    }
+  };
+}
+
 Action.placeOrder = (userId, productIds) => {
   return async (dispatch) => {
     try {
       await Promise.all(productIds.map(async (id) => {
+        let product = await axios(`${link.userProduct}product/${userId}/${id}`)
+        console.log("1", product)
         let userProduct = await axios.put(`${link.userProduct}${id}`, {
           connectType: "booked",
-          status: true
+          status: true,
+          cart: 0,
+          count: parseInt(product.data.count) + parseInt(product.data.cart)
         });
         console.log("0", id, userProduct)
         if (userProduct.data) {
-          let product = await axios(`${link.userProduct}product/${userId}/${id}`)
-          console.log("1", product)
           let seller = await axios(`${link.seller}${product.data.product.id}`);
           console.log("2", seller)
           let connectedP = await axios(`${link.userProduct}${seller.data.connect_products[0].id}`);
           console.log("3", connectedP)
           let sellerProduct = await axios.put(`${link.userProduct}${seller.data.connect_products[0].id}`, {
             status: true,
-            count: parseInt(connectedP.data.count) + 1
+            count: parseInt(connectedP.data.count) + parseInt(product.data.cart),
           });
           console.log("Trueee", sellerProduct)
 

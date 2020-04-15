@@ -14,24 +14,37 @@ import { bindActionCreators } from "redux";
 import Action from "../../ActionCreater/user";
 import Notify from "../../ActionCreater/notification";
 
-const { addCart } = Action;
+const { addCart, join, minusCount } = Action;
 const { notify } = Notify;
 
 class Content extends React.Component {
   //state to check if the proucts is seed or pesticides
+
   constructor(props) {
     super(props);
     this.state = {
       type: this.props.location.aboutProps.type,
       item: this.props.location.aboutProps.item,
+      rerender: 0
     };
     this.addToCart = this.addToCart.bind();
+    this.countMinus = this.countMinus.bind();
+  }
 
+  componentDidMount() {
+    this.props.join(this.props.userInfo.id);
+  }
+
+  countMinus = () => {
+    if (this.props.userInfo.id) {
+      this.props.minusCount(this.props.userInfo.id, this.props.location.aboutProps.item.id)
+    }
   }
 
   addToCart = () => {
-    if (this.props.userInfo.id)
+    if (this.props.userInfo.id) {
       this.props.addCart(this.props.userInfo.id, this.props.location.aboutProps.item.id)
+    }
     else
       this.props.dispatch({
         type: "addToCart",
@@ -86,11 +99,15 @@ class Content extends React.Component {
                   <tr>
                     <th>Quantity (kg)</th>
                     <td>
-                      <Button className="mr-3" variant="secondary">
+                      <Button className="mr-3" variant="secondary" onClick={this.countMinus}>
                         -
                       </Button>
-                      1
-                      <Button className="ml-3" variant="secondary">
+                      {this.props.products.map((items) => {
+                        console.log(items, this.state.item.id)
+                        if (items.productId === this.state.item.id)
+                          return items.cart
+                      })}
+                      <Button className="ml-3" variant="secondary" onClick={this.addToCart}>
                         +
                       </Button>
                     </td>
@@ -201,13 +218,18 @@ class Content extends React.Component {
 }
 
 const mapStateToProps = (state) => {
+  const { connect_products } = state.user.currentUser
+  let products = [];
+  if (connect_products) {
+    products = connect_products
+  }
   return {
-    machine: state.productList, userInfo: state.user.currentUser
+    machine: state.productList, userInfo: state.user.currentUser, products
   };
 };
 
 const mapDispatchToProps = (dispatch) => {
-  return bindActionCreators({ addCart, notify }, dispatch);
+  return bindActionCreators({ addCart, notify, join, minusCount }, dispatch);
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Content);
