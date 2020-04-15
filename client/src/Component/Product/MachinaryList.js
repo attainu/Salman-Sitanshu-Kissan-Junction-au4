@@ -54,7 +54,8 @@ class MachineList extends React.Component {
                     className="btn btn-warning"
                     onClick={() => {
                       this.clearFilter();
-                    }}>
+                    }}
+                  >
                     <FaFilter /> Clear Filter
                   </Button>
                   <Slider type={["Tractor", "Pesticider"]} />
@@ -78,7 +79,8 @@ class MachineList extends React.Component {
                               class="img-fluid"
                               src={item.imageurl}
                               alt="Alternate Text"
-                              style={{ width: "18.2rem", height: "12rem" }} />
+                              style={{ width: "18.2rem", height: "12rem" }}
+                            />
                           </div>
                           <div class="card-image-overlay m-auto">
                             <span class="card-detail-badge mr-3">
@@ -96,8 +98,15 @@ class MachineList extends React.Component {
                               to={{
                                 pathname: "/single-product",
                                 aboutProps: { item: item, type: "machine" },
-                              }}>
-                              <Button className="text-white" variant={''} style={{ backgroundColor: "#28ca2f" }} >Preview Here</Button>
+                              }}
+                            >
+                              <Button
+                                className="text-white"
+                                variant={""}
+                                style={{ backgroundColor: "#28ca2f" }}
+                              >
+                                Preview Here
+                              </Button>
                             </Link>
                           </div>
                         </div>

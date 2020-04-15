@@ -42,7 +42,7 @@ router.get("/selectmachine", async (req, res) => {
   try {
     let product = await Product.findAll({
       where: {
-        productType: ["Tractor", "Pesticides Machine"],
+        productType: ["Tractor", "Pesticider"],
       },
     });
 
