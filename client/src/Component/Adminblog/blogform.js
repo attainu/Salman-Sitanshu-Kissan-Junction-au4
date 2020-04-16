@@ -43,7 +43,7 @@ class BlogForm extends React.Component {
     } = this.state;
     await axios({
       method: "post",
-      url: "http://localhost:5000/blog_create",
+      url: "/blog_create",
       data: {
         blogTitle,
         sourceName,
@@ -54,7 +54,7 @@ class BlogForm extends React.Component {
       },
     }).then(function (response) {});
 
-    await fetch("http://localhost:5000/blog_get").then((res) => {
+    await fetch("/blog_get").then((res) => {
       res.json().then((data) => {
         this.props.dispatch({
           type: "bloglist",

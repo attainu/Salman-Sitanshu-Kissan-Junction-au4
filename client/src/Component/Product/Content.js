@@ -29,6 +29,7 @@ class Content extends React.Component {
     };
     this.addToCart = this.addToCart.bind();
     this.countMinus = this.countMinus.bind();
+    this.buyNow = this.buyNow.bind();
   }
 
   componentDidMount() {
@@ -45,6 +46,18 @@ class Content extends React.Component {
   addToCart = () => {
     if (this.props.userInfo.id) {
       this.props.addCart(this.props.userInfo.id, this.props.location.aboutProps.item.id)
+    }
+    else
+      this.props.notify({
+        type: "info",
+        msg: "Loggin First",
+      });
+  };
+
+  buyNow = () => {
+    if (this.props.userInfo.id) {
+      this.props.addCart(this.props.userInfo.id, this.props.location.aboutProps.item.id);
+      this.props.history.push("/cart");
     }
     else
       this.props.notify({
@@ -78,7 +91,7 @@ class Content extends React.Component {
               <h1 className="mb-0" style={{ "font-weight": "500" }}>
                 {this.state.item.productName}
               </h1>
-              <p className="pl-2">Seller Amitabh Kumar</p>
+              {/* <p className="pl-2">Seller Amitabh Kumar</p> */}
               <table className="table table-sm table-borderless">
                 <tbody>
                   <tr>
@@ -157,7 +170,7 @@ class Content extends React.Component {
                   Add To Cart
                 </Button>
 
-                <Button className="btn-2" variant="success">
+                <Button className="btn-2" variant="success" onClick={this.buyNow}>
                   Buy Now
                 </Button>
               </div>

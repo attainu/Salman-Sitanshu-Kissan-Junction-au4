@@ -20,7 +20,7 @@ function NavBar(props) {
   const { Authenticated, logout, type } = props;
   return (
     <>
-      <Navbar className="shadow" bg="light" expand="lg" sticky="top">
+      <Navbar className="shadow pb-0 pt-0" expand="sm" bg="light" variant="light" sticky="top">
         <Link to="/">
           <Navbar.Brand href="#home">
             <img className="mr-1" src={logo} width="35px" />
@@ -37,11 +37,9 @@ function NavBar(props) {
             <Link to="/blog">
               <Nav.Link href="#l">Blog</Nav.Link>
             </Link>
-          </Nav>
-          <Nav className="ml-auto">
-            <Nav.Link href="#home">About</Nav.Link>
-            <Link to="/test">
-              <Nav.Link href="#link">Contacts</Nav.Link>
+            <Nav.Link href="#hom">About</Nav.Link>
+            <Link to="/404">
+              <Nav.Link href="#link">404</Nav.Link>
             </Link>
           </Nav>
           <NavDropdown
@@ -100,14 +98,14 @@ function NavBar(props) {
 
 
           </NavDropdown>
-          <Form inline>
+          <Form inline >
             <FormControl
               variant="outline-success"
               type="text"
               placeholder="Search"
               className="mr-sm-2"
             />
-            <Button variant="outline-success">Search</Button>
+            <Button className="mx-auto mt-1 mb-1" variant="outline-success">Search</Button>
           </Form>
         </Navbar.Collapse>
       </Navbar>

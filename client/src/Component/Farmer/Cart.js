@@ -57,7 +57,6 @@ class Profile extends React.Component {
             <h1 className=" d-inline flex-fill m-3 mb-2">Shopping Cart</h1>
             <div className="mx-auto m-3 mb-5">
               <Link to="/checkout">
-                {" "}
                 <Button
                   className="ml-auto"
                   variant="success"
@@ -84,7 +83,7 @@ class Profile extends React.Component {
                         <tr key={index}>
                           <td scope="row">
                             <img
-                              className="m-0 rounded-circle p-0 "
+                              className="m-0 rounded p-0 "
                               width="100px"
                               src={product.imageurl}
                               alt="user pic"
@@ -92,8 +91,8 @@ class Profile extends React.Component {
                           </td>
                           <td>
                             <h4 className="m-0 p-0">{product.productName}</h4>
-                            <br />
-                            Seller Amitabh Kumar
+                            {/* <br />
+                            Seller Amitabh Kumar */}
                           </td>
                           <td className="cart-btn">
                             <Button
