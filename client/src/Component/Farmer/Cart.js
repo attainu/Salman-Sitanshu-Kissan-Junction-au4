@@ -8,14 +8,38 @@ import { Link } from "react-router-dom";
 import User from "../../ActionCreater/user";
 
 const { notify } = Action;
-const { join, addCart, minusCount } = User;
+const { join, addCart, minusCount, removeCart } = User;
 
 class Profile extends React.Component {
+
+  constructor() {
+    super();
+    this.addToCart = this.addToCart.bind();
+    this.countMinus = this.countMinus.bind();
+    this.removeCart = this.removeCart.bind();
+  }
 
   componentDidMount() {
     this.props.join(this.props.id);
   }
 
+  countMinus = (productId) => {
+    if (this.props.id) {
+      this.props.minusCount(this.props.id, productId)
+    }
+  }
+
+  addToCart = (productId) => {
+    if (this.props.id) {
+      this.props.addCart(this.props.id, productId)
+    }
+  };
+
+  removeCart = (productId) => {
+    if (this.props.id) {
+      this.props.removeCart(this.props.id, productId)
+    }
+  };
   // increaseProduct = () => {
   //   this.setState({
   //     productCount: this.state.productCount + 1,
@@ -72,21 +96,21 @@ class Profile extends React.Component {
                             Seller Amitabh Kumar
                           </td>
                           <td className="cart-btn">
-                            {/* <Button
+                            <Button
                               variant="secondary"
-                              onClick={this.countMinus}
+                              onClick={() => this.countMinus(product.id)}
                             >
                               -
-                            </Button> */}
+                            </Button>
                             <span className="mr-3 ml-3">
                               {item.cart} Quantity
                             </span>
-                            {/* <Button
+                            <Button
                               variant="secondary"
-                              onClick={this.addToCart}
+                              onClick={() => this.addToCart(product.id)}
                             >
                               +
-                            </Button> */}
+                            </Button>
                           </td>
                           <td>
                             <h4>
@@ -97,13 +121,7 @@ class Profile extends React.Component {
                           <td>
                             <i
                               class="fa fa-trash fa-2x text-danger"
-                              onClick={() =>
-                                notify({
-                                  type: "error",
-                                  msg: "Item Removed",
-                                  item: product,
-                                })
-                              }
+                              onClick={() => this.removeCart(product.id)}
                             ></i>
                           </td>
                         </tr>
@@ -120,12 +138,12 @@ class Profile extends React.Component {
         )}
 
         {!flag && (
-          <div className="mt-5 d-flex justify-content-center">
+          <div className="m-5 d-flex flex-column align-items-center justify-content-center">
             <h1>
               <span style={{ color: "#28ca2f" }}>Ooops!!! </span> Your Cart is
               Empty.
             </h1>
-            <img src="https://candleroses.com/images/Cart-empty.gif"></img>
+            <img className="content" src="https://cdn.dribbble.com/users/4131769/screenshots/7237700/media/4e397c44a240131ae063251dae9d33be.jpg"></img>
           </div>
         )}
       </>
@@ -150,7 +168,7 @@ const take = (state) => {
 };
 
 const change = (dispatch) => {
-  return bindActionCreators({ notify, join, addCart, minusCount }, dispatch);
+  return bindActionCreators({ notify, join, addCart, minusCount, removeCart }, dispatch);
 };
 
 export default connect(take, change)(Profile);

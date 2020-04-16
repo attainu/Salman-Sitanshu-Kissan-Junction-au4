@@ -114,7 +114,11 @@ class Content extends React.Component {
                   </tr>
                   <tr>
                     <th>Total:</th>
-                    <td>₹1750</td>
+                    <td>₹{this.props.products.map((items) => {
+                        console.log(items, this.state.item.id)
+                        if (items.productId === this.state.item.id)
+                          return items.cart * this.state.item.price
+                      })}</td>
                   </tr>
                   <tr>
                     <th>Product Description:</th>

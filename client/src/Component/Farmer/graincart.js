@@ -13,7 +13,7 @@ import { bindActionCreators } from "redux";
 import Action from "../../ActionCreater/user";
 import Notify from "../../ActionCreater/notification";
 
-const { addCart } = Action;
+const { addCart, join, minusCount } = Action;
 const { notify } = Notify;
 
 class Grainpage extends React.Component {
@@ -23,16 +23,27 @@ class Grainpage extends React.Component {
       item: this.props.location.aboutProps.item,
     };
     this.addToCart = this.addToCart.bind();
+    this.countMinus = this.countMinus.bind();
+  }
+
+  componentDidMount() {
+    this.props.join(this.props.userInfo.id);
+  }
+
+  countMinus = (n) => {
+    if (n == 0) return
+    if (this.props.userInfo.id) {
+      this.props.minusCount(this.props.userInfo.id, this.props.location.aboutProps.item.id)
+    }
+    else
+      this.props.notify({ type: "info", msg: "Loggin First" });
   }
 
   addToCart = () => {
     if (this.props.userInfo.id)
       this.props.addCart(this.props.userInfo.id, this.props.location.aboutProps.item.id)
     else
-      this.props.dispatch({
-        type: "addToCart",
-        payload: this.props.location.aboutProps.item,
-      });
+      this.props.notify({ type: "info", msg: "Loggin First" });
   };
 
   render() {
@@ -68,18 +79,31 @@ class Grainpage extends React.Component {
                   <tr>
                     <th>Quantity (kg)</th>
                     <td>
-                      <Button className="mr-3" variant="secondary">
-                        -
-                      </Button>
-                      1
-                      <Button className="ml-3" variant="secondary">
-                        +
-                      </Button>
+
+                      {this.props.products.map((items) => {
+                        console.log(items, this.state.item.id)
+                        if (items.productId === this.state.item.id)
+                          return (<>
+                            <Button className="mr-3" variant="secondary" onClick={() => this.countMinus(items.cart)}>
+                              -
+                            </Button>
+                            {items.cart}
+                            <Button className="ml-3" variant="secondary" onClick={this.addToCart}>
+                              +
+                            </Button>
+                          </>
+                          )
+                      })}
+
                     </td>
                   </tr>
                   <tr>
                     <th>Total:</th>
-                    <td>₹1750</td>
+                    <td>₹{this.props.products.map((items) => {
+                      console.log(items, this.state.item.id)
+                      if (items.productId === this.state.item.id)
+                        return items.cart * this.state.item.price
+                    })}</td>
                   </tr>
                   <tr>
                     <th>Avaliable Location</th>
@@ -127,13 +151,18 @@ class Grainpage extends React.Component {
 }
 
 const mapStateToProps = (state) => {
+  const { connect_products } = state.user.currentUser
+  let products = [];
+  if (connect_products) {
+    products = connect_products
+  }
   return {
-    machine: state.productList, userInfo: state.user.currentUser
+    machine: state.productList, userInfo: state.user.currentUser, products
   };
 };
 
 const mapDispatchToProps = (dispatch) => {
-  return bindActionCreators({ addCart, notify }, dispatch);
+  return bindActionCreators({ addCart, notify, join, minusCount }, dispatch);
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Grainpage);

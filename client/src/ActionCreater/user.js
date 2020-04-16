@@ -240,6 +240,36 @@ Action.minusCount = (userId, productId) => {
   };
 }
 
+Action.removeCart = (userId, productId) => {
+  return async (dispatch) => {
+    try {
+      let middleT = await axios(`${link.userProduct}user/${userId}/${productId}`)
+      console.log(middleT)
+      let userProduct = await axios.put(`${link.userProduct}${middleT.data.id}`, {
+        status: true,
+        cart: 0
+      });
+      console.log(userProduct)
+      let data = await axios(`${link.join}${userId}`);
+      if (data.data.id)
+        dispatch({
+          type: "login",
+          payload: data.data,
+        });
+      dispatch({
+        type: "notify",
+        payload: {
+          type: "warn",
+          msg: "Removed From Cart",
+        }
+      });
+    }
+    catch (err) {
+      dispatch(notify);
+    }
+  };
+}
+
 Action.placeOrder = (userId, productIds) => {
   return async (dispatch) => {
     try {
