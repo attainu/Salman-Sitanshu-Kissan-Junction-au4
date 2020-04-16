@@ -28,30 +28,31 @@ class ProductRegister extends React.Component {
   }
 
   handleChange = (e) => {
+    console.log(e);
     this.setState({
       [e.target.name]: e.target.value,
     });
   };
   // For image upload on clodinary
-  uploadImage = async e => {
+  uploadImage = async (e) => {
     const files = e.target.files;
-    const data = new FormData()
-    data.append('file', files[0])
-    data.append('upload_preset', 'sitanshu')
+    const data = new FormData();
+    data.append("file", files[0]);
+    data.append("upload_preset", "sitanshu");
 
     const res = await fetch(
-      'https://api.cloudinary.com/v1_1/drr1rnoxf/image/upload',
+      "https://api.cloudinary.com/v1_1/drr1rnoxf/image/upload",
       {
-        method: 'POST',
-        body: data
+        method: "POST",
+        body: data,
       }
-    )
+    );
     const file = await res.json();
     this.setState({
-      imageurl: file.secure_url
-    })
+      imageurl: file.secure_url,
+    });
     console.log(this.state.imageurl);
-  }
+  };
   //form on submit event
   onSubmit = (event) => {
     console.log(this.state);
@@ -64,19 +65,21 @@ class ProductRegister extends React.Component {
       productDosage,
       targetplant,
       description,
-      imageurl
+      imageurl,
     } = this.state;
-    this.props.productregister({
-      productType,
-      productName,
-      price,
-      productSize,
-      productDosage,
-      targetplant,
-      description,
-      imageurl
-
-    }, this.props.id);
+    this.props.productregister(
+      {
+        productType,
+        productName,
+        price,
+        productSize,
+        productDosage,
+        targetplant,
+        description,
+        imageurl,
+      },
+      this.props.id
+    );
     // axios({
     //   method: "post",
     //   url: "http://localhost:5000/product/",
@@ -133,14 +136,20 @@ class ProductRegister extends React.Component {
                     <div class="row register-form">
                       <div class="col-md-6">
                         <div class="form-group">
-                          <input
-                            type="text"
-                            class="form-control"
-                            placeholder={this.props.product.type}
+                          <Form.Control
+                            as="select"
                             name="productType"
                             value={this.state.productType}
                             onChange={this.handleChange}
-                          />
+                          >
+                            {this.props.product.type.map((option) => {
+                              return (
+                                <option key={option} value={option}>
+                                  {option}
+                                </option>
+                              );
+                            })}
+                          </Form.Control>
                         </div>
                         <div class="form-group">
                           <input
@@ -196,17 +205,32 @@ class ProductRegister extends React.Component {
                           />
                         </div>
                         <div class="form-group">
-                          <input
-                            type="text"
-                            class="form-control"
-                            placeholder={this.props.product.target}
+                          <Form.Control
+                            as="select"
                             name="targetplant"
                             value={this.state.targetplant}
                             onChange={this.handleChange}
-                          />
+                          >
+                            {this.props.product.target.map((option) => {
+                              if (option === "Choose Target Plant....")
+                                return (
+                                  <option
+                                    className="dropdown-item disabled"
+                                    key={option}
+                                    value={option}
+                                  >
+                                    {option}
+                                  </option>
+                                );
+                              return (
+                                <option key={option} value={option}>
+                                  {option}
+                                </option>
+                              );
+                            })}
+                          </Form.Control>
                         </div>
                         <div class="form-group">
-
                           <Form.File
                             type="file"
                             name="file"
@@ -218,7 +242,6 @@ class ProductRegister extends React.Component {
                           variant="outline-success align-center"
                           onClick={this.onSubmit}
                         >
-
                           Add Product
                         </Button>
                       </div>
@@ -235,9 +258,9 @@ class ProductRegister extends React.Component {
 }
 
 const take = (state) => {
-  const { id } = state.user.currentUser
+  const { id } = state.user.currentUser;
   return {
-    id
+    id,
   };
 };
 

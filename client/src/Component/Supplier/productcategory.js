@@ -4,8 +4,8 @@ class Productcategory extends React.Component {
   state = {
     seed: {
       subject: "Seeds and Pestisides",
-      type: "Type i.e seed, pestiside",
-      target: "Target Plants",
+      type: ["Choose type ", "Seed", "Pesticides"],
+      target: ["Choose target Crop", "Rice", "Paddy", "Maize", "Fruits"],
       price: "Price",
       size: "Size i.e 10 ml, 100 ml",
       dosage: "Dosage per hectare",
@@ -13,8 +13,8 @@ class Productcategory extends React.Component {
     },
     machine: {
       subject: "Machine for Rent",
-      type: "Type i.e tractor, harvester",
-      target: "Target Crops",
+      type: ["Choose type ", "Tractor", "Pesticider"],
+      target: ["Choose target Crop", "Rice", "Paddy", "Maize", "Fruits"],
       price: "Rent Per Hour",
       size: "Power ie. 10Hw",
       dosage: "Max day to Hire",
@@ -24,7 +24,9 @@ class Productcategory extends React.Component {
   render() {
     return (
       <>
-        <ProductRegister product={this.props.machine ? this.state.machine : this.state.seed} />
+        <ProductRegister
+          product={this.props.machine ? this.state.machine : this.state.seed}
+        />
       </>
     );
   }

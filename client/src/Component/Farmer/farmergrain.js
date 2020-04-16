@@ -7,6 +7,7 @@ import Slider from "../Product/CategorySlider";
 import MyComponent from "../Product/PriceRangeFilter";
 import TargetCrop from "../Product/TargetCropFilter";
 import { FaFilter } from "react-icons/fa";
+
 class FarmerGrain extends React.Component {
   state = {
     grain: [],
@@ -36,8 +37,8 @@ class FarmerGrain extends React.Component {
       payload: "grain",
     });
   };
+
   render() {
-    console.log(this.props.grain);
     return (
       <>
         <div className="container-fluid mt-3 listbackground ">
