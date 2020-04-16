@@ -13,7 +13,6 @@ class BlogForm extends React.Component {
     dislike: 0,
   };
   handleChange = (e) => {
-    console.log(e);
     this.setState({
       [e.target.name]: e.target.value,
     });

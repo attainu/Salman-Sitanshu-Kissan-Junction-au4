@@ -4,14 +4,12 @@ let blogdata = {
 };
 
 function blogState(state = blogdata, action) {
-  console.log(action);
   let stateCopy = JSON.parse(JSON.stringify(state));
 
   switch (action.type) {
     //to add blog
     case "bloglist":
       stateCopy.blogList = { ...action.payload };
-      console.log(stateCopy.blogList);
       return stateCopy;
 
     case "blogdelete":

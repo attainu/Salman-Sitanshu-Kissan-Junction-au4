@@ -25,14 +25,12 @@ class Addgrain extends React.Component {
   }
 
   handleChange = (e) => {
-    console.log(e);
     this.setState({
       [e.target.name]: e.target.value,
     });
   };
 
   onSubmit = (event) => {
-    console.log(this.state);
     event.preventDefault();
     let {
       grain_name,

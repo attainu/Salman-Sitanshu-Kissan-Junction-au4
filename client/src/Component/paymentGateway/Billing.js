@@ -14,13 +14,10 @@ class Billing extends React.Component {
     totalPrice: 0,
   };
   componentDidMount = () => {
-    console.log("CDM", this.props.products)
     var total = 0;
     for (var i = 0; i < this.props.products.length; i++) {
-      console.log("Price", this.props.products[i])
       if (this.props.products[i].connectType === "booked" && (this.props.products[i].status === false && this.props.products[i].cart > 0)) {
         total += parseInt(this.props.products[i].product.price) * parseInt(this.props.products[i].cart);
-        console.log("Price", this.props.products[i].product.price)
       }
     }
     this.setState({
@@ -222,7 +219,6 @@ class Billing extends React.Component {
 }
 
 const mapStateToProps = (state) => {
-  console.log(state);
   return {
     // cart: state.productList.cart,
     products: state.user.currentUser.connect_products,

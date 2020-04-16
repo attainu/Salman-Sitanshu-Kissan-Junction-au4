@@ -68,7 +68,6 @@ class Content extends React.Component {
 
   render() {
     //product size for seed and machine power for all machines
-    console.log(this.props.machine);
     let productSize;
     if (this.state.type === "seed") {
       productSize = <p> Product Size </p>;
@@ -114,7 +113,6 @@ class Content extends React.Component {
                     <th>Quantity (kg)</th>
                     <td>
                       {this.props.products.map((items) => {
-                        console.log(items, this.state.item.id)
                         if (items.productId === this.state.item.id)
                           return (<>
                             <Button className="mr-3" variant="secondary" onClick={() => this.countMinus(items.cart)}>
@@ -133,7 +131,6 @@ class Content extends React.Component {
                   <tr>
                     <th>Total:</th>
                     <td>₹{this.props.products.map((items) => {
-                      console.log(items, this.state.item.id)
                       if (items.productId === this.state.item.id)
                         return items.cart * this.state.item.price
                     })}</td>

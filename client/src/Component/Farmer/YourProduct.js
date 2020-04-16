@@ -13,7 +13,6 @@ class YourProduct extends Component {
     this.props.join(this.props.id);
   }
   deleteProduct = (id, conId) => {
-    console.log(this.props.id)
     this.props.deleteProduct(id, conId, this.props.id);
   }
   render() {

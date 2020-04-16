@@ -94,7 +94,6 @@ class Grainpage extends React.Component {
                     <td>
 
                       {this.props.products.map((items) => {
-                        console.log(items, this.state.item.id)
                         if (items.productId === this.state.item.id)
                           return (<>
                             <Button className="mr-3" variant="secondary" onClick={() => this.countMinus(items.cart)}>
@@ -113,7 +112,6 @@ class Grainpage extends React.Component {
                   <tr>
                     <th>Total:</th>
                     <td>₹{this.props.products.map((items) => {
-                      console.log(items, this.state.item.id)
                       if (items.productId === this.state.item.id)
                         return items.cart * this.state.item.price
                     })}</td>

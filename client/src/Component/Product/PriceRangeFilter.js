@@ -15,7 +15,6 @@ class MyComponent extends React.Component {
   };
   //props passes to redux state to filte on price
   applyFilter = () => {
-    console.log(this.props.type);
     if (this.props.type === "machine") {
       this.props.dispatch({
         type: "filter_machine_price",

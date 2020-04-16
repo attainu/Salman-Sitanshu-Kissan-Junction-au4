@@ -27,7 +27,6 @@ class TargetCrop extends React.Component {
     }
   };
   render() {
-    console.log(this.props.type);
     return (
       <>
         <Row>

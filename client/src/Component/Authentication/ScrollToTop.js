@@ -2,7 +2,6 @@ import React, { useEffect, Fragment } from 'react';
 import { withRouter } from 'react-router-dom';
 
 function ScrollToTop({ history, children }) {
-  console.log(history)
   useEffect(() => {
     const unlisten = history.listen(() => {
       if(history.location.pathname !== "/profile/sold" &&

@@ -49,7 +49,6 @@ class Profile extends React.Component {
     const { notify, Authenticated, products } = this.props;
     let flag = false
     products.forEach((item) => { if (item.connectType === "booked" && (item.status === false && item.cart > 0)) flag = true })
-    console.log(flag)
     return (
       <>
         {flag && (

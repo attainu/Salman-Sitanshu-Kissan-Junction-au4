@@ -28,7 +28,6 @@ class ProductRegister extends React.Component {
   }
 
   handleChange = (e) => {
-    console.log(e);
     this.setState({
       [e.target.name]: e.target.value,
     });
@@ -55,7 +54,6 @@ class ProductRegister extends React.Component {
   };
   //form on submit event
   onSubmit = (event) => {
-    console.log(this.state);
     event.preventDefault();
     let {
       productType,

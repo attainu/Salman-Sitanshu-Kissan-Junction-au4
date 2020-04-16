@@ -50,7 +50,6 @@ class ProfileEdit extends Component {
   };
 
   onSubmit = (event) => {
-    console.log(this.state);
     event.preventDefault();
     let {
       name,
