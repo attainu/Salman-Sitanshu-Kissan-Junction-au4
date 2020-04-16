@@ -24,6 +24,7 @@ class Grainpage extends React.Component {
     };
     this.addToCart = this.addToCart.bind();
     this.countMinus = this.countMinus.bind();
+    this.buyNow = this.buyNow.bind();
   }
 
   componentDidMount() {
@@ -44,6 +45,18 @@ class Grainpage extends React.Component {
       this.props.addCart(this.props.userInfo.id, this.props.location.aboutProps.item.id)
     else
       this.props.notify({ type: "info", msg: "Loggin First" });
+  };
+
+  buyNow = () => {
+    if (this.props.userInfo.id) {
+      this.props.addCart(this.props.userInfo.id, this.props.location.aboutProps.item.id);
+      this.props.history.push("/cart");
+    }
+    else
+      this.props.notify({
+        type: "info",
+        msg: "Loggin First",
+      });
   };
 
   render() {
@@ -81,7 +94,6 @@ class Grainpage extends React.Component {
                     <td>
 
                       {this.props.products.map((items) => {
-                        console.log(items, this.state.item.id)
                         if (items.productId === this.state.item.id)
                           return (<>
                             <Button className="mr-3" variant="secondary" onClick={() => this.countMinus(items.cart)}>
@@ -100,7 +112,6 @@ class Grainpage extends React.Component {
                   <tr>
                     <th>Total:</th>
                     <td>₹{this.props.products.map((items) => {
-                      console.log(items, this.state.item.id)
                       if (items.productId === this.state.item.id)
                         return items.cart * this.state.item.price
                     })}</td>
@@ -137,7 +148,7 @@ class Grainpage extends React.Component {
                   Add To Cart
                 </Button>
 
-                <Button className="btn-2" variant="success">
+                <Button className="btn-2" variant="success" onClick={this.buyNow}>
                   Buy Now
                 </Button>
               </div>

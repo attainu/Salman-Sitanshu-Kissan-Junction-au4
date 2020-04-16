@@ -16,7 +16,6 @@ class Google extends Component {
   }
 
   googleResponse = (response) => {
-    console.log(response, response.profileObj)
     const { googleId, imageUrl, email, name } = response.profileObj;
     this.props.google({
       googleId, email, name, img: imageUrl

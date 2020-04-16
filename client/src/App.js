@@ -48,11 +48,9 @@ class App extends Component {
       const Token = localStorage.token;
       this.props.token(Token);
     }
-    window.scrollTo(0, 0);
   };
 
   render() {
-    window.scrollTo(0, 0);
     return (
       <>
         <Router>

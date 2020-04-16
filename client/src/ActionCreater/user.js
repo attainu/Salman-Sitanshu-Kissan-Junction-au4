@@ -30,7 +30,7 @@ Action.join = (id) => {
         type: "login",
         payload: data.data,
       });
-    else dispatch(notify);
+    else dispatch({ type: "" });
   };
 };
 
@@ -77,7 +77,7 @@ Action.login = (data) => {
       }
       else dispatch({
         type: "warn",
-        msg: "Some Error",
+        msg: "Sorry Some Internal Error",
       });
     }
     catch (error) {
@@ -170,15 +170,12 @@ Action.profileEdit = (user, address, id, addressId) => {
 Action.addCart = (userId, productId) => {
   return async (dispatch) => {
     try {
-      console.log("Cart Adding", userId, productId)
       let middleT = await axios(`${link.userProduct}user/${userId}/${productId}`)
-      console.log("Working", middleT)
       if (middleT.data) {
         let userProduct = await axios.put(`${link.userProduct}${middleT.data.id}`, {
           status: false,
           cart: parseInt(middleT.data.cart) + 1
         });
-        console.log(userProduct)
       }
       else {
         let value = await axios.post(link.userProduct, {
@@ -187,7 +184,6 @@ Action.addCart = (userId, productId) => {
           productId: productId,
           cart: 1
         });
-        console.log("Cart Added", value)
       }
       let data = await axios(`${link.join}${userId}`);
       if (data.data.id)
@@ -212,9 +208,7 @@ Action.addCart = (userId, productId) => {
 Action.minusCount = (userId, productId) => {
   return async (dispatch) => {
     try {
-      console.log("Cart Adding", userId, productId)
       let middleT = await axios(`${link.userProduct}user/${userId}/${productId}`)
-      console.log("Working", middleT)
       let userProduct = await axios.put(`${link.userProduct}${middleT.data.id}`, {
         status: false,
         cart: parseInt(middleT.data.cart) - 1
@@ -244,12 +238,10 @@ Action.removeCart = (userId, productId) => {
   return async (dispatch) => {
     try {
       let middleT = await axios(`${link.userProduct}user/${userId}/${productId}`)
-      console.log(middleT)
       let userProduct = await axios.put(`${link.userProduct}${middleT.data.id}`, {
         status: true,
         cart: 0
       });
-      console.log(userProduct)
       let data = await axios(`${link.join}${userId}`);
       if (data.data.id)
         dispatch({
@@ -275,29 +267,20 @@ Action.placeOrder = (userId, productIds) => {
     try {
       await Promise.all(productIds.map(async (id) => {
         let product = await axios(`${link.userProduct}product/${userId}/${id}`)
-        console.log("1", product)
         let userProduct = await axios.put(`${link.userProduct}${id}`, {
           connectType: "booked",
           status: true,
           cart: 0,
           count: parseInt(product.data.count) + parseInt(product.data.cart)
         });
-        console.log("0", id, userProduct)
         if (userProduct.data) {
           let seller = await axios(`${link.seller}${product.data.product.id}`);
-          console.log("2", seller)
           let connectedP = await axios(`${link.userProduct}${seller.data.connect_products[0].id}`);
-          console.log("3", connectedP)
           let sellerProduct = await axios.put(`${link.userProduct}${seller.data.connect_products[0].id}`, {
             status: true,
             count: parseInt(connectedP.data.count) + parseInt(product.data.cart),
           });
-          console.log("Trueee", sellerProduct)
-
         }
-        // await axios.put(`${link.userProduct}${seller.connect_products.user.id}`, {
-        //   status: true,
-        // });
       }))
       dispatch({
         type: "notify",
@@ -312,5 +295,31 @@ Action.placeOrder = (userId, productIds) => {
     }
   }
 }
+
+Action.deleteProduct = (id, conId, userId) => {
+  return (async (dispatch) => {
+    try {
+      let product = await axios.delete(`${link.productR}${id}`);
+      if (product.data) {
+        await axios.delete(`${link.userProduct}${conId}`);
+        let data = await axios(`${link.join}${userId}`)
+        dispatch({
+          type: "login",
+          payload: data.data,
+        });
+        dispatch({
+          type: "notify",
+          payload: {
+            type: "error",
+            msg: "Deleted",
+          }
+        })
+      }
+    }
+    catch (error) {
+      dispatch(notify);
+    }
+  });
+};
 
 export default Action;

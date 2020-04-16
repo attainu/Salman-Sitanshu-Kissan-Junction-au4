@@ -147,7 +147,6 @@ class Bloglist extends Component {
 }
 
 const mapStateToProps = (state) => {
-  console.log(state.blogState.adminlogin);
   return {
     blogs: state.blogState.blogList.data,
     isadminlogin: state.blogState.adminlogin,

@@ -16,7 +16,6 @@ class Chart extends React.Component {
     ],
   };
   render() {
-    console.log();
     return (
       <>
         <div>

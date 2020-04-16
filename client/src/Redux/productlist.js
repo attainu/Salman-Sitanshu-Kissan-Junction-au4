@@ -9,7 +9,6 @@ let productState = {
 };
 
 function productList(state = productState, action) {
-  console.log(action);
   let stateCopy = JSON.parse(JSON.stringify(state));
 
   switch (action.type) {
@@ -118,7 +117,6 @@ function productList(state = productState, action) {
 
     case "addToCart":
       stateCopy.cart.push(action.payload);
-      console.log(stateCopy.cart);
       return stateCopy;
 
     case "notify":

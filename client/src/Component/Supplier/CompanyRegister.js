@@ -40,7 +40,6 @@ class CompanyRegister extends React.Component {
   };
 
   onSubmit = (event) => {
-    console.log(this.state);
     event.preventDefault();
     let {
       company_name,

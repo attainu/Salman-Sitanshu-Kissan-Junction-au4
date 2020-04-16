@@ -52,7 +52,6 @@ function Product({ product }) {
 }
 
 function Paypal(props) {
-  console.log(props);
 
   const product = {
     price: props.price,

@@ -29,13 +29,15 @@ class Content extends React.Component {
     };
     this.addToCart = this.addToCart.bind();
     this.countMinus = this.countMinus.bind();
+    this.buyNow = this.buyNow.bind();
   }
 
   componentDidMount() {
     this.props.join(this.props.userInfo.id);
   }
 
-  countMinus = () => {
+  countMinus = (n) => {
+    if (n == 0) return
     if (this.props.userInfo.id) {
       this.props.minusCount(this.props.userInfo.id, this.props.location.aboutProps.item.id)
     }
@@ -46,15 +48,26 @@ class Content extends React.Component {
       this.props.addCart(this.props.userInfo.id, this.props.location.aboutProps.item.id)
     }
     else
-      this.props.dispatch({
-        type: "addToCart",
-        payload: this.props.location.aboutProps.item,
+      this.props.notify({
+        type: "info",
+        msg: "Loggin First",
+      });
+  };
+
+  buyNow = () => {
+    if (this.props.userInfo.id) {
+      this.props.addCart(this.props.userInfo.id, this.props.location.aboutProps.item.id);
+      this.props.history.push("/cart");
+    }
+    else
+      this.props.notify({
+        type: "info",
+        msg: "Loggin First",
       });
   };
 
   render() {
     //product size for seed and machine power for all machines
-    console.log(this.props.machine);
     let productSize;
     if (this.state.type === "seed") {
       productSize = <p> Product Size </p>;
@@ -77,7 +90,7 @@ class Content extends React.Component {
               <h1 className="mb-0" style={{ "font-weight": "500" }}>
                 {this.state.item.productName}
               </h1>
-              <p className="pl-2">Seller Amitabh Kumar</p>
+              {/* <p className="pl-2">Seller Amitabh Kumar</p> */}
               <table className="table table-sm table-borderless">
                 <tbody>
                   <tr>
@@ -99,26 +112,28 @@ class Content extends React.Component {
                   <tr>
                     <th>Quantity (kg)</th>
                     <td>
-                      <Button className="mr-3" variant="secondary" onClick={this.countMinus}>
-                        -
-                      </Button>
                       {this.props.products.map((items) => {
-                        console.log(items, this.state.item.id)
                         if (items.productId === this.state.item.id)
-                          return items.cart
+                          return (<>
+                            <Button className="mr-3" variant="secondary" onClick={() => this.countMinus(items.cart)}>
+                              -
+                            </Button>
+                            {items.cart}
+                            <Button className="ml-3" variant="secondary" onClick={this.addToCart}>
+                              +
+                            </Button>
+                          </>
+                          )
                       })}
-                      <Button className="ml-3" variant="secondary" onClick={this.addToCart}>
-                        +
-                      </Button>
+
                     </td>
                   </tr>
                   <tr>
                     <th>Total:</th>
                     <td>₹{this.props.products.map((items) => {
-                        console.log(items, this.state.item.id)
-                        if (items.productId === this.state.item.id)
-                          return items.cart * this.state.item.price
-                      })}</td>
+                      if (items.productId === this.state.item.id)
+                        return items.cart * this.state.item.price
+                    })}</td>
                   </tr>
                   <tr>
                     <th>Product Description:</th>
@@ -152,7 +167,7 @@ class Content extends React.Component {
                   Add To Cart
                 </Button>
 
-                <Button className="btn-2" variant="success">
+                <Button className="btn-2" variant="success" onClick={this.buyNow}>
                   Buy Now
                 </Button>
               </div>
