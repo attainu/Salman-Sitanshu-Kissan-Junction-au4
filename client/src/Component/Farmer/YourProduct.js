@@ -13,6 +13,7 @@ function YourProduct(props) {
               className=" mt-4 w-md-25"
               type="button"
               value="Add Machine"
+              size="sm"
             />
           </Link>
           <Link to="/seed-register" className="d-flex justify-content-center">
@@ -21,6 +22,7 @@ function YourProduct(props) {
               className=" mt-4 w-md-25"
               type="button"
               value="Add Material"
+              size="sm"
             />
           </Link></> :
         <Link to="/sell_grain" className="d-flex justify-content-center">
@@ -29,6 +31,7 @@ function YourProduct(props) {
             className=" mt-4 w-md-25"
             type="button"
             value="Add Material"
+            size="sm"
           />
         </Link>}
 
