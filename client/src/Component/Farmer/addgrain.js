@@ -1,10 +1,12 @@
 import React from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
-import { Row, Col, Form, Container } from "react-bootstrap";
+import { Row, Col, Form, Container,Spinner ,Button } from "react-bootstrap";
 import { Redirect } from "react-router";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import Action from "../../ActionCreater/user";
+import bsCustomFileInput from 'bs-custom-file-input'
+
 const { productregister } = Action;
 class Addgrain extends React.Component {
   constructor() {
@@ -18,10 +20,15 @@ class Addgrain extends React.Component {
       price: "",
       type: ["Rice", "Maize", "Fruits", "Mustuard", "Pulsed"],
       todashboardredirect: false,
-      imageuploaded: false,
+      upload: true,
     };
     this.handleChange = this.handleChange.bind();
     this.onSubmit = this.onSubmit.bind();
+    this.uploadImage = this.uploadImage.bind();
+  }
+
+  componentDidMount() {
+    bsCustomFileInput.init();
   }
 
   handleChange = (e) => {
@@ -59,6 +66,9 @@ class Addgrain extends React.Component {
   };
   // For image upload on clodinary
   uploadImage = async (e) => {
+    this.setState({
+      upload: false
+    })
     const files = e.target.files;
     const data = new FormData();
     data.append("file", files[0]);
@@ -72,10 +82,13 @@ class Addgrain extends React.Component {
       }
     );
     const file = await res.json();
-    this.setState({
-      imageurl: file.secure_url,
-    });
-    console.log(this.state.imageurl);
+    if (file) {
+      this.setState({
+        imageurl: file.secure_url,
+        upload: true
+      })
+      console.log(file.secure_url)
+    }
   };
 
   render() {
@@ -184,20 +197,29 @@ class Addgrain extends React.Component {
                       <Col sm="8">
                         <Form.File
                           type="file"
-                          name="file"
-                          placeholder="Upload Product Image"
+                          label="Upload Product Image"
+                          custom
                           onChange={this.uploadImage}
                         />
                       </Col>
                     </Form.Group>
                     <div class="text-center">
-                      <button
-                        type="button"
-                        class="btn btn-success"
-                        onClick={this.onSubmit}
-                      >
-                        Add Here
-                      </button>
+                      {(this.state.upload) ?
+                        <Button
+                          variant="outline-success"
+                          onClick={this.onSubmit}
+                        > Add Product
+                          </Button> :
+                        <Button variant="outline-success" disabled>
+                          <Spinner
+                            as="span"
+                            animation="grow"
+                            size="sm"
+                            role="status"
+                            aria-hidden="true"
+                          />
+                            Loading...
+                          </Button>}
                     </div>
                   </Form>
                 </div>

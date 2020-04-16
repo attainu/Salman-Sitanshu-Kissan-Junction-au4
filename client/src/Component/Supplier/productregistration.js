@@ -1,11 +1,13 @@
 import React from "react";
 import "../../Css/supplierproduct.css";
-import { Form, Button } from "react-bootstrap";
+import { Form, Button, Spinner } from "react-bootstrap";
 import { Redirect } from "react-router";
 import Action from "../../ActionCreater/user";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
+import bsCustomFileInput from 'bs-custom-file-input'
 // import axios from "axios";
+
 const { productregister } = Action;
 
 class ProductRegister extends React.Component {
@@ -21,10 +23,15 @@ class ProductRegister extends React.Component {
       description: "",
       imageurl: "",
       todashboardredirect: false,
+      upload: true
     };
     this.handleChange = this.handleChange.bind();
     this.onSubmit = this.onSubmit.bind();
     this.uploadImage = this.uploadImage.bind();
+  }
+
+  componentDidMount() {
+    bsCustomFileInput.init();
   }
 
   handleChange = (e) => {
@@ -34,6 +41,9 @@ class ProductRegister extends React.Component {
   };
   // For image upload on clodinary
   uploadImage = async (e) => {
+    this.setState({
+      upload: false
+    })
     const files = e.target.files;
     const data = new FormData();
     data.append("file", files[0]);
@@ -47,10 +57,13 @@ class ProductRegister extends React.Component {
       }
     );
     const file = await res.json();
-    this.setState({
-      imageurl: file.secure_url,
-    });
-    console.log(this.state.imageurl);
+    if (file) {
+      this.setState({
+        imageurl: file.secure_url,
+        upload: true
+      })
+      console.log(file.secure_url)
+    }
   };
   //form on submit event
   onSubmit = (event) => {
@@ -231,17 +244,29 @@ class ProductRegister extends React.Component {
                         <div class="form-group">
                           <Form.File
                             type="file"
-                            name="file"
-                            placeholder="Upload Product Image"
+                            label="Upload Product Image"
+                            custom
                             onChange={this.uploadImage}
                           />
                         </div>
-                        <Button
-                          variant="outline-success align-center"
-                          onClick={this.onSubmit}
-                        >
-                          Add Product
-                        </Button>
+                        {(this.state.upload) ?
+                          <Button
+                            variant="outline-success"
+                            onClick={this.onSubmit}
+                          > Add Product
+                          </Button> :
+                          <Button variant="outline-success" disabled>
+                            <Spinner
+                              as="span"
+                              animation="grow"
+                              size="sm"
+                              role="status"
+                              aria-hidden="true"
+                            />
+                            Loading...
+                          </Button>}
+
+
                       </div>
                     </div>
                   </div>
