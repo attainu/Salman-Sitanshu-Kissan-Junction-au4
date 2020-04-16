@@ -5,6 +5,10 @@ import App from "./App";
 import * as serviceWorker from "./serviceWorker";
 import { Provider } from "react-redux";
 import rootReducer from "./Redux/index";
+import 'bootstrap/dist/css/bootstrap.min.css';
+import $ from 'jquery';
+import Popper from 'popper.js';
+import 'bootstrap/dist/js/bootstrap.bundle.min';
 import { createStore, applyMiddleware } from "redux";
 import thunk from "redux-thunk";
 
