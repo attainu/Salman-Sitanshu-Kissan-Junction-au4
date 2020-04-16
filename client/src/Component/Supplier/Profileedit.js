@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
-import { Row, Col, Form, Container, Button } from "react-bootstrap";
+import { Row, Col, Form, Container, Button, Spinner } from "react-bootstrap";
 import { FaHome } from "react-icons/fa";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
@@ -9,6 +9,9 @@ import Action from "../../ActionCreater/user";
 import Notify from "../../ActionCreater/notification";
 import Data from '../../Data/states'
 import { Link } from "react-router-dom";
+import bsCustomFileInput from 'bs-custom-file-input'
+import { set } from "mongoose";
+
 
 const { profileEdit } = Action;
 // const { notify } = Notify;
@@ -35,6 +38,7 @@ class ProfileEdit extends Component {
       cityfetch: [],
       districtfetch: [],
       todashboardredirect: false,
+      upload: true,
     };
 
     this.handleChange = this.handleChange.bind();
@@ -74,6 +78,9 @@ class ProfileEdit extends Component {
 
   // For image upload on clodinary
   uploadImage = async e => {
+    this.setState({
+      upload: false
+    })
     const files = e.target.files;
     const data = new FormData()
     data.append('file', files[0])
@@ -87,10 +94,13 @@ class ProfileEdit extends Component {
       }
     )
     const file = await res.json();
-    this.setState({
-      img: file.secure_url
-    })
-    console.log(this.state.img);
+    if (file) {
+      this.setState({
+        img: file.secure_url,
+        upload: true
+      })
+      console.log(file.secure_url)
+    }
   }
 
   //state update
@@ -128,6 +138,7 @@ class ProfileEdit extends Component {
   };
 
   componentDidMount() {
+    bsCustomFileInput.init()
     this.setState({
       name: this.props.name,
       email: this.props.email,
@@ -242,16 +253,21 @@ class ProfileEdit extends Component {
                           onChange={this.handleChange} />
                       </Col>
                     </Form.Group>
-                    <div class="form-group">
-
-                      <Form.File
-                        type="file"
-                        name="file"
-                        placeholder="Upload Product Image"
-                        onChange={this.uploadImage}
-                      />
-                    </div>
-
+                    <Form.Group as={Row}>
+                      <Form.Label column lg="3" sm="3">
+                        Profile Photo
+                      </Form.Label>
+                      <Col sm="9">
+                        <Form>
+                          <Form.File
+                            type="file"
+                            label="Upload Profile Photo"
+                            custom
+                            onChange={this.uploadImage}
+                          />
+                        </Form>
+                      </Col>
+                    </Form.Group>
                     <div>
                       <span>
                         Edit Address Detail <FaHome />
@@ -341,7 +357,7 @@ class ProfileEdit extends Component {
                         </Form.Group>
                       </Form.Row>
                       <Form.Row>
-                        <Form.Group as={Col} controlId="formGridState">
+                        <Form.Group as={Col} controlId="formGridStae">
                           <div class="text-center">
                             <Link to='/profile'>
                               <Button className="btn btn-secondary">
@@ -350,13 +366,24 @@ class ProfileEdit extends Component {
                             </Link>
                           </div>
                         </Form.Group>
-
-                        <Form.Group as={Col} controlId="formGridZip">
+                        <Form.Group as={Col} controlId="formGridS">
                           <div class="text-center">
-                            <Button className="btn btn-success"
-                              onClick={this.onSubmit}>
-                              Update Now
-                            </Button>
+                            {(this.state.upload) ?
+                              <Button className="btn btn-success"
+                                onClick={this.onSubmit}>
+                                Update Now
+                              </Button> :
+                              <Button variant="success" disabled>
+                                <Spinner
+                                  as="span"
+                                  animation="grow"
+                                  size="sm"
+                                  role="status"
+                                  aria-hidden="true"
+                                />
+                               Loading...
+                             </Button>}
+
                           </div>
                         </Form.Group>
                       </Form.Row>
@@ -368,6 +395,7 @@ class ProfileEdit extends Component {
             <Col lg={2} md={2} sm={12}></Col>
           </Row>
         </Container>
+
       </>
     );
   }
