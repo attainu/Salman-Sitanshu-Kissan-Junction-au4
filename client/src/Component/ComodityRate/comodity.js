@@ -1,80 +1,136 @@
 import React, { Component } from "react";
-import Table from "react-responsive-data-table";
+import Data from "../../Data/states";
+import { Row, Col, Form, Table } from "react-bootstrap";
+import Chart from "./demochart";
 export default class ComodityData extends Component {
+  state = {
+    statelist: Data.states,
+    state: "Choose State....",
+    fetchResult: [],
+    district: [],
+    districtSelect: "",
+    foundDistrict: false,
+    resultToShow: [],
+  };
+
+  //handle state change
+  handleChangeState = (e) => {
+    let { state, fetchResult, district } = this.state;
+    this.setState({
+      [e.target.name]: e.target.value,
+      district: [],
+    });
+    //to filter all district
+    var districtFiltered = fetchResult.filter((value) => {
+      return value.state === e.target.value;
+    });
+    //to filter unique distict
+    const unique = [...new Set(districtFiltered.map((item) => item.district))];
+
+    this.setState({
+      district: unique,
+    });
+  };
+
+  //handle distict Change
+  handleChangeDistrict = (e) => {
+    let { state, fetchResult, district } = this.state;
+    var result = fetchResult.filter((value) => {
+      return value.district === e.target.value;
+    });
+    this.setState({
+      resultToShow: result,
+    });
+  };
+
   componentDidMount = () => {
     var data = fetch(
       "https://api.data.gov.in/resource/9ef84268-d588-465a-a308-a864a43d0070?api-key=579b464db66ec23bdd000001967d7349baf94f7d47de66173d39a48e&format=json&offset=0&limit=4000"
     );
     data.then((res) => {
       res.json().then((data) => {
-        console.log(data.records);
+        this.setState({
+          fetchResult: data.records,
+        });
       });
     });
   };
   render() {
+    let { state, fetchResult, district, resultToShow } = this.state;
     return (
-      <div>
-        <Table
-          style={{
-            opacity: 0.8,
-            backgroundColor: "#00113a",
-            color: "#ffffff",
-            textAlign: "center",
-          }}
-          tableStyle="table table-hover table-striped table-bordered table-borderless table-responsive w-100"
-          pages={true}
-          pagination={true}
-          onRowClick={() => {}} // if You Want Table Row Data OnClick then assign this {row => console.log(row)}
-          page={true}
-          errormsg="Error. . ."
-          loadingmsg="Loading. . ."
-          isLoading={false}
-          sort={true}
-          title="Customers"
-          search={true}
-          size={10}
-          data={{
-            head: {
-              id: "ID",
-              name: "Name",
-              email: "Email",
-              created_at: "Created At",
-              orders: "Orders",
-              last_order: "Last OrderResponse",
-              total_spent: "Total Spent",
-            },
-            data: [
-              {
-                id: 218354810912,
-                name: "Kattie Wisoky",
-                email: "Kattie.Wisoky@data-generator.com",
-                created_at: "2017-11-07T15:14:07.000+0000",
-                orders: 6,
-                last_order: "#2233",
-                total_spent: 0,
-              },
-              {
-                id: 218354843680,
-                name: "Vernon McLaughlin",
-                email: "Vernon.McLaughlin@data-generator.com",
-                created_at: "2017-11-07T15:14:07.000+0000",
-                orders: 4,
-                last_order: "#1287",
-                total_spent: 0,
-              },
-              {
-                id: 218354909216,
-                name: "Jeffry Harber",
-                email: "Jeffry.Harber@data-generator.com",
-                created_at: "2017-11-07T15:14:07.000+0000",
-                orders: 2,
-                last_order: "#2356",
-                total_spent: 0,
-              },
-            ],
-          }}
-        />
-      </div>
+      <>
+        <div class="d-flex justify-content-around">
+          <Form.Row>
+            <Form.Group as={Col} controlId="formGridState">
+              <Form.Label>State</Form.Label>
+              <Form.Control
+                as="select"
+                name="company_state"
+                value={this.state.state}
+                onChange={this.handleChangeState}
+              >
+                {this.state.statelist.map((option) => {
+                  return (
+                    <option key={option} value={option}>
+                      {option}
+                    </option>
+                  );
+                })}
+              </Form.Control>
+            </Form.Group>
+            <Form.Group as={Col} controlId="formGridState">
+              <Form.Label>State</Form.Label>
+              <Form.Control
+                as="select"
+                name="districtSelect"
+                value={this.state.districtSelect}
+                onChange={this.handleChangeDistrict}
+              >
+                {this.state.district.map((option) => {
+                  return (
+                    <option key={option} value={option}>
+                      {option}
+                    </option>
+                  );
+                })}
+              </Form.Control>
+            </Form.Group>
+          </Form.Row>
+        </div>
+        <Row>
+          <Col>
+            <Chart />
+            <Table striped bordered hover variant="success">
+              <thead>
+                <tr>
+                  <th>Market</th>
+                  <th>Commodity</th>
+                  <th>Variety</th>
+                  <th>Arrival date</th>
+                  <th>Min Price</th>
+                  <th>Max Price</th>
+                  <th>Modal Price</th>
+                </tr>
+              </thead>
+              <tbody>
+                {resultToShow.map((item, index) => {
+                  return (
+                    <tr key={index}>
+                      <td>{item.market} </td>
+                      <td>{item.commodity} </td>
+                      <td>{item.variety} </td>
+                      <td>{item.arrival_date} </td>
+                      <td>{item.min_price} </td>
+                      <td>{item.max_price} </td>
+                      <td>{item.modal_price} </td>
+                    </tr>
+                  );
+                })}
+              </tbody>
+            </Table>
+          </Col>
+        </Row>
+      </>
     );
   }
 }
