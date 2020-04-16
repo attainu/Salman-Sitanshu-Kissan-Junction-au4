@@ -18,8 +18,8 @@ class Billing extends React.Component {
     var total = 0;
     for (var i = 0; i < this.props.products.length; i++) {
       console.log("Price", this.props.products[i])
-      if (this.props.products[i].connectType === "booked" && (this.props.products[i].status === false && this.props.products[i].count > 0)) {
-        total += parseInt(this.props.products[i].product.price);
+      if (this.props.products[i].connectType === "booked" && (this.props.products[i].status === false && this.props.products[i].cart > 0)) {
+        total += parseInt(this.props.products[i].product.price) * parseInt(this.props.products[i].cart);
         console.log("Price", this.props.products[i].product.price)
       }
     }
@@ -31,7 +31,7 @@ class Billing extends React.Component {
   submitForm = () => {
     let idies = []
     for (var i = 0; i < this.props.products.length; i++)
-      if (this.props.products[i].connectType === "booked" && (this.props.products[i].status === false && this.props.products[i].count > 0))
+      if (this.props.products[i].connectType === "booked" && (this.props.products[i].status === false && this.props.products[i].cart > 0))
         idies.push(this.props.products[i].id);
     this.props.placeOrder(this.props.user.id, idies)
   }
@@ -174,8 +174,8 @@ class Billing extends React.Component {
                   >
                     <thead>
                       <tr>
-                        <th>Sr. No</th>
                         <th>Item Name</th>
+                        <th>Quantity</th>
                         <th>Price</th>
                       </tr>
                     </thead>
@@ -183,14 +183,14 @@ class Billing extends React.Component {
                     <tbody className="text-center">
                       {this.props.products &&
                         this.props.products.map((item, index) => {
-                          if (item.connectType === "booked" && (item.status === false && item.count > 0)) {
+                          if (item.connectType === "booked" && (item.status === false && item.cart > 0)) {
                             let product = item.product
                             return (
                               <>
                                 <tr key={index}>
-                                  <td>{index + 1}</td>
                                   <td>{product.productName}</td>
-                                  <td>₹ {product.price}</td>
+                                  <td>{item.cart}</td>
+                                  <td>₹ {parseInt(product.price) * item.cart}</td>
                                 </tr>
                               </>
                             );

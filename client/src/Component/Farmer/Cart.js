@@ -8,29 +8,47 @@ import { Link } from "react-router-dom";
 import User from "../../ActionCreater/user";
 
 const { notify } = Action;
-const { join } = User;
+const { join, addCart, minusCount, removeCart } = User;
 
 class Profile extends React.Component {
-  state = {
-    productCount: 1,
-  };
+
+  constructor() {
+    super();
+    this.addToCart = this.addToCart.bind();
+    this.countMinus = this.countMinus.bind();
+    this.removeCart = this.removeCart.bind();
+  }
 
   componentDidMount() {
     this.props.join(this.props.id);
-    this.setState({
-      render: false
-    })
   }
 
-  increaseProduct = () => {
-    this.setState({
-      productCount: this.state.productCount + 1,
-    });
+  countMinus = (productId) => {
+    if (this.props.id) {
+      this.props.minusCount(this.props.id, productId)
+    }
+  }
+
+  addToCart = (productId) => {
+    if (this.props.id) {
+      this.props.addCart(this.props.id, productId)
+    }
   };
+
+  removeCart = (productId) => {
+    if (this.props.id) {
+      this.props.removeCart(this.props.id, productId)
+    }
+  };
+  // increaseProduct = () => {
+  //   this.setState({
+  //     productCount: this.state.productCount + 1,
+  //   });
+  // };
   render() {
     const { notify, Authenticated, products } = this.props;
     let flag = false
-    products.forEach((item) => { if (item.connectType === "booked" && (item.status === false && item.count > 0)) flag = true })
+    products.forEach((item) => { if (item.connectType === "booked" && (item.status === false && item.cart > 0)) flag = true })
     console.log(flag)
     return (
       <>
@@ -59,7 +77,7 @@ class Profile extends React.Component {
             <Table borderless responsive>
               <tbody className="text-center">
                 {products.map((item, index) => {
-                  if (item.connectType === "booked" && (item.status === false && item.count > 0)) {
+                  if (item.connectType === "booked" && (item.status === false && item.cart > 0)) {
                     let product = item.product
                     return (
                       <>
@@ -80,21 +98,16 @@ class Profile extends React.Component {
                           <td className="cart-btn">
                             <Button
                               variant="secondary"
-                              onClick={() =>
-                                notify({ type: "warn", msg: "Removed 1" })
-                              }
+                              onClick={() => this.countMinus(product.id)}
                             >
                               -
                             </Button>
                             <span className="mr-3 ml-3">
-                              {this.state.productCount}
+                              {item.cart} Quantity
                             </span>
                             <Button
                               variant="secondary"
-                              onClick={
-                                (() => notify({ type: "warn", msg: "Added 1" }),
-                                  this.increaseProduct)
-                              }
+                              onClick={() => this.addToCart(product.id)}
                             >
                               +
                             </Button>
@@ -102,19 +115,13 @@ class Profile extends React.Component {
                           <td>
                             <h4>
                               <sup>₹</sup>
-                              {product.price}
+                              {parseInt(product.price) * item.cart}
                             </h4>
                           </td>
                           <td>
                             <i
                               class="fa fa-trash fa-2x text-danger"
-                              onClick={() =>
-                                notify({
-                                  type: "error",
-                                  msg: "Item Removed",
-                                  item: product,
-                                })
-                              }
+                              onClick={() => this.removeCart(product.id)}
                             ></i>
                           </td>
                         </tr>
@@ -131,12 +138,12 @@ class Profile extends React.Component {
         )}
 
         {!flag && (
-          <div className="mt-5 d-flex justify-content-center">
+          <div className="m-5 d-flex flex-column align-items-center justify-content-center">
             <h1>
               <span style={{ color: "#28ca2f" }}>Ooops!!! </span> Your Cart is
               Empty.
             </h1>
-            <img src="https://candleroses.com/images/Cart-empty.gif"></img>
+            <img className="content" src="https://cdn.dribbble.com/users/4131769/screenshots/7237700/media/4e397c44a240131ae063251dae9d33be.jpg"></img>
           </div>
         )}
       </>
@@ -161,7 +168,7 @@ const take = (state) => {
 };
 
 const change = (dispatch) => {
-  return bindActionCreators({ notify, join }, dispatch);
+  return bindActionCreators({ notify, join, addCart, minusCount, removeCart }, dispatch);
 };
 
 export default connect(take, change)(Profile);

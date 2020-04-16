@@ -122,7 +122,7 @@ class Register extends React.Component {
                   onChange={this.handleChange}>
                   <option value="Farmer" selected>Farmer</option>
                   <option value="Seller">Seller</option>
-                  <option value="Customer">Customer</option>
+                  <option value="Consumer">Consumer</option>
                 </Form.Control>
               </Form.Group>
 
