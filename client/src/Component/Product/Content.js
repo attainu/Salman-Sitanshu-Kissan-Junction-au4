@@ -13,6 +13,7 @@ import {
 import { bindActionCreators } from "redux";
 import Action from "../../ActionCreater/user";
 import Notify from "../../ActionCreater/notification";
+import { Redirect } from "react-router";
 
 const { addCart, join, minusCount } = Action;
 const { notify } = Notify;
@@ -22,11 +23,12 @@ class Content extends React.Component {
 
   constructor(props) {
     super(props);
-    this.state = {
-      type: this.props.location.aboutProps.type,
-      item: this.props.location.aboutProps.item,
-      rerender: 0
-    };
+    if (this.props.location.aboutProps)
+      this.state = {
+        type: this.props.location.aboutProps.type,
+        item: this.props.location.aboutProps.item,
+        rerender: 0
+      };
     this.addToCart = this.addToCart.bind();
     this.countMinus = this.countMinus.bind();
     this.buyNow = this.buyNow.bind();
@@ -68,13 +70,15 @@ class Content extends React.Component {
 
   render() {
     //product size for seed and machine power for all machines
+    if (!this.props.location.aboutProps) {
+      return <Redirect to="/farmer" />
+    }
     let productSize;
     if (this.state.type === "seed") {
       productSize = <p> Product Size </p>;
     } else {
       productSize = <p> Machine Power </p>;
     }
-
     const shareUrl = window.location.href;
     return (
       <>

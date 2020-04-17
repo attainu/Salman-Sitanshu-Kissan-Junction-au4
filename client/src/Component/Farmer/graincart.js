@@ -12,6 +12,7 @@ import {
 import { bindActionCreators } from "redux";
 import Action from "../../ActionCreater/user";
 import Notify from "../../ActionCreater/notification";
+import { Redirect } from "react-router";
 
 const { addCart, join, minusCount } = Action;
 const { notify } = Notify;
@@ -19,9 +20,10 @@ const { notify } = Notify;
 class Grainpage extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {
-      item: this.props.location.aboutProps.item,
-    };
+    if (this.props.location.aboutProps)
+      this.state = {
+        item: this.props.location.aboutProps.item,
+      };
     this.addToCart = this.addToCart.bind();
     this.countMinus = this.countMinus.bind();
     this.buyNow = this.buyNow.bind();
@@ -60,6 +62,9 @@ class Grainpage extends React.Component {
   };
 
   render() {
+    if (!this.props.location.aboutProps) {
+      return <Redirect to="/consumer" />
+    }
     const shareUrl = window.location.href;
     return (
       <>

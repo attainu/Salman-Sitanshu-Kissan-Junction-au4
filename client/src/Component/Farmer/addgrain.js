@@ -175,7 +175,7 @@ class Addgrain extends React.Component {
                       <Col sm="8">
                         <Form.Control
                           as="select"
-                          name="type"
+                          name="graintype"
                           className="text-success"
                           value={this.state.graintype}
                           onChange={this.handleChange}
