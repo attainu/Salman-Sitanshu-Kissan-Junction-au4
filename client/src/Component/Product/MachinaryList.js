@@ -10,25 +10,41 @@ import { FaFilter } from "react-icons/fa";
 
 class MachineList extends React.Component {
   state = {
-    machine: [],
+    page: 0
   };
 
   //product data fetch all types of machine
   componentDidMount = () => {
-    var data = fetch("http://localhost:5000/product/selectmachine");
+    var data = fetch(`http://localhost:5000/product/selectmachine/${this.state.page}`);
     data.then((res) => {
       res.json().then((data) => {
         this.setState({
-          machine: data,
+          page: this.state.page + 3,
         });
         //props to add machine list in redux state
         this.props.dispatch({
           type: "add_machine",
-          payload: this.state.machine,
+          payload: data,
         });
       });
     });
   };
+
+  loadMore = () => {
+    var data = fetch(`http://localhost:5000/product/selectmachine/${this.state.page}`);
+    data.then((res) => {
+      res.json().then((data) => {
+        //props to add machine list in redux state
+        this.setState({
+          page: this.state.page + 3,
+        });
+        this.props.dispatch({
+          type: "load_machine",
+          payload: data,
+        });
+      });
+    });
+  }
 
   //clear filter
   clearFilter = () => {
@@ -114,6 +130,9 @@ class MachineList extends React.Component {
                     );
                   })}
               </Row>
+              <div className="d-flex justify-content-center">
+                <Button type="button" className="m-5" variant="success" onClick={() => this.loadMore()}>Load More</Button>
+              </div>
             </Col>
           </Row>
         </div>
