@@ -10,23 +10,39 @@ import { FaFilter } from "react-icons/fa";
 
 class ProductDisplay extends React.Component {
   state = {
-    seedPestiside: [],
+    page: 0
   };
 
   //product data fetch for seed and pestisides
   componentDidMount = () => {
-    fetch("http://localhost:5000/product/selectseed").then((res) => {
+    fetch(`http://localhost:5000/product/selectseed/${this.state.page}`).then((res) => {
       res.json().then((data) => {
         this.setState({
-          seedPestiside: data,
+          page: this.state.page + 3,
         });
         this.props.dispatch({
           type: "add_product",
-          payload: this.state.seedPestiside,
+          payload: data,
         });
       });
     });
   };
+
+  loadMore = () => {
+    var data = fetch(`http://localhost:5000/product/selectseed/${this.state.page}`);
+    data.then((res) => {
+      res.json().then((data) => {
+        //props to add machine list in redux state
+        this.setState({
+          page: this.state.page + 3,
+        });
+        this.props.dispatch({
+          type: "load_product",
+          payload: data,
+        });
+      });
+    });
+  }
 
   //clear filter
   clearFilter = () => {
@@ -113,6 +129,9 @@ class ProductDisplay extends React.Component {
                     );
                   })}
               </Row>
+              <div className="d-flex justify-content-center">
+                <Button type="button" className="m-5" variant="success" onClick={() => this.loadMore()}>Load More</Button>
+              </div>
             </Col>
           </Row>
         </div>

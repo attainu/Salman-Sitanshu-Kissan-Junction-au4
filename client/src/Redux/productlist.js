@@ -18,16 +18,31 @@ function productList(state = productState, action) {
       stateCopy.machineListCopy = [...action.payload];
       return stateCopy;
 
+    case "load_machine":
+      stateCopy.machineList = [...state.machineList, ...action.payload];
+      stateCopy.machineListCopy = [...state.machineListCopy, ...action.payload];
+      return stateCopy;
+
     // to add product
     case "add_product":
       stateCopy.productList = [...action.payload];
       stateCopy.productListCopy = [...action.payload];
       return stateCopy;
 
+    case "load_product":
+      stateCopy.productList = [...state.productList, ...action.payload];
+      stateCopy.productListCopy = [...state.productListCopy, ...action.payload];
+      return stateCopy;
+
     // to add product
     case "add_grain":
       stateCopy.grainList = [...action.payload];
       stateCopy.grainListCopy = [...action.payload];
+      return stateCopy;
+
+    case "load_grain":
+      stateCopy.grainList = [...state.grainList, ...action.payload];
+      stateCopy.grainListCopy = [...state.grainListCopy, ...action.payload];
       return stateCopy;
 
     //to filter grain on price
@@ -124,6 +139,7 @@ function productList(state = productState, action) {
         var value = action.payload.item.id;
       stateCopy.cart = stateCopy.cart.filter((item) => item.id !== value);
       return stateCopy;
+
     default:
       return state;
   }
