@@ -7,6 +7,7 @@ import Footer from "./Component/Home/Footer";
 import Content from "./Component/Product/Content";
 import Cart from "./Component/Farmer/Cart";
 import Notification from "./Component/Notification/Notification";
+import { NotificationContainer } from "react-notifications";
 import ScrollToTop from "./Component/Authentication/ScrollToTop";
 // import Google from './Component/Google/login';
 import Auth from "./Component/Authentication/RouteProtecting";
@@ -40,6 +41,8 @@ import FarmerGrain from "./Component/Farmer/farmergrain";
 import Grainpage from "./Component/Farmer/graincart";
 import Bloglist from "./Component/Adminblog/bloglist";
 import ComodityData from "./Component/ComodityRate/comodity";
+import Bankhomepage from "./Component/LoanScheme/loanHomePage";
+
 const { token } = Action;
 
 class App extends Component {
@@ -56,7 +59,7 @@ class App extends Component {
         <Router>
           <NavBar />
           <Notification />
-
+          <NotificationContainer />
           <ScrollToTop>
             <Switch>
               <Route exact path="/" component={Home} />
@@ -87,6 +90,7 @@ class App extends Component {
               <Route path="/blog" component={Bloglist} />
               <Route path="/comodity" component={ComodityData} />
               <Route path="/thankyou" component={Thankyou} />
+              <Route path="/bank" component={Bankhomepage} />
               <Route path="*" component={NotFound} />
             </Switch>
           </ScrollToTop>

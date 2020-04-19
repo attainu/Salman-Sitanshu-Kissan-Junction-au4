@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import { Spinner, Row, Col, Image, Form, Button } from "react-bootstrap";
-
 import BlogForm from "./blogform";
 import { connect } from "react-redux";
 import ClapButton from "react-clap-button";
