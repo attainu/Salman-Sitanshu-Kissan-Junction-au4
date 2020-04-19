@@ -22,24 +22,24 @@ function NavBar(props) {
     <>
       <Navbar className="shadow pb-0 pt-0" expand="sm" bg="light" variant="light" sticky="top">
         <Link to="/">
-          <Navbar.Brand href="#home">
+          <Navbar.Brand href="#">
             <img className="mr-1" src={logo} width="35px" />
             Agricom
           </Navbar.Brand>
         </Link>
-        <Navbar.Toggle aria-controls="basic-navbar-nav" />
+        <Navbar.Toggle aria-controls="responsive-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">
           <Nav className="mr-auto">
             <Link to="/">
-              <Nav.Link href="#home">Home</Nav.Link>
+              <Nav.Link active className="text-secondary" href="/">Home</Nav.Link>
             </Link>
-            <Nav.Link href="#">Services</Nav.Link>
+            <Nav.Link active className="text-secondary" href="#">Services</Nav.Link>
             <Link to="/blog">
-              <Nav.Link href="#l">Blog</Nav.Link>
+              <Nav.Link className="text-secondary" active href="/blog">Blog</Nav.Link>
             </Link>
-            <Nav.Link href="#hom">About</Nav.Link>
+            <Nav.Link active className="text-secondary" href="#hom">About</Nav.Link>
             <Link to="/404">
-              <Nav.Link href="#link">404</Nav.Link>
+              <Nav.Link active className="text-secondary" href="/404">404</Nav.Link>
             </Link>
           </Nav>
           <NavDropdown
@@ -86,7 +86,7 @@ function NavBar(props) {
                     <>
                       <Link to='/profile/product'><NavDropdown.Item href='/' >Add Product</NavDropdown.Item></Link>
                       <Link to='/profile/sold'><NavDropdown.Item href='/'>Sold</NavDropdown.Item></Link> </> : ""}
-                      
+
                   {(type === "Farmer") ?
                     <>
                       <Link to='/sell_grain'><NavDropdown.Item href='/'>Sell Grain</NavDropdown.Item></Link> </> : ""}

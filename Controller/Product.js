@@ -23,9 +23,10 @@ router.get("/", async (req, res) => {
   }
 });
 //Read operation for seed and pestisides
-router.get("/selectseed", async (req, res) => {
+router.get("/selectseed/:offset", async (req, res) => {
   try {
     let product = await Product.findAll({
+      offset: req.params.offset, limit: 3 ,
       where: {
         productType: ["Seed", "Pesticides"],
       },
@@ -38,13 +39,14 @@ router.get("/selectseed", async (req, res) => {
 });
 
 //Read operation for tractor and hasvestor
-router.get("/selectmachine", async (req, res) => {
+router.get("/selectmachine/:offset", async (req, res) => {
   try {
     let product = await Product.findAll({
+      offset: req.params.offset, limit: 3 ,
       where: {
         productType: ["Tractor", "Pesticider"],
-      },
-    });
+      }
+    },{ offset: 1, limit: 5 });
 
     res.json(product);
   } catch (err) {
@@ -53,9 +55,10 @@ router.get("/selectmachine", async (req, res) => {
 });
 
 //Read operation for seed and pestisides
-router.get("/grain", async (req, res) => {
+router.get("/grain/:offset", async (req, res) => {
   try {
     let product = await Product.findAll({
+      offset: req.params.offset, limit: 3 ,
       where: {
         productType: ["grain"],
       },

@@ -10,25 +10,41 @@ import { FaFilter } from "react-icons/fa";
 
 class FarmerGrain extends React.Component {
   state = {
-    grain: [],
+    page: 0
   };
 
   //product data fetch all types of machine
   componentDidMount = () => {
-    var data = fetch("http://localhost:5000/product/grain");
+    var data = fetch(`http://localhost:5000/product/grain/${this.state.page}`);
     data.then((res) => {
       res.json().then((data) => {
         this.setState({
-          grain: data,
+          page: this.state.page + 3,
         });
         //props to add machine list in redux state
         this.props.dispatch({
           type: "add_grain",
-          payload: this.state.grain,
+          payload: data,
         });
       });
     });
   };
+
+  loadMore = () => {
+    var data = fetch(`http://localhost:5000/product/grain/${this.state.page}`);
+    data.then((res) => {
+      res.json().then((data) => {
+        //props to add machine list in redux state
+        this.setState({
+          page: this.state.page + 3,
+        });
+        this.props.dispatch({
+          type: "load_grain",
+          payload: data,
+        });
+      });
+    });
+  }
 
   //clear filter
   clearFilter = () => {
@@ -82,6 +98,7 @@ class FarmerGrain extends React.Component {
                         >
                           {" "}
                           <UserCard
+                            className="mx-auto"
                             float
                             header={url}
                             avatar="https://p.kindpng.com/picc/s/628-6286677_thumb-image-certified-organic-products-logo-hd-png.png"
@@ -106,6 +123,9 @@ class FarmerGrain extends React.Component {
                     );
                   })}
               </Row>
+              <div className="d-flex justify-content-center">
+                <Button type="button" className="m-5" variant="success" onClick={() => this.loadMore()}>Load More</Button>
+              </div>
             </Col>
           </Row>
         </div>
