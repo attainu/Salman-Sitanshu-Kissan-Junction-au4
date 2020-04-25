@@ -19,7 +19,7 @@ export default class ForgetPasswordForm extends Component {
                   <legend>Forgot Password</legend>
                   <label for="email">Email</label>
                   <input type="email" name="email" autofocus />
-                  <Link to="/mailack">
+                  <Link to="/email">
                     {" "}
                     <input
                       type="submit"

@@ -45,6 +45,12 @@ const User = db.define(
       defaultValue:
         "https://lakewangaryschool.sa.edu.au/wp-content/uploads/2017/11/placeholder-profile-sq.jpg",
     },
+    resetpasswordtoken: {
+      type: Sequelize.STRING,
+    },
+    resetpasswordexpires: {
+      type: Sequelize.DATEONLY,
+    },
   },
   {
     timestamps: false,

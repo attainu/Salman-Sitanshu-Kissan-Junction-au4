@@ -67,14 +67,14 @@ class Adminlogin extends React.Component {
                 <Form.Label>Email</Form.Label>
                 <Form.Control
                   type="email"
-                  placeholder=" Enter Email"
+                  placeholder="Enter Email"
                   name="email"
                   value={this.state.email}
                   onChange={this.handleChange}
                 />
               </Form.Group>
               <Form.Group>
-                <Form.Label>Article Source</Form.Label>
+                <Form.Label>Password</Form.Label>
                 <Form.Control
                   type="password"
                   placeholder=" Enter Password"

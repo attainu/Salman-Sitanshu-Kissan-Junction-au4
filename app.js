@@ -15,6 +15,9 @@ app.use(express.static(path.join(__dirname, "public")));
 app.use(passport.initialize());
 app.use(cors());
 const blogControllers = require("./Controller/Blog");
+const FarmerController = require("./Controller/bank/Farmer");
+const BankController = require("./Controller/bank/Bank");
+const LoanController = require("./Controller/bank/LoanScheme");
 const mongoose = require("mongoose");
 
 mongoose.connect(
@@ -45,12 +48,24 @@ app.use("/product", require("./Controller/Product"));
 app.use("/conprd", require("./Controller/ConnectProduct"));
 app.use("/join", require("./Controller/Join"));
 app.use("/company", require("./Controller/Company"));
+
+//route for blog
 app.post("/blog_create", blogControllers.create);
 app.get("/blog_get", blogControllers.get);
 app.post("/blog_update", blogControllers.update);
 app.post("/adminlogin", blogControllers.login);
 app.post("/blog_delete", blogControllers.delete);
 
+//route for banks
+app.use("/farmer_create", FarmerController.create);
+app.use("/farmer_get", FarmerController.get);
+app.use("/farmer_delete", FarmerController.delete);
+app.use("/bank_create", BankController.create);
+app.use("/bank_get", BankController.get);
+app.post("/bank_login", BankController.login);
+app.post("/bank_check", BankController.checkBank);
+app.use("/loan_create", LoanController.create);
+app.use("/loan_get", LoanController.get);
 //Heroku Config
 if (process.env.NODE_ENV === "production") {
   // Serve any static files
