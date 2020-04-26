@@ -27,9 +27,9 @@ class FarmerHomePage extends React.Component {
         category: "lend_machine",
       },
       {
-        name: "Sell Your Used Instruments",
+        name: "Current Daily Price of Various Commodities",
         url: image2,
-        category: "sell_instument",
+        category: "comodity",
       },
     ],
   };
