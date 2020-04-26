@@ -33,7 +33,9 @@ function NavBar(props) {
             <Link to="/">
               <Nav.Link active className="text-secondary" href="/">Home</Nav.Link>
             </Link>
-            <Nav.Link active className="text-secondary" href="#">Services</Nav.Link>
+            <Link to="/bank">
+              <Nav.Link active className="text-secondary" href="/bank">Banking</Nav.Link>
+            </Link>
             <Link to="/blog">
               <Nav.Link className="text-secondary" active href="/blog">Blog</Nav.Link>
             </Link>

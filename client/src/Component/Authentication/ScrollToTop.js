@@ -6,7 +6,10 @@ function ScrollToTop({ history, children }) {
     const unlisten = history.listen(() => {
       if(history.location.pathname !== "/profile/sold" &&
       history.location.pathname !== "/profile/purchased" &&
-      history.location.pathname !== "/profile/product")
+      history.location.pathname !== "/profile/product" &&
+      history.location.pathname !== "/bank/home" &&
+      history.location.pathname !== "/bank/banksection" &&
+      history.location.pathname !== "/bank/Kisancard")
       window.scrollTo(0, 0);
     });
     return () => {
