@@ -33,7 +33,7 @@ class Profile extends Component {
                   <Button
                     className="btn-1 mt-3 mr-1"
                     onClick={() =>
-                      notify({ type: "success", msg: "Edit Profile" })
+                      notify({ type: "info", msg: "Edit Profile" })
                     }
                     variant="secondary"
                     size="sm">
