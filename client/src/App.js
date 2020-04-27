@@ -73,20 +73,20 @@ class App extends Component {
               <Route path="/sell_grain" component={Addgrain} />
               <Route path="/consumer" component={FarmerGrain} />
               <Route path="/signup" component={Register} />
-              <Route path="/profile" component={Profile} />
+              <Auth path="/profile" component={Profile} />
               <Route path="/single-product" component={Content} />
-              <Route
+              <Auth
                 path="/machine-register"
                 render={(props) => (
                   <Productcategory {...props} machine={true} />
                 )}
               />
-              <Route path="/seed-register" component={Productcategory} />
-              <Route path="/cart" component={Cart} />
+              <Auth path="/seed-register" component={Productcategory} />
+              <Auth path="/cart" component={Cart} />
               <Route path="/login" component={Login} />
-              <Route path="/company-register" component={CompanyRegister} />
-              <Route path="/profile-edit" component={ProfileEdit} />
-              <Route path="/checkout" component={Billing} />
+              <Auth path="/company-register" component={CompanyRegister} />
+              <Auth path="/profile-edit" component={ProfileEdit} />
+              <Auth path="/checkout" component={Billing} />
               <Route path="/single_grain" component={Grainpage} />
               <Route path="/blog" component={Bloglist} />
               <Route path="/comodity" component={ComodityData} />
