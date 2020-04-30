@@ -159,10 +159,22 @@ Action.profileEdit = (user, address, id, addressId) => {
       let value = await axios.put(`${link.user}${id}`, {
         addressId: res.data.id,
       });
-      dispatch(notify);
+      dispatch({
+        type: "notify",
+        payload: {
+          type: "success",
+          msg: "Profile Updated",
+        }
+      });
     } else {
       let res = await axios.put(`${link.address}${addressId}`, address);
-      dispatch(notify);
+      dispatch({
+        type: "notify",
+        payload: {
+          type: "success",
+          msg: "Profile Updated",
+        }
+      });
     }
   };
 };

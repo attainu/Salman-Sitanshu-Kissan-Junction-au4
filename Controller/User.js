@@ -195,81 +195,65 @@ router.delete("/:id", async (req, res) => {
 /* Forget Password Routes*/
 
 //-------------------------------------For User Forgot Password--------------------------------//
-/*router.forgot = function (req, res, next) {
-  async.waterfall(
-    [
-      function (done) {
-        crypto.randomBytes(20, function (err, buf) {
-          var token = buf.toString("hex");
-          done(err, token);
-        });
-      },
-      function (token, done) {
-        User.register.findOne({ email: req.body.email }, function (err, user) {
-          if (!user) {
-            return res.json({
-              flag: false,
-            });
-          }
+router.post("/forget", async (req, res) => {
+  try {
+    let user = await User.findOne({
+      where: { email: req.body.email }
+    });
+    if (!user) return res.status(403).send("No user found")
+    console.log("1", user)
+    let resetpasswordtoken = await crypto.randomBytes(20).toString("hex")
+    let resetpasswordexpires = Date.now() + 3600000; // 1 hour
+    console.log("2", resetpasswordexpires, resetpasswordtoken)
 
-          user.resetPasswordToken = token;
-          user.resetPasswordExpires = Date.now() + 3600000; // 1 hour
-
-          user.save(function (err) {
-            done(err, token, user);
-          });
-        });
+    let updated = await User.update({ resetpasswordexpires, resetpasswordtoken }, { where: { email: req.body.email } });
+    console.log("3", updated)
+    let smtpTransport = await nodemailer.createTransport({
+      service: "Gmail",
+      auth: {
+        user: "eagle.ecommerce.app@gmail.com",
+        pass: "fKnyKSjgjSPHRkFkdMd!5xDka9cxbxna7Grvv6H7F$t*YY!UCz",
       },
-      function (token, user, done) {
-        var smtpTransport = nodemailer.createTransport({
-          service: "Gmail",
-          auth: {
-            user: "eagle.ecommerce.app@gmail.com",
-            pass: "fKnyKSjgjSPHRkFkdMd!5xDka9cxbxna7Grvv6H7F$t*YY!UCz",
-          },
-        });
-        var mailOptions = {
-          to: user.email,
-          from: "eagle.ecommerce.app@gmail.com",
-          subject: "Ecommerce Password Reset",
-          text:
-            "You are receiving this because you (or someone else) have requested the reset of the password for your account.\n\n" +
-            "Please click on the following link, or paste this into your browser to complete the process:\n\n" +
-            "http://" +
-            req.headers.host +
-            "/reset/" +
-            token +
-            "\n\n" +
-            "If you did not request this, please ignore this email and your password will remain unchanged.\n",
-        };
-        smtpTransport.sendMail(mailOptions, function (err) {
-          console.log("mail sent");
-
-          done(err, "done");
-        });
-      },
-    ],
-    function (err) {
-      if (err) return next(err);
-      return res.render("forgot", {
-        flag: true,
-      });
-    }
-  );
-};
+    });
+    console.log("4", smtpTransport)
+    var mailOptions = {
+      to: user.dataValues.email,
+      from: "agricom-attainu@gmail.com",
+      subject: "Agricom Password Reset",
+      text:
+        "You are receiving this because you (or someone else) have requested the reset of the password for your account.\n\n" +
+        "Please click on the following link, or paste this into your browser to complete the process:\n\n" +
+        "http://" +
+        req.headers.host +
+        "/reset/" +
+        resetpasswordtoken +
+        "\n\n" +
+        "If you did not request this, please ignore this email and your password will remain unchanged.\n",
+    };
+    console.log("5")
+    smtpTransport.sendMail(mailOptions, function (err) {
+      if (err) res.status(403).json({ error: "smt", msg: err })
+      console.log("mail sent");
+      res.send("email send")
+    });
+  }
+  catch (err) {
+    res.status(403).json({ error: true, msg: err })
+  }
+});
 
 router.verify = function (req, res) {
   console.log(req.params.token);
-  User.register.findOne(
+  User.findOne(
     {
-      resetPasswordToken: req.params.token,
-      resetPasswordExpires: { $gt: Date.now() },
+      where: { resetPasswordToken: req.params.token, }
+      // resetPasswordExpires: { $gt: Date.now() },
     },
     function (err, user) {
       if (!user) {
         return res.redirect("/forgot");
       }
-      res.render("reset", { token: req.params.token });
+      res.json({ token: req.params.token });
     }
   );
 };
@@ -331,6 +315,6 @@ router.token = function (req, res) {
       res.redirect("/user-login");
     }
   );
-};*/
+};
 
 module.exports = router;

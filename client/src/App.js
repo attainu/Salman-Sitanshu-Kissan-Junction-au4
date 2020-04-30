@@ -28,8 +28,8 @@ import MachineList from "./Component/Product/MachinaryList";
 // import ProfileEdit from "./Component/Supplier/Profileedit";
 // import Login from "./Component/Login/login";
 // import Signup from "./Component/Login/siginup";
-// import ForgetPasswordForm from "./Component/ForgetPassword/fogetform";
-// import EmailsendMessage from "./Component/ForgetPassword/Acknolegment";
+import ForgetPasswordForm from "./Component/ForgetPassword/fogetform";
+import EmailsendMessage from "./Component/ForgetPassword/Acknolegment";
 
 import ProfileEdit from "./Component/Supplier/Profileedit";
 import Login from "./Component/FormPractice/LoginForm";
@@ -63,7 +63,8 @@ class App extends Component {
           <ScrollToTop>
             <Switch>
               <Route exact path="/" component={Home} />
-
+              <Route exact path="/forget" component={ForgetPasswordForm} />
+              <Route exact path="/email" component={EmailsendMessage} />
               <Route path="/login" component={Login} />
               <Route exact path="/farmer" component={FarmerHomePage} />
               {/* <Route path="/farmer/:lend_machine" component={MachineList} /> */}
