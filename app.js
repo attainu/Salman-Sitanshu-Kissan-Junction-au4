@@ -66,6 +66,7 @@ app.post("/bank_login", BankController.login);
 app.post("/bank_check", BankController.checkBank);
 app.use("/loan_create", LoanController.create);
 app.use("/loan_get", LoanController.get);
+
 //Heroku Config
 if (process.env.NODE_ENV === "production") {
   // Serve any static files
