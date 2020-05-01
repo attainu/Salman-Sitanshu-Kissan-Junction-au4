@@ -12,7 +12,7 @@ class Applyloan extends React.Component {
   };
 
   componentDidMount = async () => {
-    await fetch("http://localhost:5000/loan_get").then((res) => {
+    await fetch("/loan_get").then((res) => {
       res.json().then((data) => {
         this.props.dispatch({
           type: "add_loanlist",

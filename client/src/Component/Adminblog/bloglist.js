@@ -13,7 +13,7 @@ class Bloglist extends Component {
   };
   //to fetch blog data
   componentDidMount = () => {
-    var blogs = fetch("http://localhost:5000/blog_get");
+    var blogs = fetch("/blog_get");
     blogs.then((res) => {
       res.json().then((data) => {
         this.props.dispatch({
@@ -31,7 +31,7 @@ class Bloglist extends Component {
     item.like += 1;
     axios({
       method: "post",
-      url: "http://localhost:5000/blog_update",
+      url: "/blog_update",
       data: {
         _id: item._id,
         like: item.like,
@@ -48,7 +48,7 @@ class Bloglist extends Component {
     });
     axios({
       method: "post",
-      url: "http://localhost:5000/blog_delete",
+      url: "/blog_delete",
       data: {
         _id: value._id,
       },

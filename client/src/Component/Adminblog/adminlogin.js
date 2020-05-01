@@ -31,7 +31,7 @@ class Adminlogin extends React.Component {
     let { email, password } = this.state;
     await axios({
       method: "post",
-      url: "http://localhost:5000/adminlogin",
+      url: "/adminlogin",
       data: {
         email,
         password,
