@@ -82,7 +82,7 @@ router.post("/login", async (req, res) => {
 
   //Check Validation
   if (!isValid) {
-    return res.status(400).json(errors);
+    return res.status(402).json(errors);
   }
 
 
@@ -192,7 +192,43 @@ router.delete("/:id", async (req, res) => {
   }
 });
 
-/* Forget Password Routes*/
+//sending mail 
+router.post("/order", async (req, res) => {
+  try {
+    console.log(req.body)
+    console.log("hi")
+    var smtpTransport = nodemailer.createTransport({
+      service: 'Gmail',
+      auth: {
+        user: 'agricom.family@gmail.com',
+        pass: 'agricom123'
+      }
+    });
+    var mailOptions = {
+      to: 'sitanshu4@gmail.com',
+      from: 'agricom.family@gmail.com',
+      subject: 'Ecommerce Order Placed',
+      text: 'Your order placed successfully.\n\n' +
+        'Click on the following link to shop our more amazing products:\n\n' +
+
+        'If you did not have placed ordered, please send a mail to inform Us about this.\n'
+    };
+    smtpTransport.sendMail(mailOptions, function (err, info) {
+      if (err)
+        console.log(err)
+      else
+        console.log(info);
+      res.status(200).send({
+        info
+      })
+
+    })
+  }
+  catch{
+
+  }
+})
+
 
 //-------------------------------------For User Forgot Password--------------------------------//
 router.post("/forget", async (req, res) => {

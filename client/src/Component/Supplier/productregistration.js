@@ -7,7 +7,10 @@ import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import bsCustomFileInput from 'bs-custom-file-input'
 // import axios from "axios";
-
+import {
+  NotificationContainer,
+  NotificationManager,
+} from "react-notifications";
 const { productregister } = Action;
 
 class ProductRegister extends React.Component {
@@ -78,39 +81,45 @@ class ProductRegister extends React.Component {
       description,
       imageurl,
     } = this.state;
-    this.props.productregister(
-      {
-        productType,
-        productName,
-        price,
-        productSize,
-        productDosage,
-        targetplant,
-        description,
-        imageurl,
-      },
-      this.props.id
-    );
-    // axios({
-    //   method: "post",
-    //   url: "http://localhost:5000/product/",
-    //   data: {
-    //     productType,
-    //     productName,
-    //     price,
-    //     productSize,
-    //     productDosage,
-    //     targetplant,
-    //     description,
-    //     imageurl
-    //   },
-    // }).then(function (response) {
-    //   console.log(response);
-    // });
 
-    setTimeout(() => {
-      this.setState(() => ({ todashboardredirect: true }));
-    }, 1000);
+    if (!productType || !productName || !price || !productSize || !productDosage || !targetplant || !description || !imageurl) {
+      NotificationManager.warning("All field required*");
+    }
+    else {
+      this.props.productregister(
+        {
+          productType,
+          productName,
+          price,
+          productSize,
+          productDosage,
+          targetplant,
+          description,
+          imageurl,
+        },
+        this.props.id
+      );
+      // axios({
+      //   method: "post",
+      //   url: "http://localhost:5000/product/",
+      //   data: {
+      //     productType,
+      //     productName,
+      //     price,
+      //     productSize,
+      //     productDosage,
+      //     targetplant,
+      //     description,
+      //     imageurl
+      //   },
+      // }).then(function (response) {
+      //   console.log(response);
+      // });
+
+      setTimeout(() => {
+        this.setState(() => ({ todashboardredirect: true }));
+      }, 1000);
+    }
   };
 
   render() {
