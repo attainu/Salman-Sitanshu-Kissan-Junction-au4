@@ -24,7 +24,7 @@ class CarouselHome extends React.Component {
       {
         name: "Supplier",
         url: image5,
-        link: "product-register",
+        link: "profile",
         subject:
           "Sell your wide variety of products related to farming, through our platform. We have millions of farmers connected from all parts of country. ",
       },
