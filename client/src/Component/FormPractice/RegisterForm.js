@@ -19,7 +19,7 @@ class Register extends React.Component {
       password2: "",
       mobile: "",
       name: "",
-      type: "",
+      type: "Farmer",
       toLoginafterRedirect: false,
     };
     this.handleChange = this.handleChange.bind();
@@ -29,7 +29,8 @@ class Register extends React.Component {
   handleChange = (e) => {
     this.setState({
       [e.target.name]: e.target.value,
-    });
+    },() => {console.log(this.state)});
+    
   };
 
   onSubmit = (event) => {
