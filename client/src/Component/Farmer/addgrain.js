@@ -1,12 +1,15 @@
 import React from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
-import { Row, Col, Form, Container,Spinner ,Button } from "react-bootstrap";
+import { Row, Col, Form, Container, Spinner, Button } from "react-bootstrap";
 import { Redirect } from "react-router";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import Action from "../../ActionCreater/user";
 import bsCustomFileInput from 'bs-custom-file-input'
-
+import {
+  NotificationContainer,
+  NotificationManager,
+} from "react-notifications";
 const { productregister } = Action;
 class Addgrain extends React.Component {
   constructor() {
@@ -47,22 +50,26 @@ class Addgrain extends React.Component {
       imageurl,
       price,
     } = this.state;
-
-    this.props.productregister(
-      {
-        productType: "grain",
-        productName: grain_name,
-        price: price,
-        productSize: quantity,
-        productDosage: location,
-        targetplant: graintype,
-        imageurl: imageurl,
-      },
-      this.props.id
-    );
-    setTimeout(() => {
-      this.setState(() => ({ todashboardredirect: true }));
-    }, 1000);
+    if (!grain_name || !quantity || !location || !graintype || !imageurl || !price) {
+      NotificationManager.error("All field required*");
+    }
+    else {
+      this.props.productregister(
+        {
+          productType: "grain",
+          productName: grain_name,
+          price: price,
+          productSize: quantity,
+          productDosage: location,
+          targetplant: graintype,
+          imageurl: imageurl,
+        },
+        this.props.id
+      );
+      setTimeout(() => {
+        this.setState(() => ({ todashboardredirect: true }));
+      }, 1000);
+    }
   };
   // For image upload on clodinary
   uploadImage = async (e) => {
