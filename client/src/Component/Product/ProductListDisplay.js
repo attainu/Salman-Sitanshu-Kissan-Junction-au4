@@ -15,7 +15,7 @@ class ProductDisplay extends React.Component {
 
   //product data fetch for seed and pestisides
   componentDidMount = () => {
-    fetch(`http://localhost:5000/product/selectseed/${this.state.page}`).then((res) => {
+    fetch(`/product/selectseed/${this.state.page}`).then((res) => {
       res.json().then((data) => {
         this.setState({
           page: this.state.page + 3,
@@ -29,7 +29,7 @@ class ProductDisplay extends React.Component {
   };
 
   loadMore = () => {
-    var data = fetch(`http://localhost:5000/product/selectseed/${this.state.page}`);
+    var data = fetch(`/product/selectseed/${this.state.page}`);
     data.then((res) => {
       res.json().then((data) => {
         //props to add machine list in redux state

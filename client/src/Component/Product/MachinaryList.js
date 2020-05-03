@@ -15,7 +15,7 @@ class MachineList extends React.Component {
 
   //product data fetch all types of machine
   componentDidMount = () => {
-    var data = fetch(`http://localhost:5000/product/selectmachine/${this.state.page}`);
+    var data = fetch(`/product/selectmachine/${this.state.page}`);
     data.then((res) => {
       res.json().then((data) => {
         this.setState({
@@ -31,7 +31,7 @@ class MachineList extends React.Component {
   };
 
   loadMore = () => {
-    var data = fetch(`http://localhost:5000/product/selectmachine/${this.state.page}`);
+    var data = fetch(`/product/selectmachine/${this.state.page}`);
     data.then((res) => {
       res.json().then((data) => {
         //props to add machine list in redux state
