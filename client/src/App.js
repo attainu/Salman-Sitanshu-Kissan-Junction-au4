@@ -77,7 +77,7 @@ class App extends Component {
               <Route path="/single-product" component={Content} />
               <Auth
                 path="/machine-register"
-                render={(props) => (
+                component={(props) => (
                   <Productcategory {...props} machine={true} />
                 )}
               />

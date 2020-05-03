@@ -274,7 +274,7 @@ Action.removeCart = (userId, productId) => {
   };
 }
 
-Action.placeOrder = (userId, productIds) => {
+Action.placeOrder = (userId, productIds, email) => {
   return async (dispatch) => {
     try {
       await Promise.all(productIds.map(async (id) => {
@@ -301,6 +301,7 @@ Action.placeOrder = (userId, productIds) => {
           msg: "Placed Succefully",
         }
       });
+      await axios(`/user/order/${email}`);
     }
     catch (err) {
       dispatch(notify);

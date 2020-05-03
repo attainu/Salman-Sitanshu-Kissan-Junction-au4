@@ -30,7 +30,7 @@ class Billing extends React.Component {
     for (var i = 0; i < this.props.products.length; i++)
       if (this.props.products[i].connectType === "booked" && (this.props.products[i].status === false && this.props.products[i].cart > 0))
         idies.push(this.props.products[i].id);
-    this.props.placeOrder(this.props.user.id, idies)
+    this.props.placeOrder(this.props.user.id, idies,this.props.user.email)
   }
 
   render() {

@@ -193,7 +193,7 @@ router.delete("/:id", async (req, res) => {
 });
 
 //sending mail 
-router.post("/order", async (req, res) => {
+router.get("/order/:email", async (req, res) => {
   try {
     console.log(req.body)
     console.log("hi")
@@ -205,12 +205,12 @@ router.post("/order", async (req, res) => {
       }
     });
     var mailOptions = {
-      to: 'sitanshu4@gmail.com',
+      to: req.params.email,
       from: 'agricom.family@gmail.com',
-      subject: 'Ecommerce Order Placed',
+      subject: 'Agricom Order Placed',
       text: 'Your order placed successfully.\n\n' +
         'Click on the following link to shop our more amazing products:\n\n' +
-
+        'https://attainu-agricom.herokuapp.com/' + '\n\n' +
         'If you did not have placed ordered, please send a mail to inform Us about this.\n'
     };
     smtpTransport.sendMail(mailOptions, function (err, info) {
