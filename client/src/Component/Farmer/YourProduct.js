@@ -64,14 +64,14 @@ class YourProduct extends Component {
                             <th scope="row">Price:</th>
                             <td>₹{product.price} per kg</td>
                           </tr>
-                          <tr>
+                          {/* <tr>
                             <th scope="row">Quantiy: </th>
                             <td>product size kg</td>
-                          </tr>
-                          <tr>
+                          </tr> */}
+                          {/* <tr>
                             <th scope="row">Min Order: </th>
                             <td>{product.productDosage}kg</td>
-                          </tr>
+                          </tr> */}
                         </tbody>
                       </table>
                     </Card.Text>

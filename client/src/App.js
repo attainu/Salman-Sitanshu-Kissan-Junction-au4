@@ -70,7 +70,7 @@ class App extends Component {
               {/* <Route path="/farmer/:lend_machine" component={MachineList} /> */}
               <Route path="/product_seed" component={ProductDisplay} />
               <Route path="/lend_machine" component={MachineList} />
-              <Route path="/sell_grain" component={Addgrain} />
+              <Auth path="/sell_grain" component={Addgrain} />
               <Route path="/consumer" component={FarmerGrain} />
               <Route path="/signup" component={Register} />
               <Auth path="/profile" component={Profile} />
