@@ -6,6 +6,7 @@ var app = express();
 const passport = require("passport");
 const passportSetup = require("./config/passport-setup");
 var cors = require("cors");
+const dotenv = require('dotenv');
 
 app.use(logger("dev"));
 app.use(express.json());
@@ -14,6 +15,8 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, "public")));
 app.use(passport.initialize());
 app.use(cors());
+dotenv.config();
+
 const blogControllers = require("./Controller/Blog");
 const FarmerController = require("./Controller/bank/Farmer");
 const BankController = require("./Controller/bank/Bank");

@@ -1,4 +1,6 @@
 const Sequelize = require("sequelize");
+const dotenv = require('dotenv');
+dotenv.config();
 //                           DB Name         username    password
 // const db = new Sequelize("agricom", "postgres", "5432", {
 //   host: "localhost",
